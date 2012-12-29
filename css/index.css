@@ -7,9 +7,10 @@
  */
 
 /**
- * Fonts
+ * Imports
  */
 
+@import url('normalize.css');
 @import url('font.css');
 
 /**
@@ -235,11 +236,13 @@ section {
  */
 
 article {
+  padding: 0;
+  margin: 0;
   display: inline;
 }
 
 article > a.card {
-  margin-left: 5px;
+  margin-bottom: 5px;
   padding: 5em 0;
 }
 
