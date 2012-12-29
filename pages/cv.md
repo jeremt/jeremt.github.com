@@ -1,5 +1,5 @@
-CV
-===
+Resume
+======
 
 I'm a french developer and also an IT student at Epitech in Paris. I like use inovative technologies to make experiments and application on desktop, web and mobile..
 
