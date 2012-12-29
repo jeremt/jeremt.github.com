@@ -8,7 +8,7 @@ Find me on
   <a class="card" target="_blank" href="http://www.linkedin.com/profile/view?id=208391836&trk=tab_pro">
     <div class="icon-linkedin-sign"></div>
   </a>
-  <a class="card" target="_blank" href="https://github.com/JeremieT">
+  <a class="card" target="_blank" href="https://github.com/jeremt">
     <div class="icon-github"></div>
   </a>
   <a class="card" target="_blank" href="http://www.facebook.com/taboada.jeremie">
