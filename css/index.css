@@ -1,0 +1,279 @@
+/*!
+ * index.css
+ * https://github.com/JeremieT/jeremiet.github.com
+ * MIT licensed
+ *
+ * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
+ */
+
+/**
+ * Fonts
+ */
+
+@import url('font.css');
+
+/**
+ * General
+ */
+
+::selection {
+  color: white;
+  background: #ea4193;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1200px;
+  font-family: sans-serif;
+  font-size: 1.2em;
+  padding: 5px 2px 2px 5px;
+  padding: 42px;
+}
+
+a:not(.img) {
+  color: #ea4193;
+  text-decoration: none;
+}
+
+a:not(.img):hover {
+  border-bottom: 1px solid #ea4193;
+}
+
+a.icon-remove-sign {
+  font-size: 4.2em;
+  position: absolute;
+  top: -30px;
+  right: 0;
+  color: #222;
+}
+
+a.icon-remove-sign:hover {
+  color: #ea4193;
+  border-bottom: none;
+}
+
+img {
+  border-radius: 42px 0;
+  max-width: 100%;
+}
+
+/**
+ * Button
+ */
+
+.button {
+  border: none;
+  font-weight: bold;
+  color: white !important;
+  padding: 15px;
+  background: #222;
+  cursor: pointer;
+  border-radius: 21px 0;
+}
+
+.button:hover {
+  background: #ea4193;
+  border: none;
+}
+
+/**
+ * Header
+ */
+
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  margin: .15em 0;
+}
+
+h1 {
+  color: #222;
+  font-size: 5em;
+}
+
+h2 {
+  color: #666;
+  font-size: 3em;
+  font-weight: normal;
+}
+
+h3 {
+  color: #888;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/**
+ * Navigation
+ */
+
+nav > a[href^="#"] {
+  color: #222;
+  display: inline-block;
+  text-decoration: none;
+  width: 32.5%;
+  text-align: center;
+  padding: 3em 0;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  -webkit-transition: .5s;
+}
+
+nav > a[href^="#"]:hover {
+  background: #edecdc;
+  border: none;
+}
+
+nav > a[href^="#"] > div[class^="icon-"] {
+  font-size: 5em;
+  -webkit-transition: .5s;
+}
+
+nav > a[href^="#"]:hover > div[class^="icon-"] {
+  -webkit-transform: scale(1.4);
+}
+
+nav > a[href^="#"] > div.name {
+  font-weight: bold;
+  color: #666;
+}
+
+/**
+ * Show/hide pages
+ */
+
+section {
+  display: none;
+  position: relative;
+}
+
+.current {
+  display: block;
+  -webkit-animation: up .5s;
+}
+
+.home {
+  display: block;
+  -webkit-animation: down .5s;
+}
+
+/**
+ * Animations
+ */
+
+@-webkit-keyframes down {
+  from {
+    opacity: 0;
+    -webkit-transform: translate(0, -500px) scale(0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) scale(1);
+  }
+}
+
+@-webkit-keyframes up {
+  from {
+    opacity: 0;
+    -webkit-transform: translate(0, 500px) scale(0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) scale(1);
+  }
+}
+
+/**
+ * Contact page
+ */
+
+#contact-links > a {
+  color: #222;
+  font-size: 4.2em;
+}
+
+#contact-links > a:hover {
+  color: #ea4193;
+  border-bottom: none;
+}
+
+/**
+ * Card
+ */
+
+.card {
+  background: #222;
+  display: inline-block;
+  text-decoration: none;
+  width: 32.5%;
+  text-align: center;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  -webkit-transition: .5s;
+  padding: 1em 0;
+}
+.card:hover {
+  color: #222 !important;
+  background: #ea4193;
+}
+.card > [class^="icon-"], .card h1 {
+  -webkit-transition: .5s;
+  color: white; /* overide a color */
+}
+
+.card:hover > [class^="icon-"], .card:hover h1 {
+  color: #222;
+  -webkit-transform: scale(1.4);
+}
+
+/**
+ * Articles
+ */
+
+article {
+  display: inline;
+}
+
+article > a.card {
+  margin-left: 5px;
+  padding: 5em 0;
+}
+
+article * {
+  display: none;
+}
+
+article > a h1 {
+  display: block;
+  font-size: 2em;
+  color: white;
+}
+
+/**
+ * Make it responsive :)
+ */
+
+@media screen and (max-width: 700px) {
+  header {
+    font-size: .5em;
+  }
+  nav > a[href^="#"] {
+    width: 100%;
+    padding: 2em;
+  }
+  nav > a[href^="#"] > div[class^="icon-"] {
+    font-size: 4em;
+  }
+
+  .card {
+    width: 100%;
+    padding: .5em;
+  }
+  article > a.card {
+    padding: 3em;
+  }
+}
