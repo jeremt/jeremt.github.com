@@ -1,7 +1,7 @@
 jeremt.github.com
 =================
 
-It's the source code for [my personal website](http://jeremiet.github.com). Here, you can know more about me, my personal experience, my project or contact me :).
+It's the source code for [my personal website](http://jeremt.github.com). Here, you can know more about me, my personal experience, my project or contact me :).
 
 License
 -------
