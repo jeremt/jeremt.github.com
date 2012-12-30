@@ -225,12 +225,12 @@ section {
   color: #222 !important;
   background: #ea4193;
 }
-.card > [class^="icon-"], .card h1 {
+.card > [class^="icon-"], .card .title {
   -webkit-transition: .5s;
   color: white; /* overide a color */
 }
 
-.card:hover > [class^="icon-"], .card:hover h1 {
+.card:hover > [class^="icon-"], .card:hover .title {
   color: #222;
   -webkit-transform: scale(1.4);
 }
@@ -239,22 +239,13 @@ section {
  * Articles
  */
 
-article {
-  padding: 0;
-  margin: 0;
-  display: inline;
+.article.card {
+  padding: 6em 0;
+  margin-right: 5px;
 }
 
-article > a.card {
-  margin-bottom: 5px;
-  padding: 5em 0;
-}
-
-article * {
-  display: none;
-}
-
-article > a h1 {
+.article.card .title {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
   display: block;
   font-size: 2em;
   color: white;
@@ -265,9 +256,14 @@ article > a h1 {
  */
 
 @media screen and (max-width: 700px) {
-  header {
-    font-size: .5em;
+  body {
+    padding: 21px;
   }
+
+  h1 { font-size: 3em }
+  h2 { font-size: 2em }
+  h3 { font-size: 1.5em }
+
   nav > a[href^="#"] {
     width: 100%;
     padding: 2em;
@@ -280,7 +276,7 @@ article > a h1 {
     width: 100%;
     padding: .5em;
   }
-  article > a.card {
+  .article.card {
     padding: 3em;
   }
 }

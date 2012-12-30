@@ -53,17 +53,20 @@ pages.add = function (path, articles) {
 function articles(page, cb) {
   var markup = {sections: '', articles: ''}
 
+  markup.articles += '<div class="list">'
   ~function next() {
     if (page.articles.length) {
       var a = page.articles.shift()
       load("pages/" + page.path + "/" + a + ".md", function (err, res) {
         if (err) return cb(err)
+        var html = marked(res)
+          , title = /<h1>(.+)<\/h1>/.exec(html)
 
-        markup.articles += '<article>'
-        markup.articles +=   '<a href="#' + a + '" class="card">'
-        markup.articles +=     marked(res)
-        markup.articles +=   '</a>'
-        markup.articles += '</article>'
+        markup.articles += '<a href="#' + a + '" class="card article">'
+        markup.articles +=   '<div class="title">'
+        markup.articles +=     title ? title[1] : 'No title'
+        markup.articles +=   '</div>'
+        markup.articles += '</a>'
 
         markup.sections += '<section id="' + a + '" class="article">'
         markup.sections +=   '<a href="#' + page.path
@@ -73,8 +76,10 @@ function articles(page, cb) {
 
         next()
       })
-    } else
+    } else {
+      markup.articles += '</div>'
       cb(null, markup)
+    }
   }()
 }
 
