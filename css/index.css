@@ -290,4 +290,9 @@ section {
   .article.card {
     padding: 3em;
   }
+
+  a.icon-remove-sign {
+    top: -10px;
+    font-size: 2.5em;
+  }
 }
