@@ -10,36 +10,34 @@ This section contains informations about my personnal skills in development.
 
 ### Languages
 
-- C             ★★★☆☆
-- C++           ★★☆☆☆
-- Javascript    ★★★★☆
-- Coffeescript  ★★★★☆
-- Python        ★☆☆☆☆
-- Ruby          ★☆☆☆☆
-- Php           ★★★☆☆
+- C
+- C++
+- Javascript
+- Coffeescript
+- Python
+- Php
 
 ### C/C++
 
-At Epitech, I learned C/C++ with some project :
+At Epitech, I learned C/C++ with some project:
 
-- A shell inspired by Tcsh (with aliases, complex command line...)
-- A raytracer (luminosity, reflection, refraction...)
-- ...
+- in system UNIX (like shell, ls or printf recode)
+- graphic interface (SDL, OpenGL, LibX)
 
 ### Scripting
 
-I like made some shell script and command line tools in python, c or javascript.
+I like made some shell script and command line tools in __python__, __c__ or __javascript__.
 
 
 ### Web development
 
-- In frontend development I like to use libraries like requireJS and backbone to create Webapps.
-- NodeJS is my favourite websever to create speed, modern and scalable applications on the web. Moreover npm provide us a huge number of modules to handle websockets, some database driver for MongoDB, redis...
+- In __frontend development__ use libraries like _requireJS_ and _backbone_ to create structured Webapps. I also made some game and experiments with _canvas_ and _WebGL_.
+- _NodeJS_ is my favourite websever to create speed, modern and scalable __server-side__ applications. Moreover npm provide us a huge number of modules to handle websockets, some database driver for _MongoDB_, _redis_... However, some time I use Php frameworks like _Symfony_ or _Laravel_.
 
 Employment History
 ------------------
 
-### Bemyapp ambassador - from 2012
+### Bemyapp ambassador - since 2012
 
 [BeMyApp](http://bemyapp.com) organise des evenements autours du web, du mobile et des nouvelles technologies.
 Il y a les weekends BeMyApp durant lesquels des equipes composees de developers, designers, community managers et d'un chef de projet developent une appli en 48h chronos.
