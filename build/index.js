@@ -1435,4 +1435,8 @@ pages
     else nav('body > section')
   })
 
+jwerty.key('↑,↑,↓,↓,←,→,←,→,B,A,↩', function () {
+  alert('Coming soon ❤')
+})
+
 }()
