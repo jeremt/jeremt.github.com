@@ -54,12 +54,23 @@ a.icon-remove-sign:hover {
 }
 
 img {
+  box-sizing: border-box;
+  border: 21px solid #edecdc;
   max-width: 100%;
 }
 
 blockquote {
   color: #666;
   font-style: italic;
+}
+
+pre {
+  background: #edecdc;
+  padding: 21px;
+}
+
+ul {
+  list-style-type: square;
 }
 
 /**

@@ -1427,7 +1427,16 @@ window.nav = nav
 ~function () {
 
 pages
-  .add('work', ['my', 'origami', 'bilbo', 'rt', 'raphael-toolbox', 'more'])
+  .add('work', [
+      'my'
+    , 'origami'
+    , 'boilertek'
+    , 'bilbo'
+    , 'rt'
+    , 'raphael-toolbox'
+    , 'shell'
+    , 'more'
+    ])
   .add('cv')
   .add('contact')
   .generate(document.body, function (err) {
