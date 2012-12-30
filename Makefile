@@ -5,7 +5,9 @@ BUILD = \
 MIN = \
 	build/index.min.js
 
-LIB = \
+SRC = \
+	deps/jwerty.js \
+	deps/marked.js \
 	lib/pages.js \
 	lib/nav.js \
 	lib/index.js
@@ -13,9 +15,9 @@ LIB = \
 all: build minify server
 
 build:
-	@echo "\033[36mbuild -\033[m lib/*.js -> build/index.js"
+	@echo "\033[36mbuild -\033[m *.js -> build/index.js"
 	@mkdir -p build
-	@cat $(LIB) > $(BUILD)
+	@cat $(SRC) > $(BUILD)
 
 minify:
 	@ command -v uglifyjs > /dev/null && \
