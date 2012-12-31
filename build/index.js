@@ -41696,6 +41696,5 @@ function konami() {
 }
 
 jwerty.key('↑,↑,↓,↓,←,→,←,→,B,A,↩', konami)
-jwerty.key('k', konami)
 
 }()
