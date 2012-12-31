@@ -41346,7 +41346,10 @@ window.game || (window.game = {})
 var world
   , scoreEL
   , lifeEl
+  , lifes
+  , score
   , exit
+  , canvas
 
 /**
  * Initialize the game
@@ -41357,15 +41360,16 @@ var world
  */
 
 game.init = function (opts) {
-  lifes = 3
   score = 0
+  lifes = 3
   scoreEl = opts.score
   lifesEl = opts.lifes
   exit = opts.exit
-
+  
   // world
 
   world = tQuery.createWorld().boilerplate({stats: false})
+  canvas = document.querySelector('canvas')
 
   // camera
 
@@ -41412,8 +41416,10 @@ game.init = function (opts) {
       this.move()
       if (this.hit(world.tCamera())) {
         lifesEl.innerHTML = --lifes
+        canvas.className = 'shake'
         if (lifes === 0) {
           world.stop()
+          alert('Your score is ' + score + '!')
           game.exit()
         }
       }
@@ -41442,7 +41448,7 @@ game.stop = function () {
  */
 
 game.exit = function () {
-  alert('Congratulation you made: ' + score)
+  alert('Goodbye :)')
   location.reload()
 }
 
