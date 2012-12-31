@@ -10,6 +10,7 @@ TODO
 - Bug Click Konami Code
 - Add effets en destroy (Smokepuff)
 - Add effets en shoot (Laser)
+- Shake window when hit with a meteor
 
 License
 -------
