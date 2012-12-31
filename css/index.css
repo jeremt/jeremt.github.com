@@ -263,6 +263,27 @@ section {
 }
 
 /**
+ * Menu
+ */
+
+#menu {
+  font-size: 2em;
+  text-align: center;
+  color: #222;
+  padding: 21px;
+}
+
+#menu button {
+  background: transparent;
+  border: none;
+  color: #222;
+}
+
+#menu button:hover {
+  color: #ea4193;
+}
+
+/**
  * Make it responsive :)
  */
 

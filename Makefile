@@ -8,6 +8,10 @@ MIN = \
 SRC = \
 	deps/jwerty.js \
 	deps/marked.js \
+	deps/tquery-bundle.js \
+	deps/tquery/domevent.js \
+	lib/meteor.js \
+	lib/game.js \
 	lib/pages.js \
 	lib/nav.js \
 	lib/index.js

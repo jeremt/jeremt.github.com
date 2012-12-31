@@ -3,6 +3,14 @@ jeremt.github.com
 
 It's the source code for [my personal website](http://jeremt.github.com). Here, you can know more about me, my personal experience, my project or contact me :).
 
+TODO
+----
+
+- English translations
+- Bug Click Konami Code
+- Add effets en destroy (Smokepuff)
+- Add effets en shoot (Laser)
+
 License
 -------
 
