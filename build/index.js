@@ -41184,7 +41184,7 @@ tQuery.Object3D.registerInstance('off', function(eventType, callback, world){
 });
 /*!
  * meteor.js
- * https://github.com/jeremt
+ * https://github.com/jeremt/jeremt.github.com
  * MIT licensed
  *
  * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
@@ -41331,7 +41331,7 @@ window.Meteor = Meteor
 
 }()/*!
  * game.js
- * https://github.com/jeremt
+ * https://github.com/jeremt/jeremt.github.com
  * MIT licensed
  *
  * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
@@ -41454,7 +41454,7 @@ game.exit = function () {
 
 }()/*!
  * pages.js
- * https://github.com/JeremieT/jeremiet.github.com
+ * https://github.com/jeremt/jeremt.github.com
  * MIT licensed
  *
  * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
@@ -41588,7 +41588,7 @@ window.pages = pages
 
 }()/*!
  * nav.js
- * https://github.com/JeremieT/jeremiet.github.com
+ * https://github.com/jeremt/jeremt.github.com
  * MIT licensed
  *
  * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
@@ -41627,7 +41627,7 @@ window.nav = nav
 
 }()/*!
  * index.js
- * https://github.com/JeremieT/jeremiet.github.com
+ * https://github.com/jeremt/jeremt.github.com
  * MIT licensed
  *
  * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>

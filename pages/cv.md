@@ -19,14 +19,25 @@ This section contains informations about my personnal skills in development.
 
 ### C/C++
 
-At Epitech, I learned C/C++ with some project:
+#### Systeme UNIX
 
-- in system UNIX (like shell, ls or printf recode)
-- graphic interface (SDL, OpenGL, LibX)
+Durant ma première année, j'ai réalisé différent projets liés aux distributions UNIX. Cela comprend le recode en C de certaines fonctions système (printf, ls) ou d'un [shell complet](#shell).
+
+#### Graphic interface
+
+J'ai pu expérimenter la SDL et j'ai eu l'occasion de réaliser différents projets graphics avec la MinilibX (surcouche de la LibX d'Epitech) :
+
+- le "fil de fer" qui, à partir d'une map de points génère un terrain en perspective parallèle ou isométrique
+- un moteur de raycasting visant à faire un jeu similaire au [Wolfenstein 3d](http://fr.wikipedia.org/wiki/Wolfenstein_3D)
+- un [raytracer](#rt) avec la gestion des ombres, de la reflection, de la réfraction...
+
+#### Prog elem'
+
+Il s'agit d'un module d'Epitech dans lequel on réalise des projets de programmation élementaire, comme des algorithmes de tri ou encore une calculatrice gérant les nombres infinis.
 
 ### Scripting
 
-I like made some shell script and command line tools in __python__, __c__ or __javascript__.
+I made some __shell script__ and command line tools in __python__, __c__ or __javascript__.
 
 
 ### Web development
@@ -59,7 +70,3 @@ Education
 ### Epitech - from 2012 to 2016
 
 I'm student at Epitech were I learned a lot of things about C and C++ development.
-
-### Bac S
-
-I had my (Scientific Bac ?) at Montgeron in Paris (suburbe ?).
