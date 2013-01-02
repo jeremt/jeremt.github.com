@@ -41652,6 +41652,8 @@ pages
     if (err)
       return document.body.innerHTML = '<p class="error">' + err + '</p>'
     nav('body > section')
+
+    // open external links into a new window
     var a = document.querySelectorAll('a[href^="http"]')
     for (var i = 0; i < a.length; i++)
       a[i].target = "_blank"
