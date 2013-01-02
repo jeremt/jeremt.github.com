@@ -8,8 +8,8 @@ TODO
 
 - English translations
 - Bug Click Konami Code
-- Add effets en destroy (Smokepuff)
-- Add effets en shoot (Laser)
+- Add effects on destroy (Smokepuff)
+- Add effetcs on shoot (Laser)
 - Shake window when hit with a meteor
 
 License
