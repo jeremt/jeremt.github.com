@@ -5,7 +5,7 @@ Il s'agit d'une télécommande générique pour controller des présentations HT
 
 Le module NowJS m'a permit de réalisé un outil temps réel utilisant les WebSockets. De plus j'ai réalisé le code de l'application en CoffeeScript.
 
-<a target="_blank" href="https://github.com/jeremt/BilboJS" class="img">
+<a href="https://github.com/jeremt/BilboJS" class="img">
   <img src="img/bilbo.png">
 </a>
 

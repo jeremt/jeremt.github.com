@@ -5,7 +5,7 @@ Origami est un plugin jQuery qui permet de générer des animations 3d à partir
 
 Il est aussi possible de régler la vitesse de l'animation, ou d'ajouter des ombres par exemple. Pour plus d'info allez voir sur [github](https://github.com/jeremt/origami) :).
 
-<a target="_blank" href="http://jeremt.github.com/origami" class="img">
+<a href="http://jeremt.github.com/origami" class="img">
   <img src="img/origami.png">
 </a>
 
