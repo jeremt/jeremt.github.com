@@ -53,7 +53,6 @@ Employment History
 [BeMyApp](http://bemyapp.com) is conveying events around web, mobile and new technologies. Along the BeMyApp "weekends", plurivalents teams, composed of developers, designers, community managers around a project manager are gathering to produce an application in 48 hours.
 Some meetups are also organized to allow some "pitchers" to give lectures about interesting nascent technologies.
 
-Mon role autant qu'ambassadeur est de faire le lien entre Bemyapp et les ecoles d'info en fesant la promotion des diverses evenments origanises tout au long de l'annee.
 My role as an ambassador is to connect BeMyApp and the various schools, by promoting the events organized along the year, and I'm also involved in the blog (Note : mettre l'URL ici), submitting stories and tutorials.
 
 ### Web developer at Kontestapp - July 1st, 2012 to December 28th, 2012
