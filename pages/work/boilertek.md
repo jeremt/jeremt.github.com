@@ -1,9 +1,9 @@
 Boilertek
 =========
 
-Il s'agit d'un script que j'ai réalisé en coffee afin de pouvoir créer facilement un projet à partir d'un template prédéfini.
+Le script que j'ai réalisé en CoffeeScript permet de générer un projet à partir d'un template prédéfini.
 
-On peut en plus ajouté des bibliothèques directement depuis un dépot github existant.
+On peut en plus ajouter des bibliothèques directement depuis un dépot github existant.
 
 Installation
 ------------

@@ -1,7 +1,7 @@
 Origami
 =======
 
-Origami est un plugin jQuery qui permet de générer des animations 3d à partir d'animations mathématiques. En effet, le plugin permet de plier une image à partir de la courbe d'une équation.
+Origami est un plugin jQuery qui permet de générer des animations 3D à partir d'équations mathématiques.
 
 Il est aussi possible de régler la vitesse de l'animation, ou d'ajouter des ombres par exemple. Pour plus d'info allez voir sur [github](https://github.com/jeremt/origami) :).
 
