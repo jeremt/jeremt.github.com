@@ -19,7 +19,7 @@
 
 ::selection {
   color: white;
-  background: #ea4193;
+  background: #96c832;
 }
 
 body {
@@ -32,12 +32,12 @@ body {
 }
 
 a:not(.img) {
-  color: #ea4193;
+  color: #96c832;
   text-decoration: none;
 }
 
 a:not(.img):hover {
-  border-bottom: 1px solid #ea4193;
+  border-bottom: 1px solid #96c832;
 }
 
 a.icon-remove-sign {
@@ -49,7 +49,7 @@ a.icon-remove-sign {
 }
 
 a.icon-remove-sign:hover {
-  color: #ea4193;
+  color: #96c832;
   border-bottom: none;
 }
 
@@ -88,7 +88,7 @@ ul {
 }
 
 .button:hover {
-  background: #ea4193;
+  background: #96c832;
   border: none;
 }
 
@@ -244,7 +244,7 @@ section {
 }
 
 #contact-links > a:hover {
-  color: #ea4193;
+  color: #96c832;
   border-bottom: none;
 }
 
@@ -265,7 +265,7 @@ section {
 }
 .card:hover {
   color: #222 !important;
-  background: #ea4193;
+  background: #96c832;
 }
 .card > [class^="icon-"], .card .title {
   -webkit-transition: .5s;
@@ -311,7 +311,7 @@ section {
 }
 
 #menu button:hover {
-  color: #ea4193;
+  color: #96c832;
 }
 
 /**

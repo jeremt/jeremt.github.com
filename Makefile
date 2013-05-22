@@ -16,21 +16,29 @@ SRC = \
 	lib/nav.js \
 	lib/index.js
 
+ECHO = echo
+
 all: build minify server
 
 build:
-	@echo "\033[36mbuild -\033[m *.js -> build/index.js"
+	@$(ECHO) 'Build project...'
 	@mkdir -p build
 	@cat $(SRC) > $(BUILD)
 
 minify:
 	@ command -v uglifyjs > /dev/null && \
 	uglifyjs $(BUILD) > $(MIN) && \
-	echo "\033[36mminify -\033[m $(MIN)" || \
-	echo "\033[31merror -\033[m uglifyjs not installed"
+	$(ECHO) 'Minify project...' || \
+	$(ECHO) 'Error: uglifyjs not installed.'
 
 server:
-	@echo "\033[36mserver -\033[m started on port 8000"
+	@$(ECHO) 'Server started on http://localhost:8000.'
 	@python -m SimpleHTTPServer
+
+clean:
+	@$(ECHO) 'Clean project...'
+	@$(RM) -r build
+
+re:	clean all
 
 .PHONY: build
