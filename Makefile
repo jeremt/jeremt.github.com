@@ -32,7 +32,7 @@ minify:
 	$(ECHO) 'Error: uglifyjs not installed.'
 
 server:
-	@$(ECHO) 'Server started on http://localhost:8000.'
+	@$(ECHO) 'Server is starting...'
 	@python -m SimpleHTTPServer
 
 clean:

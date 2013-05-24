@@ -41182,13 +41182,6 @@ tQuery.Object3D.registerInstance('off', function(eventType, callback, world){
   // for chained API
   return this;
 });
-/*!
- * meteor.js
- * https://github.com/jeremt/jeremt.github.com
- * MIT licensed
- *
- * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
- */
 
 ~function () {
 
@@ -41329,14 +41322,7 @@ Meteor.prototype.hit = function (mesh) {
 
 window.Meteor = Meteor
 
-}()/*!
- * game.js
- * https://github.com/jeremt/jeremt.github.com
- * MIT licensed
- *
- * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
- */
-
+}()
 ~function () {
 
 // create the game object
@@ -41365,7 +41351,7 @@ game.init = function (opts) {
   scoreEl = opts.score
   lifesEl = opts.lifes
   exit = opts.exit
-  
+
   // world
 
   world = tQuery.createWorld().boilerplate({stats: false})
@@ -41452,14 +41438,7 @@ game.exit = function () {
   location.reload()
 }
 
-}()/*!
- * pages.js
- * https://github.com/jeremt/jeremt.github.com
- * MIT licensed
- *
- * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
- */
-
+}()
 ~function () {
 
 var pages = {}
@@ -41586,14 +41565,7 @@ pages.generate = function (el, cb) {
 
 window.pages = pages
 
-}()/*!
- * nav.js
- * https://github.com/jeremt/jeremt.github.com
- * MIT licensed
- *
- * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
- */
-
+}()
 ~function () {
 
 /**
@@ -41625,20 +41597,14 @@ function nav(selector, cb) {
 
 window.nav = nav
 
-}()/*!
- * index.js
- * https://github.com/jeremt/jeremt.github.com
- * MIT licensed
- *
- * (c) Jérémie Taboada - <taboada.jeremie@gmail.com>
- */
-
+}()
 ~function () {
+
+console.log("Bonjour :)")
 
 pages
   .add('work', [
       'my'
-    , 'origami'
     , 'boilertek'
     , 'bilbo'
     , 'rt'
@@ -41659,7 +41625,7 @@ pages
       a[i].target = "_blank"
   })
 
-function konami() {
+function konamiCode() {
   var pages = document.querySelectorAll('section')
     , menu  = document.querySelector('#menu')
     , play  = document.querySelector('#menu #play')
@@ -41684,7 +41650,7 @@ function konami() {
   game.start()
 
   // Menu events
-  
+
   play.onclick = function () {
     if (play.className === 'icon-pause') {
       play.className = 'icon-play'
@@ -41701,6 +41667,6 @@ function konami() {
 
 }
 
-jwerty.key('↑,↑,↓,↓,←,→,←,→,B,A,↩', konami)
+jwerty.key('↑,↑,↓,↓,←,→,←,→,B,A,↩', konamiCode)
 
 }()
