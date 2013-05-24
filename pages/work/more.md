@@ -1,13 +1,12 @@
 More
 ====
 
-On github...
-------------
+On github
+---------
 
-Sur [mon compte](https://github.com/jeremt) github, vous pouvez trouver un certain nombre de projets open source que j'ai réalisé.
-
+On my [github account](https://github.com/jeremt), you can find some of my open source projects.
 
 Ask me one!
 -----------
 
-Si vous avez un projet de développement à me proposer, n'hésitez pas à [me contacter](#contact) ;-).
+You can also [contact me](#contact), if you have any development project to offer me.

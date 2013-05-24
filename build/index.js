@@ -41600,16 +41600,9 @@ window.nav = nav
 }()
 ~function () {
 
-console.log("Bonjour :)")
-
 pages
   .add('work', [
-      'my'
-    , 'boilertek'
-    , 'bilbo'
-    , 'rt'
-    , 'raphael-toolbox'
-    , 'shell'
+      'bilbo'
     , 'more'
     ])
   .add('cv')
