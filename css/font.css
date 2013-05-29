@@ -1,12 +1,12 @@
 
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
-@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(http://fonts.googleapis.com/css?family=Oswald:300);
 
 /**
  * Font yanone - http://www.yanone.de/typedesign/kaffeesatz/
  */
 
-@font-face {
+/*@font-face {
   font-family: 'Yanone Kaffeesatz';
   font-style: normal;
   font-weight: 700;
@@ -29,7 +29,7 @@
   font-style: normal;
   font-weight: 200;
   src: local('Yanone Kaffeesatz ExtraLight'), local('YanoneKaffeesatz-ExtraLight'), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRYa6iXjgqaxY3DU3RqApPOI.woff) format('woff');
-}
+}*/
 
 /**
  * Font awesome - http://fortawesome.github.com/Font-Awesome/

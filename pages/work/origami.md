@@ -1,9 +1,10 @@
 Origami
 =======
 
-Origami est un plugin jQuery qui permet de générer des animations 3D à partir d'équations mathématiques.
+Origami is a jQuery plugin to generate css3 animation from mathematical sequences and equations.
+For example, you can use cosinus to have a simple wave effect.
 
-Il est aussi possible de régler la vitesse de l'animation, ou d'ajouter des ombres par exemple. Pour plus d'info allez voir sur [github](https://github.com/jeremt/origami) :).
+Take a look at the demo at:
 
 <a href="http://jeremt.github.com/origami" class="img">
   <img src="img/origami.png">
@@ -12,7 +13,7 @@ Il est aussi possible de régler la vitesse de l'animation, ou d'ajouter des omb
 Usage
 -----
 
-Pour utiliser le plugin, il suffit de cibler l'element :
+You just have to create a balise like this one:
 
 ```html
 <div id="your-elem">
@@ -25,7 +26,7 @@ Pour utiliser le plugin, il suffit de cibler l'element :
 </div> <!-- #your-elem -->
 ```
 
-et de lui appliquer l'animation puis de l'utiliser lors d'un event par exemple :
+and apply origami effect with your settings:
 
 ```js
 $('#your-elem').origami({

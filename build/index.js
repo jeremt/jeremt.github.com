@@ -41600,9 +41600,13 @@ window.nav = nav
 }()
 ~function () {
 
+var loading = document.querySelector("#loading")
+loading.style.display = 'none'
+
 pages
   .add('work', [
       'bilbo'
+    , 'origami'
     , 'more'
     ])
   .add('cv')
