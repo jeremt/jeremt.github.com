@@ -2381,193 +2381,2046 @@ THREE.OBJLoader.prototype = {
   }
 
 };
-
-~function () {
-
 /**
- * Handle navigation from hashes in url.
+ * @author alteredq / http://alteredqualia.com/
  *
- * @param {String} page selector
- * @param {Function} executed when new page appear
+ * Full-screen textured quad shader
  */
 
-function nav(selector, cb) {
-  this['❤'] = function () {
-    var all = document.querySelectorAll(selector)
-      , current = document.querySelector(location.hash || '#home')
-      , notfound = document.querySelector('#default')
+THREE.CopyShader = {
 
-    for (var i = 0, el = null ; el = all[i] ; i++)
-      el.className = ''
-    if (current === null) {
-      console.warn('Page ' + location.hash + ' doesnt exists.')
-      notfound.className = 'current'
-    } else {
-      current.className = location.hash ? 'current' : 'home'
+	uniforms: {
+
+		"tDiffuse": { type: "t", value: null },
+		"opacity":  { type: "f", value: 1.0 }
+
+	},
+
+	vertexShader: [
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vUv = uv;",
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+		"}"
+
+	].join("\n"),
+
+	fragmentShader: [
+
+		"uniform float opacity;",
+
+		"uniform sampler2D tDiffuse;",
+
+		"varying vec2 vUv;",
+
+		"void main() {",
+
+			"vec4 texel = texture2D( tDiffuse, vUv );",
+			"gl_FragColor = opacity * texel;",
+
+		"}"
+
+	].join("\n")
+
+};
+/**
+ * @author alteredq / http://alteredqualia.com/
+ *
+ * Convolution shader
+ * ported from o3d sample to WebGL / GLSL
+ * http://o3d.googlecode.com/svn/trunk/samples/convolution.html
+ */
+
+THREE.ConvolutionShader = {
+
+  defines: {
+
+    "KERNEL_SIZE_FLOAT": "25.0",
+    "KERNEL_SIZE_INT": "25",
+
+  },
+
+  uniforms: {
+
+    "tDiffuse":        { type: "t", value: null },
+    "uImageIncrement": { type: "v2", value: new THREE.Vector2( 0.001953125, 0.0 ) },
+    "cKernel":         { type: "fv1", value: [] }
+
+  },
+
+  vertexShader: [
+
+    "uniform vec2 uImageIncrement;",
+
+    "varying vec2 vUv;",
+
+    "void main() {",
+
+      "vUv = uv - ( ( KERNEL_SIZE_FLOAT - 1.0 ) / 2.0 ) * uImageIncrement;",
+      "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+    "}"
+
+  ].join("\n"),
+
+  fragmentShader: [
+
+    "uniform float cKernel[ KERNEL_SIZE_INT ];",
+
+    "uniform sampler2D tDiffuse;",
+    "uniform vec2 uImageIncrement;",
+
+    "varying vec2 vUv;",
+
+    "void main() {",
+
+      "vec2 imageCoord = vUv;",
+      "vec4 sum = vec4( 0.0, 0.0, 0.0, 0.0 );",
+
+      "for( int i = 0; i < KERNEL_SIZE_INT; i ++ ) {",
+
+        "sum += texture2D( tDiffuse, imageCoord ) * cKernel[ i ];",
+        "imageCoord += uImageIncrement;",
+
+      "}",
+
+      "gl_FragColor = sum;",
+
+    "}"
+
+
+  ].join("\n"),
+
+  buildKernel: function ( sigma ) {
+
+    // We lop off the sqrt(2 * pi) * sigma term, since we're going to normalize anyway.
+
+    function gauss( x, sigma ) {
+
+      return Math.exp( - ( x * x ) / ( 2.0 * sigma * sigma ) );
+
     }
-    cb && cb(location.hash)
+
+    var i, values, sum, halfWidth, kMaxKernelSize = 25, kernelSize = 2 * Math.ceil( sigma * 3.0 ) + 1;
+
+    if ( kernelSize > kMaxKernelSize ) kernelSize = kMaxKernelSize;
+    halfWidth = ( kernelSize - 1 ) * 0.5;
+
+    values = new Array( kernelSize );
+    sum = 0.0;
+    for ( i = 0; i < kernelSize; ++i ) {
+
+      values[ i ] = gauss( i - halfWidth, sigma );
+      sum += values[ i ];
+
+    }
+
+    // normalize the kernel
+
+    for ( i = 0; i < kernelSize; ++i ) values[ i ] /= sum;
+
+    return values;
+
   }
-  this['❤']()
-  this.onhashchange = this['❤']
+
+};
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.BloomPass = function ( strength, kernelSize, sigma, resolution ) {
+
+	strength = ( strength !== undefined ) ? strength : 1;
+	kernelSize = ( kernelSize !== undefined ) ? kernelSize : 25;
+	sigma = ( sigma !== undefined ) ? sigma : 4.0;
+	resolution = ( resolution !== undefined ) ? resolution : 256;
+
+	// render targets
+
+	var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
+
+	this.renderTargetX = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+	this.renderTargetY = new THREE.WebGLRenderTarget( resolution, resolution, pars );
+
+	// copy material
+
+	if ( THREE.CopyShader === undefined )
+		console.error( "THREE.BloomPass relies on THREE.CopyShader" );
+
+	var copyShader = THREE.CopyShader;
+
+	this.copyUniforms = THREE.UniformsUtils.clone( copyShader.uniforms );
+
+	this.copyUniforms[ "opacity" ].value = strength;
+
+	this.materialCopy = new THREE.ShaderMaterial( {
+
+		uniforms: this.copyUniforms,
+		vertexShader: copyShader.vertexShader,
+		fragmentShader: copyShader.fragmentShader,
+		blending: THREE.AdditiveBlending,
+		transparent: true
+
+	} );
+
+	// convolution material
+
+	if ( THREE.ConvolutionShader === undefined )
+		console.error( "THREE.BloomPass relies on THREE.ConvolutionShader" );
+
+	var convolutionShader = THREE.ConvolutionShader;
+
+	this.convolutionUniforms = THREE.UniformsUtils.clone( convolutionShader.uniforms );
+
+	this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurx;
+	this.convolutionUniforms[ "cKernel" ].value = THREE.ConvolutionShader.buildKernel( sigma );
+
+	this.materialConvolution = new THREE.ShaderMaterial( {
+
+		uniforms: this.convolutionUniforms,
+		vertexShader:  convolutionShader.vertexShader,
+		fragmentShader: convolutionShader.fragmentShader,
+		defines: {
+			"KERNEL_SIZE_FLOAT": kernelSize.toFixed( 1 ),
+			"KERNEL_SIZE_INT": kernelSize.toFixed( 0 )
+		}
+
+	} );
+
+	this.enabled = true;
+	this.needsSwap = false;
+	this.clear = false;
+
+};
+
+THREE.BloomPass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta, maskActive ) {
+
+		if ( maskActive ) renderer.context.disable( renderer.context.STENCIL_TEST );
+
+		// Render quad with blured scene into texture (convolution pass 1)
+
+		THREE.EffectComposer.quad.material = this.materialConvolution;
+
+		this.convolutionUniforms[ "tDiffuse" ].value = readBuffer;
+		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurX;
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetX, true );
+
+
+		// Render quad with blured scene into texture (convolution pass 2)
+
+		this.convolutionUniforms[ "tDiffuse" ].value = this.renderTargetX;
+		this.convolutionUniforms[ "uImageIncrement" ].value = THREE.BloomPass.blurY;
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTargetY, true );
+
+		// Render original scene with superimposed blur to texture
+
+		THREE.EffectComposer.quad.material = this.materialCopy;
+
+		this.copyUniforms[ "tDiffuse" ].value = this.renderTargetY;
+
+		if ( maskActive ) renderer.context.enable( renderer.context.STENCIL_TEST );
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, readBuffer, this.clear );
+
+	}
+
+};
+
+THREE.BloomPass.blurX = new THREE.Vector2( 0.001953125, 0.0 );
+THREE.BloomPass.blurY = new THREE.Vector2( 0.0, 0.001953125 );
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.EffectComposer = function ( renderer, renderTarget ) {
+
+	this.renderer = renderer;
+
+	if ( renderTarget === undefined ) {
+
+		var width = window.innerWidth || 1;
+		var height = window.innerHeight || 1;
+		var parameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBuffer: false };
+
+		renderTarget = new THREE.WebGLRenderTarget( width, height, parameters );
+
+	}
+
+	this.renderTarget1 = renderTarget;
+	this.renderTarget2 = renderTarget.clone();
+
+	this.writeBuffer = this.renderTarget1;
+	this.readBuffer = this.renderTarget2;
+
+	this.passes = [];
+
+	if ( THREE.CopyShader === undefined )
+		console.error( "THREE.EffectComposer relies on THREE.CopyShader" );
+
+	this.copyPass = new THREE.ShaderPass( THREE.CopyShader );
+
+};
+
+THREE.EffectComposer.prototype = {
+
+	swapBuffers: function() {
+
+		var tmp = this.readBuffer;
+		this.readBuffer = this.writeBuffer;
+		this.writeBuffer = tmp;
+
+	},
+
+	addPass: function ( pass ) {
+
+		this.passes.push( pass );
+
+	},
+
+	insertPass: function ( pass, index ) {
+
+		this.passes.splice( index, 0, pass );
+
+	},
+
+	render: function ( delta ) {
+
+		this.writeBuffer = this.renderTarget1;
+		this.readBuffer = this.renderTarget2;
+
+		var maskActive = false;
+
+		var pass, i, il = this.passes.length;
+
+		for ( i = 0; i < il; i ++ ) {
+
+			pass = this.passes[ i ];
+
+			if ( !pass.enabled ) continue;
+
+			pass.render( this.renderer, this.writeBuffer, this.readBuffer, delta, maskActive );
+
+			if ( pass.needsSwap ) {
+
+				if ( maskActive ) {
+
+					var context = this.renderer.context;
+
+					context.stencilFunc( context.NOTEQUAL, 1, 0xffffffff );
+
+					this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, delta );
+
+					context.stencilFunc( context.EQUAL, 1, 0xffffffff );
+
+				}
+
+				this.swapBuffers();
+
+			}
+
+			if ( pass instanceof THREE.MaskPass ) {
+
+				maskActive = true;
+
+			} else if ( pass instanceof THREE.ClearMaskPass ) {
+
+				maskActive = false;
+
+			}
+
+		}
+
+	},
+
+	reset: function ( renderTarget ) {
+
+		if ( renderTarget === undefined ) {
+
+			renderTarget = this.renderTarget1.clone();
+
+			renderTarget.width = window.innerWidth;
+			renderTarget.height = window.innerHeight;
+
+		}
+
+		this.renderTarget1 = renderTarget;
+		this.renderTarget2 = renderTarget.clone();
+
+		this.writeBuffer = this.renderTarget1;
+		this.readBuffer = this.renderTarget2;
+
+	},
+
+	setSize: function ( width, height ) {
+
+		var renderTarget = this.renderTarget1.clone();
+
+		renderTarget.width = width;
+		renderTarget.height = height;
+
+		this.reset( renderTarget );
+
+	}
+
+};
+
+// shared ortho camera
+
+THREE.EffectComposer.camera = new THREE.OrthographicCamera( -1, 1, 1, -1, 0, 1 );
+
+THREE.EffectComposer.quad = new THREE.Mesh( new THREE.PlaneGeometry( 2, 2 ), null );
+
+THREE.EffectComposer.scene = new THREE.Scene();
+THREE.EffectComposer.scene.add( THREE.EffectComposer.quad );
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.MaskPass = function ( scene, camera ) {
+
+	this.scene = scene;
+	this.camera = camera;
+
+	this.enabled = true;
+	this.clear = true;
+	this.needsSwap = false;
+
+	this.inverse = false;
+
+};
+
+THREE.MaskPass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta ) {
+
+		var context = renderer.context;
+
+		// don't update color or depth
+
+		context.colorMask( false, false, false, false );
+		context.depthMask( false );
+
+		// set up stencil
+
+		var writeValue, clearValue;
+
+		if ( this.inverse ) {
+
+			writeValue = 0;
+			clearValue = 1;
+
+		} else {
+
+			writeValue = 1;
+			clearValue = 0;
+
+		}
+
+		context.enable( context.STENCIL_TEST );
+		context.stencilOp( context.REPLACE, context.REPLACE, context.REPLACE );
+		context.stencilFunc( context.ALWAYS, writeValue, 0xffffffff );
+		context.clearStencil( clearValue );
+
+		// draw into the stencil buffer
+
+		renderer.render( this.scene, this.camera, readBuffer, this.clear );
+		renderer.render( this.scene, this.camera, writeBuffer, this.clear );
+
+		// re-enable update of color and depth
+
+		context.colorMask( true, true, true, true );
+		context.depthMask( true );
+
+		// only render where stencil is set to 1
+
+		context.stencilFunc( context.EQUAL, 1, 0xffffffff );  // draw if == 1
+		context.stencilOp( context.KEEP, context.KEEP, context.KEEP );
+
+	}
+
+};
+
+
+THREE.ClearMaskPass = function () {
+
+	this.enabled = true;
+
+};
+
+THREE.ClearMaskPass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta ) {
+
+		var context = renderer.context;
+
+		context.disable( context.STENCIL_TEST );
+
+	}
+
+};
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.RenderPass = function ( scene, camera, overrideMaterial, clearColor, clearAlpha ) {
+
+	this.scene = scene;
+	this.camera = camera;
+
+	this.overrideMaterial = overrideMaterial;
+
+	this.clearColor = clearColor;
+	this.clearAlpha = ( clearAlpha !== undefined ) ? clearAlpha : 1;
+
+	this.oldClearColor = new THREE.Color();
+	this.oldClearAlpha = 1;
+
+	this.enabled = true;
+	this.clear = true;
+	this.needsSwap = false;
+
+};
+
+THREE.RenderPass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta ) {
+
+		this.scene.overrideMaterial = this.overrideMaterial;
+
+		if ( this.clearColor ) {
+
+			this.oldClearColor.copy( renderer.getClearColor() );
+			this.oldClearAlpha = renderer.getClearAlpha();
+
+			renderer.setClearColor( this.clearColor, this.clearAlpha );
+
+		}
+
+		renderer.render( this.scene, this.camera, readBuffer, this.clear );
+
+		if ( this.clearColor ) {
+
+			renderer.setClearColor( this.oldClearColor, this.oldClearAlpha );
+
+		}
+
+		this.scene.overrideMaterial = null;
+
+	}
+
+};
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.SavePass = function ( renderTarget ) {
+
+	if ( THREE.CopyShader === undefined )
+		console.error( "THREE.SavePass relies on THREE.CopyShader" );
+
+	var shader = THREE.CopyShader;
+
+	this.textureID = "tDiffuse";
+
+	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+	this.material = new THREE.ShaderMaterial( {
+
+		uniforms: this.uniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader
+
+	} );
+
+	this.renderTarget = renderTarget;
+
+	if ( this.renderTarget === undefined ) {
+
+		this.renderTargetParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBuffer: false };
+		this.renderTarget = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, this.renderTargetParameters );
+
+	}
+
+	this.enabled = true;
+	this.needsSwap = false;
+	this.clear = false;
+
+};
+
+THREE.SavePass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta ) {
+
+		if ( this.uniforms[ this.textureID ] ) {
+
+			this.uniforms[ this.textureID ].value = readBuffer;
+
+		}
+
+		THREE.EffectComposer.quad.material = this.material;
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, this.renderTarget, this.clear );
+
+	}
+
+};
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.ShaderPass = function ( shader, textureID ) {
+
+	this.textureID = ( textureID !== undefined ) ? textureID : "tDiffuse";
+
+	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+	this.material = new THREE.ShaderMaterial( {
+
+		uniforms: this.uniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader
+
+	} );
+
+	this.renderToScreen = false;
+
+	this.enabled = true;
+	this.needsSwap = true;
+	this.clear = false;
+
+};
+
+THREE.ShaderPass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta ) {
+
+		if ( this.uniforms[ this.textureID ] ) {
+
+			this.uniforms[ this.textureID ].value = readBuffer;
+
+		}
+
+		THREE.EffectComposer.quad.material = this.material;
+
+		if ( this.renderToScreen ) {
+
+			renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera );
+
+		} else {
+
+			renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, writeBuffer, this.clear );
+
+		}
+
+	}
+
+};
+/**
+ * @author alteredq / http://alteredqualia.com/
+ */
+
+THREE.TexturePass = function ( texture, opacity ) {
+
+	if ( THREE.CopyShader === undefined )
+		console.error( "THREE.TexturePass relies on THREE.CopyShader" );
+
+	var shader = THREE.CopyShader;
+
+	this.uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+
+	this.uniforms[ "opacity" ].value = ( opacity !== undefined ) ? opacity : 1.0;
+	this.uniforms[ "tDiffuse" ].value = texture;
+
+	this.material = new THREE.ShaderMaterial( {
+
+		uniforms: this.uniforms,
+		vertexShader: shader.vertexShader,
+		fragmentShader: shader.fragmentShader
+
+	} );
+
+	this.enabled = true;
+	this.needsSwap = false;
+
+};
+
+THREE.TexturePass.prototype = {
+
+	render: function ( renderer, writeBuffer, readBuffer, delta ) {
+
+		THREE.EffectComposer.quad.material = this.material;
+
+		renderer.render( THREE.EffectComposer.scene, THREE.EffectComposer.camera, readBuffer );
+
+	}
+
+};
+
+/**
+ * Default EventEmitter constructor.
+ */
+function EventEmitter() {}
+
+/**
+ * Listen the given event.
+ */
+EventEmitter.prototype.on = function(event, cb) {
+  this.events = this.events || {};
+  this.events[event] = this.events[event] || [];
+  this.events[event].push(cb);
 }
 
-window.nav = nav
-
-}()
-~function () {
-
-var pages = {}
-  , arr = []
+/**
+ * Stop listening the given event.
+ */
+EventEmitter.prototype.off = function(event, cb) {
+  this.events = this.events || {};
+  if (event in this.events)
+    this.events[event].splice(this.events[event].indexOf(cb), 1);
+}
 
 /**
- * Simple helper to load a file with XHR.
+ * Trigger the given event.
  */
+EventEmitter.prototype.trigger = function (event) {
+  this.events || (this.events = {});
+  if (event in this.events) {
+    for(var i = 0; i < this.events[event].length; i++)
+      this.events[event][i].apply(this,
+        Array.prototype.slice.call(arguments, 1));
+  }
+}
 
-function load(path, cb, loading) {
-  var req = new XMLHttpRequest()
+/**
+ * Static method to create EventEmitter from the given
+ * object.
+ */
+EventEmitter.create  = function(obj){
+  var props = ['on', 'off', 'trigger'];
+  for (var i = 0; i < props.length; i++) {
+    if (typeof obj === 'function')
+      obj.prototype[props[i]]  = EventEmitter.prototype[props[i]];
+    else
+      obj[props[i]] = EventEmitter.prototype[props[i]];
+  }
+}
+var Particles = Particles || {};
 
-  req.open("GET", path)
-  req.onreadystatechange = function () {
-    if (req.readyState === 4) {
-      if (req.status === 200)
-        cb(null, req.responseText)
-      else
-        cb(new Error(req.statusText))
+Particles.Shader = {
+  vertex: [
+    "attribute vec3  customColor;",
+    "attribute float customOpacity;",
+    "attribute float customSize;",
+    "attribute float customAngle;",
+    "attribute float customVisible;",  // float used as boolean (0 = false, 1 = true)
+    "varying vec4  color;",
+    "varying float angle;",
+    "void main()",
+    "{",
+      "if ( customVisible > 0.5 )",         // true
+        "color = vec4( customColor, customOpacity );", //     set color associated to vertex; use later in fragment shader.
+      "else",             // false
+        "color = vec4(0.0, 0.0, 0.0, 0.0);",     //     make particle invisible.
+        
+      "angle = customAngle;",
+
+      "vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );",
+      "gl_PointSize = customSize * ( 300.0 / length( mvPosition.xyz ) );",     // scale particles as objects in 3D space
+      "gl_Position = projectionMatrix * mvPosition;",
+    "}"
+  ].join("\n"),
+
+  fragment: [
+    "uniform sampler2D texture;",
+    "varying vec4 color;",   
+    "varying float angle;",   
+    "void main()", 
+    "{",
+      "gl_FragColor = color;",
+      
+      "float c = cos(angle);",
+      "float s = sin(angle);",
+      "vec2 rotatedUV = vec2(c * (gl_PointCoord.x - 0.5) + s * (gl_PointCoord.y - 0.5) + 0.5,", 
+                            "c * (gl_PointCoord.y - 0.5) - s * (gl_PointCoord.x - 0.5) + 0.5);",  // rotate UV coordinates to rotate texture
+          "vec4 rotatedTexture = texture2D( texture,  rotatedUV );",
+      "gl_FragColor = gl_FragColor * rotatedTexture;",    // sets an otherwise white particle texture to desired color
+    "}"
+  ].join("\n")
+};
+var Particles = Particles || {};
+
+Particles.Particle = function ()
+{
+  this.position = new THREE.Vector3();
+  this.velocity = new THREE.Vector3(); // units per second
+  this.acceleration = new THREE.Vector3();
+
+  this.angle = 0;
+  this.angleVelocity = 0; // degrees per second
+  this.angleAcceleration = 0; // degrees per second, per second
+
+  this.size = 16.0;
+
+  this.color = new THREE.Color();
+  this.opacity = 1.0;
+
+  this.age = 0;
+  this.alive = 0;
+}
+
+Particles.Particle.prototype.update = function(dt)
+{
+  this.position.add( this.velocity.clone().multiplyScalar(dt) );
+  this.velocity.add( this.acceleration.clone().multiplyScalar(dt) );
+  
+  this.angle += this.angleVelocity * Math.PI/180 * dt;
+  this.angleVelocity += this.angleAcceleration * Math.PI/180 * dt;
+
+  this.age += dt;
+  
+  if (this.sizeTween.times.length > 0)
+    this.size = this.sizeTween.lerp(this.age);
+  if (this.colorTween.times.length > 0)
+  {
+    var colorHSL = this.colorTween.lerp(this.age);
+    this.color.setHSL(colorHSL.x, colorHSL.y, colorHSL.z);
+  }
+  if (this.opacityTween.times.length > 0)
+    this.opacity = this.opacityTween.lerp(this.age);
+}
+var Particles = Particles || {};
+
+Particles.Tween = function (times, values) {
+  this.times  = times || [];
+  this.values = values || [];
+}
+
+Particles.Tween.prototype.lerp = function(dt) {
+  var i = 0;
+  var n = this.times.length;
+  while (i < n && dt > this.times[i])
+    ++i;
+  if (i == 0)
+    return this.values[0];
+  if (i == n)
+    return this.values[n-1];
+  var p = (dt - this.times[i-1]) / (this.times[i] - this.times[i-1]);
+  if (this.values[0] instanceof THREE.Vector3)
+    return this.values[i-1].clone().lerp(this.values[i], p);
+  else // its a float
+    return this.values[i-1] + p * (this.values[i] - this.values[i-1]);
+}
+var Particles = Particles || {};
+
+Particles.Effect = function (settings) {
+
+  // Initialize move properties.
+
+  this.positionStyle = "CUBE";    
+  this.positionBase = new THREE.Vector3();
+  this.positionSpread = new THREE.Vector3();
+  this.positionRadius = 0;
+  
+  this.velocityStyle = "CUBE";  
+  this.velocityBase = new THREE.Vector3();
+  this.velocitySpread = new THREE.Vector3(); 
+
+  this.speedBase   = 0;
+  this.speedSpread = 0;
+
+  this.accelerationBase = new THREE.Vector3();
+  this.accelerationSpread = new THREE.Vector3();  
+  
+  this.angleBase = 0;
+  this.angleSpread = 0;
+  this.angleVelocityBase = 0;
+  this.angleVelocitySpread = 0;
+  this.angleAccelerationBase = 0;
+  this.angleAccelerationSpread = 0;
+  
+  this.sizeBase   = 0.0;
+  this.sizeSpread = 0.0;
+  this.sizeTween  = new Particles.Tween();
+
+  // Initialize render properties.
+
+  this.colorBase   = new THREE.Vector3(0.0, 1.0, 0.5); 
+  this.colorSpread = new THREE.Vector3(0.0, 0.0, 0.0);
+  this.colorTween  = new Particles.Tween();
+  
+  this.opacityBase   = 1.0;
+  this.opacitySpread = 0.0;
+  this.opacityTween  = new Particles.Tween();
+
+  this.blendStyle = THREE.NormalBlending; // false;
+
+  this.particles = [];
+  this.particlesPerSecond = 100;
+  this.particleDeathAge = 1.0;
+  
+  // Initialize emitter properties.
+
+  this.emitterAge = 0.0;
+  this.emitterAlive = true;
+  this.emitterDeathAge = 60;
+  
+  if (settings === undefined)
+    return;
+  
+  for (var key in settings) 
+    this[key] = settings[key];
+  
+  // Attach tweens to particles.
+
+  Particles.Particle.prototype.sizeTween = this.sizeTween;
+  Particles.Particle.prototype.colorTween = this.colorTween;
+  Particles.Particle.prototype.opacityTween = this.opacityTween;  
+
+  // Compute the maximal number of particles for this emitter.
+
+  this.particleCount =
+    this.particlesPerSecond *
+    Math.min(this.particleDeathAge, this.emitterDeathAge);
+
+  // Create threejs particle system.
+  
+  this.particlesGeometry = new THREE.Geometry();
+  this.particlesMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      texture: {type: "t", value: this.particleTexture},
+    },
+    attributes: {
+      customVisible: {type: 'f', value: []},
+      customAngle: {type: 'f', value: []},
+      customSize: {type: 'f', value: []},
+      customColor: {type: 'c', value: []},
+      customOpacity: {type: 'f', value: []}
+    },
+    vertexShader:   Particles.Shader.vertex,
+    fragmentShader: Particles.Shader.fragment,
+    transparent: true, 
+    alphaTest: 0.5,
+    blending: THREE.NormalBlending,
+    depthTest: true
+  });
+  this.mesh = new THREE.ParticleSystem();
+}
+  
+Particles.Effect.prototype._randomValue = function (base, spread) {
+  return base + spread * (Math.random() - 0.5);
+}
+
+Particles.Effect.prototype._randomVector3 = function (base, spread) {
+  var rand3 = new THREE.Vector3(
+    Math.random() - 0.5,
+    Math.random() - 0.5,
+    Math.random() - 0.5
+  );
+  return new THREE.Vector3()
+    .addVectors(base, new THREE.Vector3()
+      .multiplyVectors(spread, rand3));
+}
+
+
+Particles.Effect.prototype._createParticle = function () {
+  var particle = new Particles.Particle();
+
+  // Initialize positions
+  switch (this.positionStyle) {
+    case "CUBE":
+      particle.position =
+        this._randomVector3(this.positionBase, this.positionSpread);
+      break;
+    case "SPHERE":
+      var z = 2 * Math.random() - 1;
+      var t = 6.2832 * Math.random();
+      var r = Math.sqrt(1 - z * z);
+      var vec3 = new THREE.Vector3(r * Math.cos(t), r * Math.sin(t), z);
+      particle.position = new THREE.Vector3()
+        .addVectors(
+          this.positionBase,
+          vec3.multiplyScalar(this.positionRadius)
+        );
+      break;
+    default:
+      Particles.debug && console.warn("Invalid position style.");
+      break;
+  }
+  
+  // Initialize velocities
+  switch (this.velocityStyle) {
+    case "CUBE":
+      particle.velocity = this._randomVector3(
+        this.velocityBase,
+        this.velocitySpread
+      );
+      break;
+    case "SPHERE":
+      var direction = new THREE.Vector3().subVectors(particle.position, this.positionBase);
+      var speed = this._randomValue(this.speedBase, this.speedSpread);
+      particle.velocity = direction.normalize().multiplyScalar( speed );
+      break;
+    default:
+      Particles.debug && console.warn("Invalid velocity style.");
+      break;
+  }
+  
+  particle.acceleration = this._randomVector3( this.accelerationBase, this.accelerationSpread ); 
+
+  particle.angle = this._randomValue( this.angleBase,             this.angleSpread );
+  particle.angleVelocity = this._randomValue( this.angleVelocityBase,     this.angleVelocitySpread );
+  particle.angleAcceleration = this._randomValue( this.angleAccelerationBase, this.angleAccelerationSpread );
+
+  particle.size = this._randomValue( this.sizeBase, this.sizeSpread );
+
+  var color = this._randomVector3( this.colorBase, this.colorSpread );
+  particle.color = new THREE.Color().setHSL( color.x, color.y, color.z );
+  
+  particle.opacity = this._randomValue( this.opacityBase, this.opacitySpread );
+
+  particle.age = 0;
+  particle.alive = 0;
+  
+  return particle;
+}
+
+Particles.Effect.prototype.initialize = function () {
+  // Remove duplicate code somehow,
+  // here and in update function below.
+  for (var i = 0; i < this.particleCount; i++) {
+    this.particles[i] = this._createParticle();
+    this.particlesGeometry.vertices[i] = this.particles[i].position;
+    this.particlesMaterial.attributes.customVisible.value[i] = this.particles[i].alive;
+    this.particlesMaterial.attributes.customColor.value[i] = this.particles[i].color;
+    this.particlesMaterial.attributes.customOpacity.value[i] = this.particles[i].opacity;
+    this.particlesMaterial.attributes.customSize.value[i] = this.particles[i].size;
+    this.particlesMaterial.attributes.customAngle.value[i] = this.particles[i].angle;
+  }
+  
+  this.particlesMaterial.blending = this.blendStyle;
+  if ( this.blendStyle != THREE.NormalBlending) 
+    this.particlesMaterial.depthTest = false;
+  
+  this.mesh = new THREE.ParticleSystem( this.particlesGeometry, this.particlesMaterial );
+  this.mesh.dynamic = true;
+  this.mesh.sortParticles = true;
+}
+
+Particles.Effect.prototype.update = function(dt) {
+
+  // Update particle data.
+
+  var recycleIndices = [];
+  for (var i = 0; i < this.particleCount; ++i) {
+    if (this.particles[i].alive) {
+      this.particles[i].update(dt);
+
+      // Check if particle is dead.
+
+      if ( this.particles[i].age > this.particleDeathAge ) {
+        this.particles[i].alive = 0.0;
+        recycleIndices.push(i);
+      }
+
+      // Update particle properties in shader.
+
+      this.particlesMaterial.attributes.customVisible.value[i] = this.particles[i].alive;
+      this.particlesMaterial.attributes.customColor.value[i]   = this.particles[i].color;
+      this.particlesMaterial.attributes.customOpacity.value[i] = this.particles[i].opacity;
+      this.particlesMaterial.attributes.customSize.value[i]    = this.particles[i].size;
+      this.particlesMaterial.attributes.customAngle.value[i]   = this.particles[i].angle;
+    }   
+  }
+
+  // Check if particle emitter is alive.
+
+  if (!this.emitterAlive)
+    return;
+
+  // If no particles have died yet,
+  // then there are still particles to activate
+
+  if (this.emitterAge < this.particleDeathAge) {
+
+    // Determine indices of particles to activate.
+
+    var startIndex =
+      Math.round(this.particlesPerSecond * (this.emitterAge +  0));
+    var endIndex =
+      Math.round(this.particlesPerSecond * (this.emitterAge + dt));
+    if (endIndex > this.particleCount) 
+      endIndex = this.particleCount; 
+
+    // Then activate them.
+
+    for (var i = startIndex; i < endIndex; ++i)
+      this.particles[i].alive = 1.0;
+  }
+
+  // if any particles have died while the emitter is still running, we imediately recycle them
+  for (var j = 0; j < recycleIndices.length; ++j) {
+    var i = recycleIndices[j];
+    this.particles[i] = this._createParticle();
+    this.particles[i].alive = 1.0; // activate right away
+    this.particlesGeometry.vertices[i] = this.particles[i].position;
+  }
+
+  // stop emitter?
+  this.emitterAge += dt;
+  if (this.emitterAge > this.emitterDeathAge)
+    this.emitterAlive = false;
+}
+
+
+var Particles = Particles || {};
+
+Particles.Examples =
+{
+  fountain: {
+    positionStyle    : "CUBE",
+    positionBase     : new THREE.Vector3(0,  5, 0),
+    positionSpread   : new THREE.Vector3(10, 0, 10),
+    
+    velocityStyle    : "CUBE",
+    velocityBase     : new THREE.Vector3(0,  160, 0),
+    velocitySpread   : new THREE.Vector3(100, 20, 100), 
+
+    accelerationBase : new THREE.Vector3(0, -100, 0),
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/heart.png'),
+
+    colorBase               : new THREE.Vector3(0.9, 0.8, 0.7),
+
+    angleBase               : 0,
+    angleSpread             : 180,
+    angleVelocityBase       : 0,
+    angleVelocitySpread     : 360 * 4,
+    
+    sizeTween    : new Particles.Tween([0, 1], [1, 20]),
+    opacityTween : new Particles.Tween([2, 3], [1, 0]),
+
+    particlesPerSecond : 200,
+    particleDeathAge   : 3.0,   
+    emitterDeathAge    : 60
+  },
+
+  fireball: {
+    positionStyle  : "SPHERE",
+    positionBase   : new THREE.Vector3(0, 50, 0),
+    positionRadius : 2,
+        
+    velocityStyle : "SPHERE",
+    speedBase     : 40,
+    speedSpread   : 8,
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/smokeparticle.png'),
+
+    sizeTween    : new Particles.Tween([0, 0.1], [1, 150]),
+    opacityTween : new Particles.Tween([0.7, 1], [1, 0]),
+    colorBase    : new THREE.Vector3(80/255, 1, 0.4),
+    blendStyle   : THREE.AdditiveBlending,  
+    
+    particlesPerSecond : 60,
+    particleDeathAge   : 1.5,   
+    emitterDeathAge    : 60
+  },
+  
+  smoke: {
+    positionStyle    : "CUBE",
+    positionBase     : new THREE.Vector3(0, 0, 0),
+    positionSpread   : new THREE.Vector3(10, 0, 10),
+
+    velocityStyle    : "CUBE",
+    velocityBase     : new THREE.Vector3(0, 150, 0),
+    velocitySpread   : new THREE.Vector3(80, 50, 80), 
+    accelerationBase : new THREE.Vector3(0,-10,0),
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/smokeparticle.png'),
+
+    angleBase               : 0,
+    angleSpread             : 720,
+    angleVelocityBase       : 0,
+    angleVelocitySpread     : 720,
+    
+    sizeTween    : new Particles.Tween([0, 1], [32, 128]),
+    opacityTween : new Particles.Tween([0.8, 2], [0.5, 0]),
+    colorTween   : new Particles.Tween([0.4, 1], [ new THREE.Vector3(0,0,0.2), new THREE.Vector3(0, 0, 0.5) ]),
+
+    particlesPerSecond : 200,
+    particleDeathAge   : 2.0,   
+    emitterDeathAge    : 60
+  },
+  
+  clouds: {
+    positionStyle  : "CUBE",
+    positionBase   : new THREE.Vector3(-100, 100,  0),
+    positionSpread : new THREE.Vector3(  0,  50, 60),
+    
+    velocityStyle  : "CUBE",
+    velocityBase   : new THREE.Vector3(40, 0, 0),
+    velocitySpread : new THREE.Vector3(20, 0, 0), 
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/smokeparticle.png'),
+
+    sizeBase     : 80.0,
+    sizeSpread   : 100.0,
+    colorBase    : new THREE.Vector3(0.0, 0.0, 1.0), // H,S,L
+    opacityTween : new Particles.Tween([0,1,4,5],[0,1,1,0]),
+
+    particlesPerSecond : 50,
+    particleDeathAge   : 10.0,    
+    emitterDeathAge    : 60
+  },
+    
+  snow: {
+    positionStyle    : "CUBE",
+    positionBase     : new THREE.Vector3(0, 200, 0),
+    positionSpread   : new THREE.Vector3(500, 0, 500),
+    
+    velocityStyle    : "CUBE",
+    velocityBase     : new THREE.Vector3(0, -60, 0),
+    velocitySpread   : new THREE.Vector3(50, 20, 50), 
+    accelerationBase : new THREE.Vector3(0, -10,0),
+    
+    angleBase               : 0,
+    angleSpread             : 720,
+    angleVelocityBase       :  0,
+    angleVelocitySpread     : 60,
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/snowflake.png'),
+      
+    sizeTween    : new Particles.Tween([0, 0.25], [1, 10]),
+    colorBase   : new THREE.Vector3(0.66, 1.0, 0.9), // H,S,L
+    opacityTween : new Particles.Tween([2, 3], [0.8, 0]),
+
+    particlesPerSecond : 200,
+    particleDeathAge   : 4.0,   
+    emitterDeathAge    : 60
+  },
+  
+  rain: {
+    positionStyle    : "CUBE",
+    positionBase     : new THREE.Vector3(0, 200, 0),
+    positionSpread   : new THREE.Vector3(600, 0, 600),
+
+    velocityStyle    : "CUBE",
+    velocityBase     : new THREE.Vector3(0, -400, 0),
+    velocitySpread   : new THREE.Vector3(10, 50, 10), 
+    accelerationBase : new THREE.Vector3(0, -10,0),
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/raindrop2flip.png'),
+
+    sizeBase    : 8.0,
+    sizeSpread  : 4.0,
+    colorBase   : new THREE.Vector3(0.66, 1.0, 0.7), // H,S,L
+    colorSpread : new THREE.Vector3(0.00, 0.0, 0.2),
+    opacityBase : 0.6,
+
+    particlesPerSecond : 1000,
+    particleDeathAge   : 1.0,   
+    emitterDeathAge    : 60
+  },
+    
+  starfield: {
+    positionStyle    : "CUBE",
+    positionBase     : new THREE.Vector3(0, 200, 0),
+    positionSpread   : new THREE.Vector3(600, 400, 600),
+
+    velocityStyle    : "CUBE",
+    velocityBase     : new THREE.Vector3(0, 0, 0),
+    velocitySpread   : new THREE.Vector3(0.5, 0.5, 0.5), 
+    
+    angleBase               : 0,
+    angleSpread             : 720,
+    angleVelocityBase       : 0,
+    angleVelocitySpread     : 4,
+
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/spikey.png'),
+    
+    sizeBase    : 10.0,
+    sizeSpread  : 2.0,        
+    colorBase   : new THREE.Vector3(0.15, 1.0, 0.9), // H,S,L
+    colorSpread : new THREE.Vector3(0.00, 0.0, 0.2),
+    opacityBase : 1,
+
+    particlesPerSecond : 20000,
+    particleDeathAge   : 60.0,    
+    emitterDeathAge    : 0.1
+  },
+
+  startunnel: {
+    positionStyle  : "CUBE",
+    positionBase   : new THREE.Vector3(0, 0, 0),
+    positionSpread : new THREE.Vector3(10, 10, 10),
+
+    velocityStyle  : "CUBE",
+    velocityBase   : new THREE.Vector3(0, 50, 200),
+    velocitySpread : new THREE.Vector3(40, -20, 80), 
+    
+    angleBase               : 0,
+    angleSpread             : 720,
+    angleVelocityBase       : 10,
+    angleVelocitySpread     : 0,
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/spikey.png'),
+
+    sizeBase    : 4.0,
+    sizeSpread  : 2.0,        
+    colorBase   : new THREE.Vector3(0.15, 1.0, 0.8), // H,S,L
+    opacityBase : 1,
+    blendStyle  : THREE.AdditiveBlending,
+
+    particlesPerSecond : 500,
+    particleDeathAge   : 4.0,   
+    emitterDeathAge    : 60
+  },
+
+  firework: {
+    positionStyle  : "SPHERE",
+    positionBase   : new THREE.Vector3(0, 100, 0),
+    positionRadius : 10,
+    
+    velocityStyle  : "SPHERE",
+    speedBase      : 90,
+    speedSpread    : 10,
+    
+    accelerationBase : new THREE.Vector3(0, -80, 0),
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/spark.png'),
+    
+    sizeTween    : new Particles.Tween([0.5, 0.7, 1.3], [5, 40, 1]),
+    opacityTween : new Particles.Tween([0.2, 0.7, 2.5], [0.75, 1, 0]),
+    colorTween   : new Particles.Tween([0.4, 0.8, 1.0], [ new THREE.Vector3(0,1,1), new THREE.Vector3(0,1,0.6), new THREE.Vector3(0.8, 1, 0.6) ]),
+    blendStyle   : THREE.AdditiveBlending,  
+    
+    particlesPerSecond : 3000,
+    particleDeathAge   : 2.5,   
+    emitterDeathAge    : 0.2
+  },
+
+  candle: {
+    positionStyle  : "SPHERE",
+    positionBase   : new THREE.Vector3(0, 50, 0),
+    positionRadius : 2,
+    
+    velocityStyle  : "CUBE",
+    velocityBase   : new THREE.Vector3(0,100,0),
+    velocitySpread : new THREE.Vector3(20,0,20),
+    
+    particleTexture : THREE.ImageUtils.loadTexture('resources/textures/smokeparticle.png'),
+    
+    sizeTween    : new Particles.Tween([0, 0.3, 1.2], [20, 150, 1]),
+    opacityTween : new Particles.Tween([0.9, 1.5], [1, 0]),
+    colorTween   : new Particles.Tween([0.5, 1.0], [ new THREE.Vector3(0.02, 1, 0.5), new THREE.Vector3(0.05, 1, 0) ]),
+    blendStyle : THREE.AdditiveBlending,  
+    
+    particlesPerSecond : 60,
+    particleDeathAge   : 1.5,   
+    emitterDeathAge    : 60
+  }
+  
+};
+~function () {
+
+function EffectManager(renderer, scene, camera) {
+  this.renderer = renderer;
+  this.scene = scene;
+  this.camera = camera;
+  this.composer = null;
+}
+
+EffectManager.prototype.none = function () {
+  this.composer = null;
+}
+
+EffectManager.prototype.bloom = function () {
+  this.composer = new THREE.EffectComposer(this.renderer);
+  this.composer.addPass(
+    new THREE.RenderPass(this.scene, this.camera)
+ );
+  var effectBloom = new THREE.BloomPass(1, 25, 4);
+  this.composer.addPass(effectBloom);
+  var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+  effectCopy.renderToScreen = true;
+  this.composer.addPass(effectCopy);
+}
+
+EffectManager.prototype.render = function () {
+  if (this.composer === null)
+    this.renderer.render(this.scene, this.camera);
+  else
+    this.composer.render();
+}
+
+window.EffectManager = EffectManager;
+
+}();
+~function () {
+
+/**
+ * Create a new context and initialize the application.
+ */
+function Context() {
+  var self = this;
+
+  this.effectManager = null;
+  this.paused = false;
+
+  // Create html container.
+
+  var container = document.createElement('div');
+  document.body.appendChild(container);
+
+  // Create camera.
+
+  this.camera = new THREE.PerspectiveCamera(
+    45, window.innerWidth / window.innerHeight, 1, 2000
+  );
+
+  // Create scene.
+
+  this.scene = new THREE.Scene();
+
+  // Create the renderer.
+
+  this.renderer = new THREE.WebGLRenderer();
+  this.renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(this.renderer.domElement);
+
+  window.addEventListener('resize', function () {
+    self.camera.aspect = window.innerWidth / window.innerHeight;
+    self.camera.updateProjectionMatrix();
+    self.renderer.setSize(window.innerWidth, window.innerHeight);
+  }, false);
+
+  // Create keyboard event handler.
+
+  this.keyboard = new KEvent;
+}
+
+/**
+ * Handle events.
+ */
+EventEmitter.create(Context);
+
+Context.prototype.attachEffectManager = function (effectManager) {
+  this.effectManager = effectManager;
+}
+
+Context.prototype.pause = function () {
+  this.paused = true;
+}
+
+Context.prototype.play = function () {
+  this.paused = false;
+}
+
+/**
+ * Set fps.
+ */
+Context.prototype.setFPS = function (fps) {
+  this.fps = fps;
+}
+
+/**
+ * Start the application.
+ */
+Context.prototype.start = function () {
+  var self = this;
+  var then = new Date().getTime();
+
+  this.fps || (this.fps = 60);
+  var interval = 1000 / this.fps;
+  this.trigger("start");
+  ~function animate() {
+    requestAnimationFrame(animate);
+    var now = new Date().getTime();
+    var delta = now - then;
+
+    if (delta > interval) {
+      then = now - (delta % interval);
+      self.trigger("frame", delta);
+      if (!this.paused) {
+        if (self.effectManager)
+          self.effectManager.render();
+        else
+          self.renderer.render(self.scene, self.camera);
+      }
+    }
+  }();
+}
+
+window.Context = Context;
+
+}();
+~function () {
+
+function Gui(context) {
+  this.effectManager = null;
+  this.context = context;
+  this.gameOverBox = document.querySelector("#gui-gameOver");
+  this.pauseBox = document.querySelector("#gui-pause");
+  this.continueButtons = document.querySelectorAll("#gui-continue");
+  this.replayButtons = document.querySelectorAll("#gui-replay");
+  this.quitButtons = document.querySelectorAll("#gui-quit")
+}
+
+Gui.prototype.start = function () {
+  var self = this;
+  for (var i = 0; i < this.continueButtons.length; ++i) {
+    this.continueButtons[i].addEventListener("click", function () {
+      self.handleContinue();
+    });
+  }
+  for (var i = 0; i < this.replayButtons.length; ++i) {
+    this.replayButtons[i].addEventListener("click", function () {
+      self.handleReplay();
+    });
+  }
+  for (var i = 0; i < this.quitButtons.length; ++i) {
+    this.quitButtons[i].addEventListener("click", function () {
+      self.handleQuit();
+    });
+  }
+}
+
+Gui.prototype.attachEffectManager = function (effectManager) {
+  this.effectManager = effectManager;
+}
+
+Gui.prototype.gameOver = function (score) {
+  if (this.effectManager)
+    this.effectManager.bloom();
+  this.context.pause();
+  this.gameOverBox.style.display = "block";
+  this.gameOverBox.querySelector("#gui-score").innerHTML = score;
+}
+
+Gui.prototype.pause = function () {
+  if (this.effectManager)
+    this.effectManager.bloom();
+  this.context.pause();
+  this.pauseBox.style.display = "block";
+}
+
+Gui.prototype.handleContinue = function () {
+  if (this.effectManager)
+    this.effectManager.none();
+  this.pauseBox.style.display = "none";
+  this.context.play();
+}
+
+Gui.prototype.handleReplay = function () {
+  window.location.reload();
+}
+
+Gui.prototype.handleQuit = function () {
+  window.location.replace("index.html");
+}
+
+window.Gui = Gui;
+
+}();
+~function () {
+
+function Hud() {
+  this.hudElement = document.querySelector("#hud");
+  this.scoreValue = document.querySelector("#hud-score .value");
+  this.lifesValue = document.querySelector("#hud-lifes .value");
+  this.currentScore = this.scoreValue.innerHTML;
+  this.currentLifes = this.lifesValue.innerHTML;
+  this._currentBloodTime = 0;
+  this.bloodTime = 1000;
+  this.hasBlood = false;
+}
+
+Hud.prototype.updateLifes = function (value) {
+  if (this.currentLifes != value) {
+    this.lifesValue.innerHTML = value;
+    this.currentLifes = value;
+  }
+}
+
+Hud.prototype.updateScore = function (value) {
+  if (this.currentScore != value) {
+    this.scoreValue.innerHTML = value;
+    this.currentScore = value;
+  }
+}
+
+Hud.prototype.activateBlood = function () {
+  this.hasBlood = true;
+  this.hudElement.className = "blood";
+}
+
+Hud.prototype.updateBlood = function (deltaTime) {
+  if (this.hasBlood === false)
+    return;
+  if (this._currentBloodTime < this.bloodTime)
+    this._currentBloodTime += deltaTime;
+  else {
+    this.hasBlood = false;
+    this._currentBloodTime = 0;
+    this.hudElement.className = "";
+  }
+}
+
+window.Hud = Hud;
+
+}();
+/**
+ * The core is a global which store all game informations.
+ */
+var Core = {
+  width   : 100,    //< The width of the area.
+  height  : 100,    //< The height of the area.
+  depth   : 500,    //< The depth of the area.
+  score   : 0,      //< Player's score.
+  lifes   : 5,      //< Player's lifes.
+  highQuality: true //< Graphic quality level.
+};
+~function () {
+
+function Fireball(parent) {
+  this.parent = parent;
+  // this.engine = new Particles.Effect(Particles.Examples.fireball);
+  // this.engine.initialize();
+  // this.mesh = this.engine.mesh;
+
+  if (Core.highQuality) {
+    var material = new THREE.MeshPhongMaterial({
+      color: 0x96c832
+    });
+  } else {
+    var material = new THREE.MeshBasicMaterial({
+      color: 0x96c832
+    });
+  }
+
+  this.mesh = new THREE.Mesh(
+    new THREE.CubeGeometry(5, 5, 5), material
+  );
+  this.mesh.position = parent.mesh.position.clone();
+  this.mesh.position.z -= 10;
+}
+
+Fireball.prototype.move = function (deltaTime) {
+  // this.engine.update(deltaTime);
+  this.mesh.position.z -= deltaTime * 0.5;
+  this.mesh.rotation.x += 0.005 * deltaTime;
+  this.mesh.rotation.y += 0.005 * deltaTime;
+  this.mesh.rotation.z += 0.005 * deltaTime;
+  return this.mesh.position.z >= -250;
+}
+
+window.Fireball = Fireball;
+
+}();
+~function () {
+
+function Asteroide(width, height) {
+  var _skins = [
+    "resources/textures/asteroides/bilbo.png",
+    "resources/textures/asteroides/boilertek.png",
+    "resources/textures/asteroides/contact.png",
+    "resources/textures/asteroides/fb.png",
+    "resources/textures/asteroides/gh.png",
+    "resources/textures/asteroides/gplus.png",
+    "resources/textures/asteroides/in.png",
+    "resources/textures/asteroides/mail.png",
+    "resources/textures/asteroides/origami.png",
+    "resources/textures/asteroides/resume.png",
+    "resources/textures/asteroides/rtb.png",
+    "resources/textures/asteroides/rt.png",
+    "resources/textures/asteroides/twitter.png",
+    "resources/textures/asteroides/website.png",
+    "resources/textures/asteroides/work.png"
+  ];
+
+  var _texture = THREE.ImageUtils.loadTexture(
+    _skins[~~(Math.random() * _skins.length)]
+  );
+
+  if (Core.highQuality) {
+    var material = new THREE.MeshPhongMaterial({
+      map: _texture
+    });
+  } else {
+    var material = new THREE.MeshBasicMaterial({
+      map: _texture
+    });
+  }
+
+  this.mesh = new THREE.Mesh(
+    new THREE.CubeGeometry(10, 10, 10), material
+  );
+  this.mesh.position.x = Math.random() * width - width / 2;
+  this.mesh.position.y = Math.random() * height - height / 2;
+  this.mesh.position.clamp(
+    new THREE.Vector3(-width / 2 + 10, -height / 2 + 10, -250),
+    new THREE.Vector3(width / 2 - 10, height / 2 - 10, -250)
+  );
+}
+
+Asteroide.prototype.update = function (deltaTime) {
+  this.mesh.rotation.x += 0.001 * deltaTime;
+  this.mesh.rotation.y += 0.001 * deltaTime;
+  this.mesh.rotation.z += 0.001 * deltaTime;
+  this.mesh.position.z += 0.05 * deltaTime;
+}
+
+Asteroide.prototype.hit = function (target) {
+  return this.mesh.position.distanceTo(target) < 20;
+}
+
+window.Asteroide = Asteroide;
+
+}();
+~function () {
+
+function AsteroideEmitter(scene) {
+  this.scene = scene;
+  this.spawnTime = 1;
+  this.currentTime = 0;
+  this.asteroides = [];
+}
+
+AsteroideEmitter.prototype.update = function (deltaTime) {
+  if (this.currentTime < this.spawnTime * 1000)
+    this.currentTime += deltaTime;
+  else {
+    this.currentTime = 0;
+    var a = new Asteroide(100, 100);
+    this.asteroides.push(a);
+    this.scene.add(a.mesh);
+  }
+  for (var i = this.asteroides.length - 1; i >= 0; --i) {
+    if (this.asteroides[i].mesh.position.z > 10) {
+      this.scene.remove(this.asteroides[i].mesh);
+      this.asteroides.splice(i, 1);
     } else
-      loading && loading(req.readyState)
+      this.asteroides[i].update(deltaTime);
   }
-  req.send()
 }
 
-/**
- * Add a new page.
- *
- * @param {String} page name
- * @param {Array} add a list of articles into the page
- */
-
-pages.add = function (path, articles) {
-  arr.push({path: path, articles: articles})
-  return this
-}
-
-/**
- * Load the article of a specific page.
- *
- * @param {Object} current page
- * @param {Function} callback
- */
-
-function articles(page, cb) {
-  var markup = {sections: '', articles: ''}
-
-  markup.articles += '<div class="list">'
-  ~function next() {
-    if (page.articles.length) {
-      var a = page.articles.shift()
-      load("pages/" + page.path + "/" + a + ".md", function (err, res) {
-        if (err) return cb(err)
-        var html = marked(res)
-          , title = /<h1>(.+)<\/h1>/.exec(html)
-
-        markup.articles += '<a href="#' + a + '" class="card article">'
-        markup.articles +=   '<div class="title">'
-        markup.articles +=     title ? title[1] : 'No title'
-        markup.articles +=   '</div>'
-        markup.articles += '</a>'
-
-        markup.sections += '<section id="' + a + '" class="article">'
-        markup.sections +=   '<a href="#' + page.path
-        markup.sections +=   '" class="icon-remove-sign"></a>'
-        markup.sections +=   marked(res)
-        markup.sections += '</section>'
-
-        next()
-      })
-    } else {
-      markup.articles += '</div>'
-      cb(null, markup)
+AsteroideEmitter.prototype.hit = function (target) {
+  for (var i = this.asteroides.length - 1; i >= 0; --i) {
+    if (this.asteroides[i].hit(target)) {
+      this.scene.remove(this.asteroides[i].mesh);
+      this.asteroides.splice(i, 1);
+      return true;
     }
-  }()
+  }
+  return false;
 }
 
-/**
- * Executed when all files are added.
- *
- * @param {HTMLElement} el to append the pages
- * @param {Function} callback
- */
+window.AsteroideEmitter = AsteroideEmitter;
 
-pages.generate = function (el, cb) {
-  ~function next() {
-    if (arr.length) {
-      var page = arr.shift()
-
-      // load the `page`
-      load("pages/" + page.path + ".md", function (err, res) {
-        // if error return it
-        if (err) return cb(err)
-
-        // else create a new page
-        var section = document.createElement('section')
-          , close = '<a href="#" class="icon-remove-sign"></a>'
-        section.id = page.path
-
-        // add some articles into the page
-        if (page.articles) {
-          return articles(page, function (err, markup) {
-            if (err) return cb(err)
-
-            // add articles into the page
-            section.innerHTML = close + marked(res)
-              .replace('{{articles}}', markup.articles)
-            el.appendChild(section)
-
-            // add articles pages
-            el.innerHTML += markup.sections
-            next()
-          })
-        }
-
-        // and append it to the parent `el`
-        section.innerHTML = close + marked(res)
-        el.appendChild(section)
-        next()
-      })
-    } else cb()
-  }()
-}
-
-window.pages = pages
-
-}()
+}();
 ~function () {
 
-var loading = document.querySelector("#loading")
-loading.style.display = 'none'
+function Gridbox(width, height, depth, step) {
 
-pages
-  .add('work', [
-      'bilbo'
-    , 'origami'
-    , 'spaceship'
-    , 'more'
-    ])
-  .add('cv')
-  .add('contact')
-  .generate(document.body, function (err) {
-    if (err)
-      return document.body.innerHTML = '<p class="error">' + err + '</p>'
-    nav('body > section')
+  this.mesh = new THREE.Object3D();
+  this.width = width;
+  this.height = height;
+  this.depth = depth;
 
-    // open external links into a new window
-    var a = document.querySelectorAll('a[href^="http"]')
-    for (var i = 0; i < a.length; i++)
-      a[i].target = "_blank"
-  })
+  step || (step = 10);
 
-jwerty.key('↑,↑,↓,↓,←,→,←,→,B,A,↩', function () {
-  window.location.replace("game.html")
-})
+  // Create grid material
+  this.gridMaterial = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    wireframe: true
+  });
 
-}()
+  function _createWallGeometry(w, h) {
+    return new THREE.PlaneGeometry(w, h, w / step, h / step);
+  }
+
+  this.wallBack = new THREE.Mesh(
+    _createWallGeometry(width, height),
+    this.gridMaterial
+  );
+
+  this.wallBack.position.z -= depth / 2;
+
+  this.wallLeft = new THREE.Mesh(
+    _createWallGeometry(depth, height),
+    this.gridMaterial
+  );
+
+  this.wallLeft.rotation.y = Math.PI * 90 / 180;
+  this.wallLeft.position.x -= width / 2;
+
+  this.wallRight = this.wallLeft.clone();
+  this.wallRight.position.x += width;
+
+  this.wallTop = new THREE.Mesh(
+    _createWallGeometry(width, depth),
+    this.gridMaterial
+  );
+  this.wallTop.rotation.x = Math.PI * 90 / 180;
+  this.wallTop.position.y += height / 2;
+
+  this.wallBottom = this.wallTop.clone();
+  this.wallBottom.position.y -= height;
+
+  this.mesh.add(this.wallBack);
+  this.mesh.add(this.wallLeft);
+  this.mesh.add(this.wallRight);
+  this.mesh.add(this.wallTop);
+  this.mesh.add(this.wallBottom);
+
+}
+
+window.Gridbox = Gridbox;
+
+}();
+~function () {
+
+/**
+ * Spaceship constructor, create a spaceship mesh.
+ */
+function Spaceship(cb, scene) {
+  var self, _loader, _texture;
+
+  // some variables.
+
+  self = this;
+  self.scene = scene;
+  self.loaded = false;
+  self.camera = null;
+
+  self.target = new THREE.Vector3(0, 0, 0);
+
+  // shoot
+
+  self.fireballs = [];
+  self._currentShootTime = 1000;
+  self.shootTime = 200;
+
+  // texture
+
+  _texture = new THREE.Texture();
+
+  _loader = new THREE.ImageLoader();
+  _loader.addEventListener('load', function (event) {
+    _texture.image = event.content;
+    _texture.needsUpdate = true;
+  });
+  _loader.load('resources/textures/ship_01.png');
+
+  // model
+
+  _loader = new THREE.OBJLoader();
+  _loader.addEventListener('load', function (event) {
+    self.mesh = event.content;
+    self.mesh.traverse(function (child) {
+      if (child instanceof THREE.Mesh)
+        child.material.map = _texture;
+    });
+    self.mesh.rotation.z = Math.PI / 2;
+    self.loaded = true;
+    cb && cb.call(self);
+  });
+  _loader.load('resources/models/ship_01.obj');
+}
+
+/**
+ * Attach the given camera to this spaceship.
+ */
+Spaceship.prototype.attachCamera = function (camera) {
+  this.camera = camera;
+}
+
+/**
+ * Send a missile.
+ */
+Spaceship.prototype.shoot = function (deltaTime) {
+  if (this._currentShootTime < this.shootTime)
+    this._currentShootTime += deltaTime;
+  else {
+    this._currentShootTime = 0;
+    var fireball = new Fireball(this);
+    this.scene.add(fireball.mesh);
+    this.fireballs.push(fireball);
+    this.mesh.position.z += 10;
+  }
+}
+
+/**
+ * Check if we destroy an asteroide.
+ */
+Spaceship.prototype.destroyAsteroide = function (emitter) {
+  for (var i = this.fireballs.length - 1; i >= 0; --i) {
+    if (emitter.hit(this.fireballs[i].mesh.position)) {
+      this.scene.remove(this.fireballs[i].mesh);
+      this.fireballs.splice(i, 1);
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Update the spaceship according keyboard events.
+ */
+Spaceship.prototype.update = function(deltaTime, keyboard) {
+  if (this.loaded == false)
+    return ;
+
+  // Update the position according keyboard events.
+
+  if (keyboard.pressed("left"))
+    this.target.x -= 0.1 * deltaTime;
+  if (keyboard.pressed("right"))
+    this.target.x += 0.1 * deltaTime;
+  if (keyboard.pressed("up"))
+    this.target.y += 0.1 * deltaTime;
+  if (keyboard.pressed("down"))
+    this.target.y -= 0.1 * deltaTime;
+  if (keyboard.pressed("space"))
+    this.shoot(deltaTime);
+
+  // Handle movement limits.
+
+  if (this.target.x < -40)
+    this.target.x = -40;
+  if (this.target.x > 40)
+    this.target.x = 40;
+  if (this.target.y < -40)
+    this.target.y = -40;
+  if (this.target.y > 40)
+    this.target.y = 40;
+
+  this.mesh.position.lerp(this.target, 0.05);
+
+  // Update fireballs.
+
+  for (var i = this.fireballs.length - 1; i >= 0; --i) {
+    if (this.fireballs[i].move(deltaTime) === false) {
+      this.scene.remove(this.fireballs[i].mesh);
+      this.fireballs.splice(i, 1);
+    }
+  }
+
+  // If we attach a camera, follow the spaceship.
+
+  if (this.camera !== null) {
+    this.cameraTarget = this.mesh.position.clone();
+    this.cameraTarget.z += 50;
+    this.camera.position.lerp(this.cameraTarget, 0.1);
+  }
+}
+
+window.Spaceship = Spaceship;
+
+}();
+~function () {
+
+var context = new Context();
+var gui = new Gui(context);
+var hud = new Hud();
+
+context.on("start", function () {
+  var self = this;
+
+  // Set camera position
+
+  this.camera.position.z += Core.depth / 2;
+
+  // Create lights.
+
+  var ambient = new THREE.AmbientLight(0x121210);
+  this.scene.add(ambient);
+  var directionalLight = new THREE.DirectionalLight(0xffffff);
+  directionalLight.position.set(0, 0, 1).normalize();
+  this.scene.add(directionalLight);
+
+  // Create background.
+  var bg = new THREE.Mesh(
+    new THREE.PlaneGeometry(1000, 1000, 1, 1),
+    new THREE.MeshBasicMaterial({
+      color: 0xeeeeee
+    })
+  );
+  bg.position.z = -500;
+  this.scene.add(bg);
+
+  // Create spaceship.
+
+  this.spaceship = new Spaceship(function () {
+    self.scene.add(this.mesh);
+  }, this.scene);
+  this.spaceship.attachCamera(this.camera);
+
+  // Create grid
+
+  this.box = new Gridbox(Core.width, Core.height, Core.depth);
+  this.scene.add(this.box.mesh);
+
+  this.emitter = new AsteroideEmitter(this.scene);
+
+  // Create effect manager.
+  var effectManager = new EffectManager(
+    this.renderer,
+    this.scene,
+    this.camera
+  );
+  this.attachEffectManager(effectManager);
+  gui.attachEffectManager(effectManager);
+});
+
+context.on("frame", function (deltaTime) {
+
+  // TODO - Faire une gui
+
+  if (!this.paused && this.keyboard.pressed("escape")) {
+    gui.pause();
+  }
+
+  // Handle gameOver.
+
+  if (this.paused === false && Core.lifes < 0) {
+    gui.gameOver(Core.score);
+  }
+
+  if (this.paused)
+    return ;
+
+  // Update HUD.
+
+  hud.updateLifes(Core.lifes);
+  hud.updateScore(Core.score);
+  hud.updateBlood(deltaTime);
+
+  // Update game entitites.
+
+  this.emitter.update(deltaTime);
+  if (this.spaceship.mesh) {
+    if (this.emitter.hit(this.spaceship.mesh.position)) {
+      hud.activateBlood();
+      Core.lifes--;
+      this.spaceship.mesh.position.z += 100;
+      this.camera.position.z += 80;
+    }
+    if (this.spaceship.destroyAsteroide(this.emitter))
+      Core.score++;
+    this.spaceship.update(deltaTime, this.keyboard);
+  }
+
+});
+
+gui.start();
+context.start();
+
+}();

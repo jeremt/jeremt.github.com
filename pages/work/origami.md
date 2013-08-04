@@ -7,7 +7,7 @@ For example, you can use cosinus to have a simple wave effect.
 Take a look at the demo at:
 
 <a href="http://jeremt.github.com/origami" class="img">
-  <img src="img/origami.png">
+  <img src="resources/images/origami.png">
 </a>
 
 Usage

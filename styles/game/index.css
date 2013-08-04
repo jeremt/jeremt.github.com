@@ -1,0 +1,8 @@
+
+@import url("gui.css");
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #eee;
+}

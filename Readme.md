@@ -3,15 +3,6 @@ jeremt.github.com
 
 It's the source code for [my personal website](http://jeremt.github.com). Here, you can know more about me, my personal experience, my project or contact me :).
 
-TODO
-----
-
-- English translations
-- Bug Click Konami Code
-- Add effects on destroy (Smokepuff)
-- Add effetcs on shoot (Laser)
-- Shake window when hit with a meteor
-
 License
 -------
 

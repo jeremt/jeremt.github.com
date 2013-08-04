@@ -6,7 +6,7 @@ BilboJS is a generic remote controller, to manage HTML5 presentations in-browser
 The NowJS module help me to create a realtime tool with WebSockets, and the whole app has been written in CoffeeScript.
 
 <a href="https://github.com/jeremt/BilboJS" class="img">
-  <img src="img/bilbo.png">
+  <img src="resources/images/bilbo.png">
 </a>
 
 Principle
