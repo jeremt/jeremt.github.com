@@ -5,7 +5,7 @@ In order to experiment with webgl I decided to create a simple spaceship game. Y
 
 <img src="resources/images/spaceship_1.png">
 
-I also wanted to try to create nice postFx, hud, gui menu to be ready for my potential futur webgl games.
+I also wanted to try to create nice PostFX, HUD, and GUI menus to be ready for my potential futur webgl games.
 
 <img src="resources/images/spaceship_2.png">
 
