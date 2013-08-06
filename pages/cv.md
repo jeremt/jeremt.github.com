@@ -21,9 +21,13 @@ For my Epitech second year, I made 2 game in C++:
 - a snake like game with multiple graphic interfaces (Ncurse, SFML, OpenGL)
 - a bomberman like coded in C++ with OpenGL
 
+I made some simple HTML5 games with canvas (snake, doodle-jump like...) or WebGL (my website's [spaceship](game.html) game).
+
+Finally I worked on a retro adventure game on android.
+
 ### Web development
 
-I like to make some web experiments in Javascript using Canvas, WegGL and NodeJS.
+I like to make some web experiments using Canvas, WegGL and NodeJS. You can get an overview of it on my [github](https://github.com/jeremt) ;).
 
 ### UNIX System
 
@@ -31,7 +35,7 @@ I have realized several unix projects, like (re)code - in C - some core function
 
 ### Scripting
 
-I made some __Shell Script__ and command line tools in __Python__, __C__ or __Javascript__.
+I made some __Shell Script__ and command line tools in __Python__, __C__ or __Javascript__. You can take a look at [cppgen](https://github.com/jeremt/cppgen) or [boilertek](https://github.com/jeremt/boilertek) for example.
 
 
 What I did
