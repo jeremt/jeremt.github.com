@@ -9,4 +9,4 @@ On my [github account](https://github.com/jeremt), you can find some of my open 
 Ask me one!
 -----------
 
-You can also [contact me](#contact), if you have any development project to offer me.
+You can also [contact me](#contact), if you have any interesting or innovative development project to offer me.

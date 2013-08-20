@@ -2548,9 +2548,11 @@ loading.style.display = 'none'
 
 pages
   .add('work', [
-      'bilbo'
+      'jeremt'
+    , 'bilbo'
     , 'origami'
     , 'spaceship'
+    , 'marioversusboo'
     , 'more'
     ])
   .add('cv')
