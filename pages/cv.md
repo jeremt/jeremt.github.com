@@ -23,7 +23,13 @@ For my Epitech second year, I made 2 game in C++:
 
 I made some simple HTML5 games with canvas (snake, doodle-jump like...) or WebGL (my website's [spaceship](game.html) game).
 
-Finally I worked on a retro adventure game on android.
+During this summer, I try [Unity3d](http://unity3d.com/) and I made 3 games:
+
+- A simple 3d Arkanoid game in space with some nice particles and explosions effects.
+- A spaceship race game with [Occulus Rift](http://www.oculusvr.com/) support.
+- A little arcarde game on Android and desktop with [the new Intel webcam](http://click.intel.com/intelsdk/Creative_Interactive_Gesture_Camera_Developer_Kit-P2061.aspx) in which you have to catch falling fruits and avoid chocolate ;).
+
+Finally I worked on a retro adventure game on native android.
 
 ### Web development
 
