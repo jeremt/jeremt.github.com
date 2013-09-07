@@ -2557,6 +2557,7 @@ pages
     ])
   .add('cv')
   .add('contact')
+  .add('businesscard')
   .generate(document.body, function (err) {
     if (err)
       return document.body.innerHTML = '<p class="error">' + err + '</p>'

@@ -20,7 +20,7 @@ Find me on
   <a class="card" href="https://twitter.com/JeremieTaboada">
     <div class="icon-twitter"></div>
   </a>
-  <a class="card" href="mailto:taboada.jeremie@gmail.com">
+  <a class="card" href="#businesscard">
     <div class="icon-envelope-alt"></div>
   </a>
 </div>

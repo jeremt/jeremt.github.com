@@ -312,6 +312,14 @@ section {
 }
 
 /**
+ * Business card
+ */
+.business-card {
+  padding: 40px;
+  background: #edecdc;
+}
+
+/**
  * Make it responsive :)
  */
 
