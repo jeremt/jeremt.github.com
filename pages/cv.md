@@ -49,6 +49,12 @@ I made some __Shell Script__ and command line tools in __Python__, __C__ or __Ja
 Jobs
 ----
 
+### C++/Python developer at Stupeflix - from September 2013
+
+Stupeflix is a french startup which provide a web service and an iPhone application to create customized videos. The Stupeflix engine use XML and Binary files on iPhone to compile videos. The engine is based on OpenSceneGraph C++ library and its python binding.
+
+I'm currently doing my partime job at Stupeflix for my Epitech thrid year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
+
 ### C/Php teaching assistant - Mars 2013
 
 The ETNA (École des technologies numériques appliquées) is a French private university in computer science. ETNA's students can prepare major certifications (Microsoft, Cisco Systems, Oracle) and two specializations are available: software development or system and computer network.
@@ -67,12 +73,6 @@ My role as an ambassador is to connect BeMyApp and the various schools, by promo
 [Kontest](http://kontestapp.com/) is an automated platform which creates online contests connected to Facebook, web and mobile based systems. No only multichannel, Kontest is also a readymade service enabling customers to manage theirs events, by helping them to create a game online within a few minutes.
 
 My responsability in the company was to realize the second version of the platform as a web-developer. I also work in R&D on futures Kontest products.
-
-### C++/Python developer at Stupeflix - September 2013 to July 2014
-
-Stupeflix is a french startup which provide a web service and an iPhone application to create customized videos. The Stupeflix engine use XML and Binary files on iPhone to compile videos. The engine is based on OpenSceneGraph C++ library and its python binding.
-
-I'm currently doing my partime job at Stupeflix for my Epitech thrid year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
 
 Education
 ---------
