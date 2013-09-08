@@ -53,13 +53,13 @@ Jobs
 
 Stupeflix is a french startup which provides a web service and an iPhone application to create customized videos. The Stupeflix engine use XML and Binary files on iPhone to compile videos. The engine is based on OpenSceneGraph C++ library and its python binding.
 
-I'm currently doing my partime job at Stupeflix for my Epitech third year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
+I'm currently doing my part-time job at Stupeflix for my Epitech third year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
 
 ### C/Php teaching assistant - Mars 2013
 
 The ETNA (École des technologies numériques appliquées) is a French private university in computer science. ETNA's students can prepare major certifications (Microsoft, Cisco Systems, Oracle) and two specializations are available: software development or system and computer network.
 
-An ETNA Assistant's job involves acting as an teaching assistant among ETNA students. I learned them C and Php basics, helped them in their projects and also noted them.
+An ETNA Assistant's job involves acting as a teaching assistant among ETNA students. I teached them C and Php basics, helped them in their projects and also noted them.
 
 ### Bemyapp ambassador - since 2012
 
@@ -72,7 +72,7 @@ My role as an ambassador is to connect BeMyApp and the various schools, by promo
 
 [Kontest](http://kontestapp.com/) is an automated platform which creates online contests connected to Facebook, web and mobile based systems. No only multichannel, Kontest is also a readymade service enabling customers to manage theirs events, by helping them to create a game online within a few minutes.
 
-My responsability in the company was to realize the second version of the platform as a web-developer. I also work in R&D on futures Kontest products.
+My responsability in the company was to realize the second version of the platform as a web-developer. I also work in R&D on future Kontest products.
 
 Education
 ---------
