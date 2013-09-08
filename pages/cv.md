@@ -51,19 +51,19 @@ Jobs
 
 ### C++/Python developer at Stupeflix - from September 2013
 
-Stupeflix is a french startup which provide a web service and an iPhone application to create customized videos. The Stupeflix engine use XML and Binary files on iPhone to compile videos. The engine is based on OpenSceneGraph C++ library and its python binding.
+Stupeflix is a french startup which provides a web service and an iPhone application to create customized videos. The Stupeflix engine use XML and Binary files on iPhone to compile videos. The engine is based on OpenSceneGraph C++ library and its python binding.
 
-I'm currently doing my partime job at Stupeflix for my Epitech thrid year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
+I'm currently doing my partime job at Stupeflix for my Epitech third year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
 
 ### C/Php teaching assistant - Mars 2013
 
 The ETNA (École des technologies numériques appliquées) is a French private university in computer science. ETNA's students can prepare major certifications (Microsoft, Cisco Systems, Oracle) and two specializations are available: software development or system and computer network.
 
-The assistant ETNA work involves acting as an teaching assistant among ETNA students. I learned them C and Php basics, helped them in their projects and also noted them.
+An ETNA Assistant's job involves acting as an teaching assistant among ETNA students. I learned them C and Php basics, helped them in their projects and also noted them.
 
 ### Bemyapp ambassador - since 2012
 
-[BeMyApp](http://bemyapp.com) is organising events about web, mobile and new technologies. During the "BeMyApp Weekends", plurivalents teams composed of developers, designers, community managers and people carrying an idea are gathering to create an application in 48 hours.
+[BeMyApp](http://bemyapp.com) is organising events about web, mobile and new technologies. During the "BeMyApp Weekends", multidisciplinary teams composed of developers, designers, community managers and people carrying an idea are gathering to create an application in 48 hours.
 Some meetups are also organized to allow some speakers to deliver lectures about interesting emerging technologies.
 
 My role as an ambassador is to connect BeMyApp and the various schools, by promoting the events organized during the year. Besides, I also submit some tutorials on the [blog](http://ambassadeur.bemyapp.com/) (for instance an article about the [Dart language](http://ambassadeur.bemyapp.com/?p=149)).
