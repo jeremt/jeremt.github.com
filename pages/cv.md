@@ -11,7 +11,7 @@ Projects
 
 ### Computer graphics
 
-During my first year, I made projets to implement some graphical concepts in C with LibX:
+During my first year, I implement some graphical concepts in C with LibX:
 
 - an __isometric__ "wireframe" ground generate from a data file.
 - a __raycasting__ engine creating a game similar to [Wolfenstein 3d](http://fr.wikipedia.org/wiki/Wolfenstein_3D)
