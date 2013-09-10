@@ -32,7 +32,7 @@ During this summer, I try [Unity3d](http://unity3d.com/) and I made 3 games:
 
 - A simple 3d Arkanoid game in space with some nice particles and explosions effects.
 - A spaceship race game with [Occulus Rift](http://www.oculusvr.com/) support.
-- A little arcarde game on Android and desktop with [the new Intel webcam](http://click.intel.com/intelsdk/Creative_Interactive_Gesture_Camera_Developer_Kit-P2061.aspx) in which you have to catch falling fruits and avoid chocolate ;).
+- A little arcade game on Android and desktop with [the new Intel webcam](http://click.intel.com/intelsdk/Creative_Interactive_Gesture_Camera_Developer_Kit-P2061.aspx) in which you have to catch falling fruits and avoid chocolate ;).
 
 Finally I worked on a retro adventure game as native android application.
 
