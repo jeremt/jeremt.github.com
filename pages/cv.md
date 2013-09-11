@@ -73,7 +73,7 @@ My role as an ambassador is to connect BeMyApp and the various schools, by promo
 
 ### Web developer at Kontestapp - July 1st, 2012 to December 28th, 2012
 
-[Kontest](http://kontestapp.com/) is an automated platform which creates online contests connected to Facebook, web and mobile based systems. No only multichannel, Kontest is also a readymade service enabling customers to manage theirs events, by helping them to create a game online within a few minutes.
+[Kontest](http://kontestapp.com/) is an automated platform which creates online contests connected to Facebook, web and mobile based systems. Not only multichannel, Kontest is also a readymade service enabling customers to manage theirs events, by helping them to create a game online within a few minutes.
 
 My responsability in the company was to realize the second version of the platform as a web-developer. I also work in R&D on future Kontest products.
 
