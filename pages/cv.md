@@ -3,7 +3,6 @@ Resume
 
 As a french developer and IT student at Epitech in Paris, I like to use innovative technologies to make experiments and applications on desktop, web and mobile platforms.
 
-- [Download the PDF version](https://github.com/jeremt/jeremt.github.com/raw/master/CV.pdf)
 - [View it on google doc](https://docs.google.com/document/d/1ufz-7A4BmaDLBP0aaNbknU5nT2YGMcqGq5cYEViuPT0/edit?usp=sharing)
 
 Projects
