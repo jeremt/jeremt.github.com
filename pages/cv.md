@@ -5,88 +5,73 @@ As a french developer and IT student at Epitech in Paris, I like to use innovati
 
 - [View it on google doc](https://docs.google.com/document/d/1ufz-7A4BmaDLBP0aaNbknU5nT2YGMcqGq5cYEViuPT0/edit?usp=sharing)
 
-Projects
---------
-
-### Computer graphics
-
-During my first year, I implement some graphical concepts in C with LibX:
-
-- an __isometric__ "wireframe" ground generate from a data file.
-- a __raycasting__ engine creating a game similar to [Wolfenstein 3d](http://fr.wikipedia.org/wiki/Wolfenstein_3D)
-- a __raytracer__ implementing some raytracing effects (light, reflection, bump mapping...)
-
-In partnership with [AMD](http://www.amd.com/) and Epitech Advanced Computer Science Laboratory, I worked on a C++ project for which we used OpenGL3 and OpenCL to create a 3D demonstration.
-
-### Game Development
-
-For my Epitech second year, I made 2 game in C++:
-
-- a snake like game with multiple graphic interfaces (Ncurse, SFML, OpenGL)
-- a C++ OpenGL based game engine and a bomberman like with nice 3D effects (particles, animations effects, camera...)
-
-I made some simple HTML5 games with canvas (snake, doodle-jump like...) or WebGL (my website's [spaceship](game.html) game).
-
-During this summer, I try [Unity3d](http://unity3d.com/) and I made 3 games:
-
-- A simple 3d Arkanoid game in space with some nice particles and explosions effects.
-- A spaceship race game with [Occulus Rift](http://www.oculusvr.com/) support.
-- A little arcade game on Android and desktop with [the new Intel webcam](http://click.intel.com/intelsdk/Creative_Interactive_Gesture_Camera_Developer_Kit-P2061.aspx) in which you have to catch falling fruits and avoid chocolate ;).
-
-Finally I worked on a retro adventure game as native android application.
-
-### Web development
-
-I like to make some web experiments using html5, Canvas, WegGL or NodeJS. You can get an overview of it on my [github](https://github.com/jeremt) ;).
-
-### UNIX System
-
-I have realized several unix projects, like (re)code - in C - some core functions (printf, ls) or a complete shell. I also experimented __POSIX Threads__ and __sockets__ with some school projets (like a client/server IRC).
-
-### Scripting
-
-I made some __Shell Script__ and command line tools in __Python__, __C__ or __Javascript__. You can take a look at [cppgen](https://github.com/jeremt/cppgen) or [boilertek](https://github.com/jeremt/boilertek) for example.
-
-
-Jobs
-----
-
-### C++/Python developer at Stupeflix - from September 2013
-
-Stupeflix is a french startup which provides a web service and an iPhone application to create customized videos. The Stupeflix engine use XML and Binary files on iPhone to compile videos. The engine is based on OpenSceneGraph C++ library and its python binding.
-
-I'm currently doing my part-time job at Stupeflix for my Epitech third year. I work on themes creation using the python binding and some C++ tools to improve Stupeflix engine features.
-
-### C/Php teaching assistant - Mars 2013
-
-The ETNA (École des technologies numériques appliquées) is a French private university in computer science. ETNA's students can prepare major certifications (Microsoft, Cisco Systems, Oracle) and two specializations are available: software development or system and computer network.
-
-An ETNA Assistant's job involves acting as a teaching assistant among ETNA students. I teached them C and Php basics, helped them in their projects and also noted them.
-
-### Bemyapp ambassador - since 2012
-
-[BeMyApp](http://bemyapp.com) is organising events about web, mobile and new technologies. During the "BeMyApp Weekends", multidisciplinary teams composed of developers, designers, community managers and people carrying an idea are gathering to create an application in 48 hours.
-Some meetups are also organized to allow some speakers to deliver lectures about interesting emerging technologies.
-
-My role as an ambassador is to connect BeMyApp and the various schools, by promoting the events organized during the year. Besides, I also submit some tutorials on the [blog](http://ambassadeur.bemyapp.com/) (for instance an article about the [Dart language](http://ambassadeur.bemyapp.com/?p=149)).
-
-### Web developer at Kontestapp - July 1st, 2012 to December 28th, 2012
-
-[Kontest](http://kontestapp.com/) is an automated platform which creates online contests connected to Facebook, web and mobile based systems. No only multichannel, Kontest is also a readymade service enabling customers to manage theirs events, by helping them to create a game online within a few minutes.
-
-My responsability in the company was to realize the second version of the platform as a web-developer. I also work in R&D on future Kontest products.
-
 Education
 ---------
+### Epitech (European Institute of Technology)     since Sept. 2011 - Paris, France
+#### Bachelor/Master degree in Computer Science
+- Managed projects as team leader of groups composed of 3 to 6 members
+- Carried out projects in various domains such as Security, Network, Algorithms, Game Development
+- Explored several programming languages such as C, C++, Python, OCaml or C#
 
-### Epitech - from 2012 to 2016
+### Lycee de montgeron    from 2009 to 2011 - Paris, France
+#### Baccalaureate in Sciences
+- Learned technical subjects such as Computer Science, Electronic, Engineering Sciences.
+- Learned general subjects such as Mathematics, Physics & Chemistry, History & Geography, French language.
 
-I am currently studying at Epitech (European Institute of Information Technology) where I learn about computer sciences.
-The particularity of Epitech is to teach with practical cases which makes me autonomous and able to realize complete projects.
+Work Experience
+---------------
+### Epitech (European Institute of Technology)    since Dec. 2013 - Paris, France
+#### Koala (Kind Of Advanced Language Assistant)
+- Teach C++, Design Patterns and Best Practices related to Object Oriented Programming
+- Help students to achieve their projects and score them
 
-Languages
----------
+### Stupeflix     since Sept. 2013 - Paris, France
+#### C++/Python developer
+- Improve 3D Engine based on OpenGL for Desktop & iPhone
+- Create GLSL Shaders
+- Work on Python video themes
+- Enhance the Stupeflix engine with several C++ tools
 
-- __French__ - native language
-- __English__ - intermediate level (TOEIC 735)
-- __Spanish__ - beginner
+### ETNA School     from March 2013 to December 2013 - Paris, France
+#### C/Php Teaching assistant
+- Teach C & Php basics
+- Assist students with their projects
+- Oversee project defenses and rate student projects
+
+### Bemyapp     since March 2013 - Paris, France
+#### Ambassador
+- Promote events sponsored by main actors of the IT sector as Microsoft, Intel or Google
+- Ensure communication between Bemyapp & Epitech students
+- Write blog articles & tutorials about innovative technology
+
+
+### Kontestapp     from July 1st to December 28th, 2012 - Paris, France
+#### Web developer
+- Developed back-end development using Symfony Framework
+- Worked on front-end development using HTML5, CSS3, CoffeeScript & BackboneJS
+- Carried out R&D in new web technologies like NodeJS, SocketIO, MongoDB & Redis
+
+Projects
+--------
+### Game Development
+- Worked on C++ side scrolling shoot-em-up multiplayer game & ECS 2D engine based on SFML2
+- Developed a 3D Engine based on OpenGL & a bomberman-like game using this engine
+- Tried Unity & carried out some Unity projects (for example, a race game with Occulus Rift)
+- Created several HTML5 minigames for the most part available on Github (like a snake & a 3D runner)
+
+### Computer Graphics
+- Developed a demoscene using OpenGL3/OpenCL, in partnership with AMD & Epitech ACSEL lab
+- Gained experience in GLSL shading language by creating some effects in WebGL & OpenGL3
+- Created a Ray-Tracing engine in C, including features such as transparency, bump-mapping or reflection
+- Recreated a Wolfenstein like game with a Ray-Casting renderering with LibX
+
+### Web Development
+- Created some web apps in Javascript
+- Used WebGL or canvas to create HTML5 games
+- Created some applications using NodeJS, SocketIO & MongoDB
+
+Awards
+------
+- __DATACKATHON__ - Award for an application that refactors correct input data
+- __BeMyApp OpenTourisme__ - First price by the SNCF (France’s leading transportation company)  for an application used to organise trips, based on OpenDATA & coded with Dart language.
+
