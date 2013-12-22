@@ -7,45 +7,45 @@ As a french developer and IT student at Epitech in Paris, I like to use innovati
 
 Education
 ---------
-### Epitech (European Institute of Technology)     since Sept. 2011 - Paris, France
+### Epitech (European Institute of Technology) - since Sept. 2011 - Paris, France
 #### Bachelor/Master degree in Computer Science
 - Managed projects as team leader of groups composed of 3 to 6 members
 - Carried out projects in various domains such as Security, Network, Algorithms, Game Development
 - Explored several programming languages such as C, C++, Python, OCaml or C#
 
-### Lycee de montgeron    from 2009 to 2011 - Paris, France
+### Lycee de montgeron - from 2009 to 2011 - Paris, France
 #### Baccalaureate in Sciences
 - Learned technical subjects such as Computer Science, Electronic, Engineering Sciences.
 - Learned general subjects such as Mathematics, Physics & Chemistry, History & Geography, French language.
 
 Work Experience
 ---------------
-### Epitech (European Institute of Technology)    since Dec. 2013 - Paris, France
+### Epitech (European Institute of Technology) - since Dec. 2013 - Paris, France
 #### Koala (Kind Of Advanced Language Assistant)
 - Teach C++, Design Patterns and Best Practices related to Object Oriented Programming
 - Help students to achieve their projects and score them
 
-### Stupeflix     since Sept. 2013 - Paris, France
+### Stupeflix - since Sept. 2013 - Paris, France
 #### C++/Python developer
 - Improve 3D Engine based on OpenGL for Desktop & iPhone
 - Create GLSL Shaders
 - Work on Python video themes
 - Enhance the Stupeflix engine with several C++ tools
 
-### ETNA School     from March 2013 to December 2013 - Paris, France
+### ETNA School - from March 2013 to December 2013 - Paris, France
 #### C/Php Teaching assistant
 - Teach C & Php basics
 - Assist students with their projects
 - Oversee project defenses and rate student projects
 
-### Bemyapp     since March 2013 - Paris, France
+### Bemyapp - since March 2013 - Paris, France
 #### Ambassador
 - Promote events sponsored by main actors of the IT sector as Microsoft, Intel or Google
 - Ensure communication between Bemyapp & Epitech students
 - Write blog articles & tutorials about innovative technology
 
 
-### Kontestapp     from July 1st to December 28th, 2012 - Paris, France
+### Kontestapp - from July 1st to December 28th, 2012 - Paris, France
 #### Web developer
 - Developed back-end development using Symfony Framework
 - Worked on front-end development using HTML5, CSS3, CoffeeScript & BackboneJS
