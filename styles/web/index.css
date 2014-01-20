@@ -133,7 +133,7 @@ nav > a[href^="#"]:active {
   background:#d9d8c9;
 }
 nav > a[href^="#"] > div[class^="icon-"]{
-font-size:8em;
+font-size:6.5em;
 /*transition*/
 -webkit-transition:.5s;
    -moz-transition:.5s;
