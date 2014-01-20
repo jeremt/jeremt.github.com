@@ -8,10 +8,12 @@
 /**
  * General
  */
-
 ::selection{
 color:white;
-background:#96c832;
+background:#619bbf;
+}
+#quote {
+  font-size: 1.3em;
 }
 body{
 margin:0 auto;
@@ -23,11 +25,11 @@ padding:42px;
 color:#111;
 }
 a:not(.img){
-color:#96c832;
+color:#619bbf;
 text-decoration:none;
 }
 a:not(.img):hover{
-border-bottom:1px solid #96c832;
+border-bottom:1px solid #619bbf;
 }
 a.icon-remove-sign{
 font-size:4.2em;
@@ -37,7 +39,7 @@ right:0;
 color:#222;
 }
 a.icon-remove-sign:hover{
-color:#96c832;
+color:#619bbf;
 border-bottom:none;
 }
 img{
@@ -76,7 +78,7 @@ cursor:pointer;
         border-radius:21px 0;
 }
 .button:hover{
-background:#96c832;
+background:#619bbf;
 border:none;
 }
 /**
@@ -84,8 +86,8 @@ border:none;
  */
 
 h1, h2, h3{
-font-family:'Oswald', sans-serif;
-font-weight:normal;
+font-family:'Yanone Kaffeesatz', sans-serif;
+font-weight: 300;
 margin:.15em 0;
 }
 h1{
@@ -127,6 +129,9 @@ nav > a[href^="#"]:hover{
 background:#edecdc;
 border:none;
 }
+nav > a[href^="#"]:active {
+box-shadow: inset 0 1px 10px rgba(0, 0, 0, .2);
+}
 nav > a[href^="#"] > div[class^="icon-"]{
 font-size:5em;
 /*transition*/
@@ -158,73 +163,49 @@ position:relative;
 .current{
 display:block;
 /*animation*/
--webkit-animation:up .5s;
-   -moz-animation:up .5s;
-    -ms-animation:up .5s;
-     -o-animation:up .5s;
-        animation:up .5s;
+-webkit-animation: bounce .75s;
+   -moz-animation: bounce .75s;
+    -ms-animation: bounce .75s;
+     -o-animation: bounce .75s;
+        animation: bounce .75s;
 }
 .home{
 display:block;
 /*animation*/
--webkit-animation:down .5s;
-   -moz-animation:down .5s;
-    -ms-animation:down .5s;
-     -o-animation:down .5s;
-        animation:down .5s;
+-webkit-animation: bounce .75s;
+   -moz-animation: bounce .75s;
+    -ms-animation: bounce .75s;
+     -o-animation: bounce .75s;
+        animation: bounce .75s;
 }
 /**
  * Animations
  */
 
-.shake{
-/*animation-name*/
--webkit-animation-name:shake 1s;
-   -moz-animation-name:shake 1s;
-    -ms-animation-name:shake 1s;
-     -o-animation-name:shake 1s;
-        animation-name:shake 1s;
-}
-@-webkit-keyframes down{
-from {
+@-webkit-keyframes bounce {
+  0% {
     opacity: 0;
-    -webkit-transform: translate(0, -500px) scale(0);
+    -webkit-transform: translateY(-500px);
+    transform: translateY(-500px);
   }
-  to {
+
+  60% {
     opacity: 1;
-    -webkit-transform: translate(0, 0) scale(1);
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
   }
 }
-@-webkit-keyframes up{
-from {
-    opacity: 0;
-    -webkit-transform: translate(0, 500px) scale(0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate(0, 0) scale(1);
-  }
-}
-@-webkit-keyframes shake{
-0%, 100% {-webkit-transform: translateX(0);}
-  10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
-  20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
-}
-@-moz-keyframes shake{
-0%, 100% {-moz-transform: translateX(0);}
-  10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
-  20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
-}
-@-o-keyframes shake{
-0%, 100% {-o-transform: translateX(0);}
-  10%, 30%, 50%, 70%, 90% {-o-transform: translateX(-10px);}
-  20%, 40%, 60%, 80% {-o-transform: translateX(10px);}
-}
-@keyframes shake{
-0%, 100% {transform: translateX(0);}
-  10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
-  20%, 40%, 60%, 80% {transform: translateX(10px);}
-}
+
 /**
  * Contact page
  */
@@ -234,7 +215,7 @@ color:#222;
 font-size:4.2em;
 }
 #contact-links > a:hover{
-color:#96c832;
+color:#619bbf;
 border-bottom:none;
 }
 /**
@@ -254,11 +235,15 @@ box-sizing:border-box;
    -moz-transition:.5s;
      -o-transition:.5s;
         transition:.5s;
+box-shadow: 1px 0 5px rgba(0, 0, 0, .5);
 padding:1em 0;
 }
 .card:hover{
 color:#222 !important;
-background:#96c832;
+background:#619bbf;
+}
+.card:active {
+box-shadow: inset 1px 0 10px rgba(0, 0, 0, .3);
 }
 .card > [class^="icon-"], .card .title{
 /*transition*/
@@ -288,7 +273,7 @@ padding:6em 0;
 margin-right:5px;
 }
 .article.card .title{
-font-family:'Oswald', sans-serif;
+font-family:'Yanone Kaffeesatz', sans-serif;
 display:block;
 font-size:2em;
 color:white;
@@ -309,7 +294,7 @@ border:none;
 color:#222;
 }
 #menu button:hover{
-color:#96c832;
+color:#619bbf;
 }
 /**
  * Business card

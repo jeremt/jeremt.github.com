@@ -4,6 +4,9 @@
 var loading = document.querySelector("#loading")
 loading.style.display = 'none'
 
+document.querySelector("#quote").innerHTML =
+  quotes[~~(Math.random() * quotes.length)]
+
 pages
   .add('work', [
       'jeremt'
