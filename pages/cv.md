@@ -21,7 +21,7 @@ Education
 Work Experience
 ---------------
 ### Epitech (European Institute of Technology) - since Dec. 2013 - Paris, France
-#### Koala (Kind Of Advanced Language Assistant)
+#### C++ teacher
 - Teach C++, Design Patterns and Best Practices related to Object Oriented Programming
 - Help students to achieve their projects and score them
 
