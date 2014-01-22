@@ -2552,6 +2552,44 @@ window.pages = pages
 }()
 ~function () {
 
+function ThemeLoader(arr) {
+  this._themes = arr || [];
+}
+
+ThemeLoader.prototype.loadTheme = function (filename) {
+  var link=document.createElement("link")
+  link.setAttribute("rel", "stylesheet")
+  link.setAttribute("type", "text/css")
+  link.setAttribute("href", filename)
+  var index = document.getElementsByTagName("link")
+  var head = document.getElementsByTagName("head")[0]
+  head.insertBefore(link, head.firstChild)
+}
+
+ThemeLoader.prototype.randomTheme = function () {
+  var th = this._themes[~~(Math.random() * this._themes.length)]
+  this.loadTheme(th)
+}
+
+window.ThemeLoader = ThemeLoader
+
+}()
+
+~function () {
+
+// load theme
+
+var tl = new ThemeLoader([
+    'styles/themes/blue.css'
+  , 'styles/themes/red.css'
+  , 'styles/themes/green.css'
+  , 'styles/themes/yellow.css'
+])
+
+tl.randomTheme()
+
+// load page
+
 var loading = document.querySelector("#loading")
 loading.style.display = 'none'
 

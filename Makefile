@@ -13,6 +13,7 @@ SRCS_WEB 		= \
 	scripts/web/quotes.js \
 	scripts/web/nav.js \
 	scripts/web/pages.js \
+	scripts/web/themeloader.js \
 	scripts/web/index.js
 
 SRCS_GAME 	= \

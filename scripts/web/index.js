@@ -1,6 +1,19 @@
 
 ~function () {
 
+// load theme
+
+var tl = new ThemeLoader([
+    'styles/themes/blue.css'
+  , 'styles/themes/red.css'
+  , 'styles/themes/green.css'
+  , 'styles/themes/yellow.css'
+])
+
+tl.randomTheme()
+
+// load page
+
 var loading = document.querySelector("#loading")
 loading.style.display = 'none'
 

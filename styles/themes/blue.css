@@ -1,0 +1,16 @@
+a:not(.img):hover {
+  border-bottom:1px solid #619bbf;
+}
+
+::selection,
+.button:hover,
+.card:hover {
+  background:#619bbf;
+}
+
+a.icon-remove-sign:hover,
+#contact-links > a:hover,
+a:not(.img),
+#menu button:hover {
+  color:#619bbf;
+}

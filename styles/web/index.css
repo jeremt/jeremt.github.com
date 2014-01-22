@@ -4,32 +4,29 @@
 
 @import url('../common/normalize.css');
 @import url('../common/font.css');
+/*@import url('../themes/red.css');*/
 
 /**
  * General
  */
 ::selection{
-color:white;
-background:#619bbf;
+  color:white;
 }
 #quote {
   font-size: 1.3em;
 }
+
 body{
-margin:0 auto;
-max-width:1200px;
-font-family:'Droid Sans', sans-serif;
-font-size:1.2em;
-padding:5px 2px 2px 5px;
-padding:42px;
-color:#111;
+  margin:0 auto;
+  max-width:1200px;
+  font-family:'Droid Sans', sans-serif;
+  font-size:1.2em;
+  padding:5px 2px 2px 5px;
+  padding:42px;
+  color:#111;
 }
 a:not(.img){
-color:#619bbf;
-text-decoration:none;
-}
-a:not(.img):hover{
-border-bottom:1px solid #619bbf;
+  text-decoration:none;
 }
 a.icon-remove-sign{
 font-size:4.2em;
@@ -39,7 +36,6 @@ right:0;
 color:#222;
 }
 a.icon-remove-sign:hover{
-color:#619bbf;
 border-bottom:none;
 }
 img{
@@ -78,7 +74,6 @@ cursor:pointer;
         border-radius:21px 0;
 }
 .button:hover{
-background:#619bbf;
 border:none;
 }
 /**
@@ -101,6 +96,9 @@ font-size:3em;
 h3{
 color:#888;
 font-size:2em;
+}
+h4 {
+  color: #444;
 }
 header{
 text-align:center;
@@ -220,7 +218,6 @@ color:#222;
 font-size:4.2em;
 }
 #contact-links > a:hover{
-color:#619bbf;
 border-bottom:none;
 }
 /**
@@ -244,7 +241,6 @@ padding:1em 0;
 }
 .card:hover{
 color:#222 !important;
-background:#619bbf;
 }
 .card > [class^="icon-"], .card .title{
 /*transition*/
@@ -299,16 +295,22 @@ background:transparent;
 border:none;
 color:#222;
 }
-#menu button:hover{
-color:#619bbf;
-}
 /**
  * Business card
  */
 .business-card{
-padding:40px;
 background:#edecdc;
 }
+
+.business-card table {
+  width: 100%;
+}
+
+.business-card td {
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
 /**
  * Make it responsive :)
  */
@@ -344,3 +346,4 @@ a.icon-remove-sign{
 top:-10px;
 font-size:2.5em;
 }
+
