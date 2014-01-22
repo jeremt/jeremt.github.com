@@ -2603,6 +2603,11 @@ pages
     , 'origami'
     , 'spaceship'
     , 'marioversusboo'
+    , 'rtype'
+    , 'spacedemo'
+    , 'babel'
+    , 'gomoku'
+    , 'emotions'
     , 'more'
     ])
   .add('cv')

@@ -48,8 +48,11 @@ color:#666;
 font-style:italic;
 }
 pre{
-background:#edecdc;
+color:#edecdc;
+background: #333;
 padding:21px;
+text-shadow: 0 1px 4px black;
+box-shadow: inset 0 1px 10px black;
 }
 ul{
 list-style-type:square;
