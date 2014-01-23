@@ -2,6 +2,8 @@
 NAME_WEB 		= index
 NAME_GAME		= game
 
+PORT = 4242
+
 LIBS  			= \
 	libraries/jwerty.js \
 	libraries/kevent.min.js \
@@ -71,8 +73,8 @@ minify:
 	$(ECHO) 'Error: uglifyjs not installed.'
 
 server:
-	@$(ECHO) Start server at localhost:8000
-	@python -m SimpleHTTPServer
+	@$(ECHO) Start server at localhost:${PORT}
+	@python -m SimpleHTTPServer ${PORT}
 
 clean:
 	@$(ECHO) Remove build/
