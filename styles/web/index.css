@@ -128,7 +128,8 @@ box-sizing:border-box;
 }
 nav > a:hover {
 background:#edecdc;
-border:none;
+/* must be important because it would be override by js otherwise*/
+border:none !important;
 }
 nav > a:active {
   background:#d9d8c9;
@@ -149,7 +150,6 @@ color:#222;
 }
 nav > a:hover > div[class^="icon-"]{
 /*transform*/
-border: none;
 -webkit-transform:scale(1);
    -moz-transform:scale(1);
     -ms-transform:scale(1);
