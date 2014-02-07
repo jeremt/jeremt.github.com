@@ -111,7 +111,7 @@ margin-bottom:5px;
  * Navigation
  */
 
-nav > a[href^="#"]{
+nav > a {
 color:#222;
 display:inline-block;
 text-decoration:none;
@@ -126,14 +126,14 @@ box-sizing:border-box;
      -o-transition:.5s;
         transition:.5s;
 }
-nav > a[href^="#"]:hover{
+nav > a:hover{
 background:#edecdc;
 border:none;
 }
-nav > a[href^="#"]:active {
+nav > a:active {
   background:#d9d8c9;
 }
-nav > a[href^="#"] > div[class^="icon-"]{
+nav > a > div[class^="icon-"]{
 font-size:6.5em;
 /*transition*/
 -webkit-transition:.5s;
@@ -146,7 +146,7 @@ font-size:6.5em;
      -o-transform:scale(0.6);
         transform:scale(0.6);
 }
-nav > a[href^="#"]:hover > div[class^="icon-"]{
+nav > a:hover > div[class^="icon-"]{
 /*transform*/
 -webkit-transform:scale(1);
    -moz-transform:scale(1);
@@ -154,7 +154,7 @@ nav > a[href^="#"]:hover > div[class^="icon-"]{
      -o-transform:scale(1);
         transform:scale(1);
 }
-nav > a[href^="#"] > div.name{
+nav > a > div.name{
 font-weight:bold;
 color:#666;
 }
