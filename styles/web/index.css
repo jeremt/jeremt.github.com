@@ -126,7 +126,7 @@ box-sizing:border-box;
      -o-transition:.5s;
         transition:.5s;
 }
-nav > a:hover{
+nav > a:hover {
 background:#edecdc;
 border:none;
 }
@@ -136,6 +136,7 @@ nav > a:active {
 nav > a > div[class^="icon-"]{
 font-size:6.5em;
 /*transition*/
+color:#222;
 -webkit-transition:.5s;
    -moz-transition:.5s;
      -o-transition:.5s;
@@ -148,6 +149,7 @@ font-size:6.5em;
 }
 nav > a:hover > div[class^="icon-"]{
 /*transform*/
+border: none;
 -webkit-transform:scale(1);
    -moz-transform:scale(1);
     -ms-transform:scale(1);
@@ -331,11 +333,11 @@ font-size:2em;
 h3{
 font-size:1.5em;
 }
-nav > a[href^="#"]{
+nav > a {
 width:100%;
 padding:2em;
 }
-nav > a[href^="#"] > div[class^="icon-"]{
+nav > a > div[class^="icon-"]{
 font-size:4em;
 }
 .card{
