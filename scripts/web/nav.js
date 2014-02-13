@@ -1,4 +1,3 @@
-
 ~function () {
 
 /**
@@ -22,6 +21,7 @@ function nav(selector, cb) {
     } else {
       current.className = location.hash ? 'current' : 'home'
     }
+    document.body.scrollTop = 0;
     cb && cb(location.hash)
   }
   this['❤']()
