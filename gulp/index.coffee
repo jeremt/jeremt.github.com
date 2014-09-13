@@ -26,7 +26,7 @@ gulp.task "watch", ["build"], ->
 gulp.task('browser-sync', ->
   browserSync({
     server: {
-      baseDir: "./app"
+      baseDir: "./"
     }
   })
 )

@@ -47,7 +47,8 @@ LabCtrl = (function() {
   LabCtrl.$inject = ["$scope", "$routeParams"];
 
   ARTICLES = {
-    "cpp11_functions_tricks": "C++11 functions tricks"
+    "cpp11_functions_tricks": "C++11 functions tricks",
+    "glsl_antialiasing_technics": "GLSL anti-aliasing technics"
   };
 
   function LabCtrl(scope, params) {

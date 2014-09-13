@@ -48,6 +48,7 @@ class LabCtrl
 
   ARTICLES =
     "cpp11_functions_tricks": "C++11 functions tricks"
+    "glsl_antialiasing_technics": "GLSL anti-aliasing technics"
 
   constructor: (@scope, @params) ->
     @scope.onEditor = (editor) ->

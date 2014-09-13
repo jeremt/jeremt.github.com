@@ -50,16 +50,21 @@ class Compiler extends Builder
 
   # Build the markup files and add them to the watchlist.
   #
-  # @param {Array<String>} pages some pages to compiles
+  # @param {Array<String>} markup some markup to compiles
   # @param {Array<String>} partials partials files which aren't compiled
   #
-  compileMarkup: ({pages, partials} = {}) ->
-    defaultPages = ["index.jade", "{pages,templates}/**/*.jade"]
-    files = @addFiles("compileMarkup", pages ? defaultPages)
+  compileMarkup: ({markup, partials} = {}) ->
+    markup ?= ["index.jade", "markup/**/*.jade"]
+    files = @addFiles("compileMarkup", markup)
     gulp.src(files)
       .pipe(jade(basedir: @src, locals: @locals)
         .on('error', @handleError))
       .pipe(gulp.dest(@dest))
+
+    # Copy the index.html file to the root folder.
+    if "index.jade" in markup
+      gulp.src([path.join(@dest, "index.html")])
+        .pipe(gulp.dest(path.join(@dest, "..")))
 
   # Build some scripts as single files.
   #
