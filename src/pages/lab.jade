@@ -2,5 +2,6 @@ btn(icon="close" href="#" id="close")
 header
   h1 Experiments
 
-article
-  include /pages/lab/cpp11_functions_tricks.jade
+  h2(ng-repeat="(name, title) in articles")
+    a(href="#/lab/{{name}}") {{title}}
+  //- h2: a(href="#/lab/cpp11_functions_tricks") C++11 function tricks

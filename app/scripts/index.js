@@ -10,6 +10,9 @@ app.config([
     }).when("/lab", {
       templateUrl: "app/pages/lab.html",
       controller: "LabCtrl"
+    }).when("/lab/:name", {
+      templateUrl: "app/pages/lab_article.html",
+      controller: "LabCtrl"
     }).when("/contact", {
       templateUrl: "app/pages/contact.html",
       controller: "ContactCtrl"
@@ -39,13 +42,22 @@ HomeCtrl = (function() {
 app.controller("HomeCtrl", HomeCtrl);
 
 LabCtrl = (function() {
-  LabCtrl.$inject = ["$scope"];
+  var ARTICLES;
 
-  function LabCtrl(scope) {
+  LabCtrl.$inject = ["$scope", "$routeParams"];
+
+  ARTICLES = {
+    "cpp11_functions_tricks": "C++11 functions tricks"
+  };
+
+  function LabCtrl(scope, params) {
     this.scope = scope;
+    this.params = params;
     this.scope.onEditor = function(editor) {
       return editor.setReadOnly(true);
     };
+    this.scope.name = this.params.name;
+    this.scope.articles = ARTICLES;
   }
 
   return LabCtrl;

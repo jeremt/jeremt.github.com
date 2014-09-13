@@ -9,7 +9,12 @@ app.config ["$routeProvider", (route) ->
     )
     .when("/lab",
       templateUrl: "app/pages/lab.html"
-      controller: "LabCtrl")
+      controller: "LabCtrl"
+    )
+    .when("/lab/:name",
+      templateUrl: "app/pages/lab_article.html"
+      controller: "LabCtrl"
+    )
     .when("/contact",
       templateUrl: "app/pages/contact.html"
       controller: "ContactCtrl"
@@ -39,11 +44,16 @@ app.controller("HomeCtrl", HomeCtrl)
 
 class LabCtrl
 
-  @$inject = ["$scope"]
+  @$inject = ["$scope", "$routeParams"]
 
-  constructor: (@scope) ->
+  ARTICLES =
+    "cpp11_functions_tricks": "C++11 functions tricks"
+
+  constructor: (@scope, @params) ->
     @scope.onEditor = (editor) ->
       editor.setReadOnly(true)
+    @scope.name = @params.name
+    @scope.articles = ARTICLES
 
 class ContactCtrl
 

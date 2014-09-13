@@ -1,4 +1,4 @@
-<h2><a href="#/lab/cpp11_functions_tricks">C++11 function tricks</a></h2><p>C++11 provides some features for a more "functionnal" C++. Indeed, there is
+<p>C++11 provides some features for a more "functionnal" C++. Indeed, there is
 some features such as std::function std::bind or lambdas that make functions
 manipulation much easier. So, I decided to create 2 useful tools to
 manipulate functions.
@@ -22,7 +22,7 @@ functions in contains (for JS like events for example).
 int n = 2;
 triple(n);
 std::cout << n << std::endl;
-</div><h3>Callable</h3><p>The first problem is that the given function can have a variable number
+</div><h2>Callable</h2><p>The first problem is that the given function can have a variable number
 of parameters of different type. That's why we will use <strong>variadic
 templates</strong>.
 </p><p>Then, we have to figure out a way to store this paramters within the Callable
@@ -131,7 +131,7 @@ template&lt;typename Lambda, typename ...Args&gt;
 Callable&lt;Lambda, Args...&gt; makeCallable(Lambda &&lambda, Args &&...args) {
   return Callable&lt;Lambda, Args...&gt;(lambda, std::forward&lt;Args&gt;(args)...);
 }
-</div><h3>Function</h3><p>For this one, the problem is that we should store the lambda without knowing
+</div><h2>Function</h2><p>For this one, the problem is that we should store the lambda without knowing
 its number of paramters or their types. So we have to find them from the
 lambda argument itself.
 </p><p>Firstly, we need to convert the lambda to an std::function, so we could call
@@ -289,7 +289,7 @@ private:
   std::function&lt;void()&gt; _deleter;
   
 };
-</div><h3>Unit tests</h3><p>Eventually, there is some unit tests written using
+</div><h2>Unit tests</h2><p>Eventually, there is some unit tests written using
 <a href="https://github.com/jeremt/testy">testy</a> library.
 </p><div ui-ace="{onLoad: onEditor, mode: &quot;c_cpp&quot;, theme: &quot;flatcolors&quot;}">#include "testy.hpp"
 #include "function.hpp"

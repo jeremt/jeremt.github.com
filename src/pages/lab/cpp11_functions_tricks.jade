@@ -1,6 +1,4 @@
 
-h2: a(href="#/lab/cpp11_functions_tricks") C++11 function tricks
-
 p.
   C++11 provides some features for a more "functionnal" C++. Indeed, there is
   some features such as std::function std::bind or lambdas that make functions
@@ -35,7 +33,7 @@ div(ui-ace="{onLoad: onEditor, mode: \"c_cpp\", theme: \"flatcolors\"}").
   triple(n);
   std::cout << n << std::endl;
 
-h3 Callable
+h2 Callable
 
 p.
   The first problem is that the given function can have a variable number
@@ -168,7 +166,7 @@ div(ui-ace="{onLoad: onEditor, mode: \"c_cpp\", theme: \"flatcolors\"}").
     return Callable&lt;Lambda, Args...&gt;(lambda, std::forward&lt;Args&gt;(args)...);
   }
 
-h3 Function
+h2 Function
 
 p.
   For this one, the problem is that we should store the lambda without knowing
@@ -347,7 +345,7 @@ div(ui-ace="{onLoad: onEditor, mode: \"c_cpp\", theme: \"flatcolors\"}").
 
   };
 
-h3 Unit tests
+h2 Unit tests
 
 p.
   Eventually, there is some unit tests written using
