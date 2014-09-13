@@ -55,7 +55,8 @@ class Compiler extends Builder
   #
   compileMarkup: ({markup, partials} = {}) ->
     markup ?= ["index.jade", "markup/**/*.jade"]
-    files = @addFiles("compileMarkup", markup)
+    partials ?= ["partials/**/*.jade"]
+    files = @addFiles("compileMarkup", markup.concat(partials))
     gulp.src(files)
       .pipe(jade(basedir: @src, locals: @locals)
         .on('error', @handleError))
