@@ -5,16 +5,16 @@ app = angular.module("app", ["ngRoute", "ui.ace"]);
 app.config([
   "$routeProvider", function(route) {
     return route.when("/", {
-      templateUrl: "app/pages/home.html",
+      templateUrl: "app/home.html",
       controller: "HomeCtrl"
     }).when("/lab", {
-      templateUrl: "app/pages/lab.html",
+      templateUrl: "app/lab.html",
       controller: "LabCtrl"
     }).when("/lab/:name", {
-      templateUrl: "app/pages/lab_article.html",
+      templateUrl: "app/lab_article.html",
       controller: "LabCtrl"
     }).when("/contact", {
-      templateUrl: "app/pages/contact.html",
+      templateUrl: "app/contact.html",
       controller: "ContactCtrl"
     }).otherwise({
       redirectTo: "/"
