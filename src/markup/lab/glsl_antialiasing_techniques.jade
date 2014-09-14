@@ -1,27 +1,20 @@
 p.
   The purpose of this article is to show some technics to draw simple
   anti-aliased shapes in GLSL shaders. It a good pratice to do so because it's
-  faster and more beautiful than post-processed anti-aliasing (because it
-  involves a render to texture).
+  faster and more precise than post-processed anti-aliasing such as FXAA
+  (because it involves a render to texture).
 
 p.
   To test our shaders, we will use the following
   <a href="http://threejs.org" target="_blank">THREE.js</a> code that contains
-  a rotating plane in front of the camera and apply our shader on it (copy and
-  past this code in an html file and open it on a browser).
+  a rotating plane and apply our shader on it (copy and past this code in an
+  html file and open it on a browser).
 
 div(ui-ace="{onLoad: onEditor, mode: \"html\", theme: \"flatcolors\"}").
   &lt;!DOCTYPE html&gt;
-  &lt;style&gt;
-  body {
-    margin: 0;
-  }
-  &lt;/style&gt;
-
+  &lt;style&gt;body {margin: 0;}&lt;/style&gt;
   &lt;div id="canvas"&gt;&lt;/div&gt;
-
   &lt;script src="//ajax.googleapis.com/ajax/libs/threejs/r67/three.min.js"&gt;&lt;/script&gt;
-
   &lt;script id="vertex" type="x-shader/x-vertex"&gt;
 
   varying vec2 vUv;
@@ -32,7 +25,6 @@ div(ui-ace="{onLoad: onEditor, mode: \"html\", theme: \"flatcolors\"}").
   }
 
   &lt;/script&gt;
-
   &lt;script id="fragment" type="x-shader/x-fragment"&gt;
 
   #ifndef GL_ES
@@ -52,7 +44,6 @@ div(ui-ace="{onLoad: onEditor, mode: \"html\", theme: \"flatcolors\"}").
   }
 
   &lt;/script&gt;
-
   &lt;script&gt;
 
   // config
@@ -103,7 +94,7 @@ div(ui-ace="{onLoad: onEditor, mode: \"html\", theme: \"flatcolors\"}").
   &lt;/script&gt;
 
 p.
-  For now, we are just filling all the quad with blue color, like you can see
+  For now, we are just filling the quad with blue color, like you can see
   in the fragment shader:
 
 div(ui-ace="{onLoad: onEditor, mode: \"glsl\", theme: \"flatcolors\"}").
@@ -124,11 +115,11 @@ div(ui-ace="{onLoad: onEditor, mode: \"glsl\", theme: \"flatcolors\"}").
   }
 
 p.
-  From now, we will update this fragment unil we get our anti-aliased shapes
-  working. The first step to apply anti-aliasing is to detect the edge of the
-  quad. To do so, we will use the UV coordinates. For instance, if the
-  <strong>vUv</strong> value is 0, 0 that means we are in the left corner.
-  So we will draw a 10% border around the quad:
+  From now, we will update this fragment unil we get our anti-aliased rectangle
+  shape working. The first step is to detect the border of the quad. To do so,
+  we will use the UV coordinates. For instance, if the <strong>vUv</strong>
+  value is (0, 0) that means we are in the left corner. So we will draw a 10%
+  border around the quad:
 
 div(ui-ace="{onLoad: onEditor, mode: \"glsl\", theme: \"flatcolors\"}").
   #ifndef GL_ES
@@ -151,7 +142,7 @@ div(ui-ace="{onLoad: onEditor, mode: \"glsl\", theme: \"flatcolors\"}").
   }
 
 p.
-  Whenever you write a shader, optimization is really important. So, we will do
+  When you write a shader, optimization is really important. So, we will do
   2 things:
 
 ul
@@ -251,7 +242,7 @@ div(ui-ace="{onLoad: onEditor, mode: \"glsl\", theme: \"flatcolors\"}").
     gl_FragColor = vec4(color, alpha);
     vec2 border = linearstep(vec2(0), uvPixel, vUv) *
                   linearstep(vec2(0), uvPixel, vec2(1) - vUv);
-    gl_FragColor.a = float(border);
+    gl_FragColor.a = border.x * border.y;
   }
 
 h2 Bonus
