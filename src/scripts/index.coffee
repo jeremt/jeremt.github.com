@@ -53,6 +53,7 @@ class LabCtrl
   constructor: (@scope, @params) ->
     @scope.onEditor = (editor) ->
       editor.setReadOnly(true)
+      editor.setOptions(maxLines: Infinity)
     @scope.name = @params.name
     @scope.articles = ARTICLES
 

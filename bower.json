@@ -1,11 +1,10 @@
 {
   "name": "jeremt.github.io",
   "version": "0.0.1",
-  "devDependencies": {
-    "font-awesome": "~4.2.0",
-    "angular": "~1.2.23"
-  },
   "dependencies": {
-    "angular-route": "~1.2.24"
+    "font-awesome": "~4.2.0",
+    "angular": "~1.2.23",
+    "angular-route": "~1.2.24",
+    "angular-ui-ace": "bower"
   }
 }

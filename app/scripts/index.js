@@ -55,7 +55,10 @@ LabCtrl = (function() {
     this.scope = scope;
     this.params = params;
     this.scope.onEditor = function(editor) {
-      return editor.setReadOnly(true);
+      editor.setReadOnly(true);
+      return editor.setOptions({
+        maxLines: Infinity
+      });
     };
     this.scope.name = this.params.name;
     this.scope.articles = ARTICLES;
