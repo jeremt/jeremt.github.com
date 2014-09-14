@@ -39,7 +39,7 @@ header .quote {
   font-size: 1.2em;
 }
 .ace_editor {
-  height: 200px;
+  height: 300px;
 }
 a:not(.btn):not(.card):not(.img) {
   position: relative;

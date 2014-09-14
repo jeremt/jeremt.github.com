@@ -48,7 +48,7 @@ LabCtrl = (function() {
 
   ARTICLES = {
     "cpp11_functions_tricks": "C++11 functions tricks",
-    "glsl_antialiasing_technics": "GLSL anti-aliasing technics"
+    "glsl_antialiasing_techniques": "GLSL anti-aliasing techniques"
   };
 
   function LabCtrl(scope, params) {

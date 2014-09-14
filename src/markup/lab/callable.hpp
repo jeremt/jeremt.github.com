@@ -26,10 +26,13 @@ struct CallableHelper<0> {
 
 }
 
+// A callable store the function and the paramters to call its at construction.
+// Then, you can call it later with callable.call(); or callable();
 template<typename Lambda, typename ...Args>
-struct Callable {
+class Callable {
 public:
 
+  // Store the lambda and its paramters within the callable.
   Callable(Lambda const &lambda, Args &&...args) :
     _args(std::forward<Args>(args)...),
     _lambda(lambda) {
@@ -37,10 +40,12 @@ public:
 
   ~Callable() {}
 
+  // Call the lambda with its paramters stored at construction.
   void call() {
     priv::CallableHelper<sizeof...(Args)>()(_lambda, _args);
   }
 
+  // Call the callable like a regular function.
   void operator()() {
     call();
   }
