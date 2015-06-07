@@ -1,0 +1,45 @@
+/**
+ * This stylesheet contains generic typography rules.
+ */
+
+/**
+ * Body
+ */
+body {
+    font-size: 1em;
+}
+
+/**
+ * Headings
+ */
+html /deep/ h1,
+html /deep/ h2,
+html /deep/ h3,
+html /deep/ h4 {
+    font-family: maxwell_regular, sans-serif;
+    color: #eeeeee;
+}
+html /deep/ h1 {
+    font-size: 3em;
+    text-align: center;
+    margin: 0;
+}
+html /deep/ h2 {
+    font-size: 2.5em;
+    margin: 10px 0;
+}
+html /deep/ h3 {
+    font-size: 2em;
+}
+html /deep/ h4 {
+    font-size: 1.5em;
+}
+
+/**
+ * Content
+ */
+html /deep/ p,
+html /deep/ ul,
+html /deep/ ol {
+    color: #666;
+}

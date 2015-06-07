@@ -1,0 +1,27 @@
+#card {
+    margin: 10px;
+    cursor: pointer;
+    padding: 40px;
+    transition: .3s;
+    text-align: center;
+    background: rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    color: #eeeeee;
+    transform: scale(0.95);
+}
+#card > #description {
+    font-family: maxwell_regular, sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    display: inline-block;
+    padding-top: 20px;
+}
+#card > #icon {
+    font-size: 3em;
+    cursor: pointer;
+}
+#card:hover {
+    background: #eeeeee;
+    color: #2A3947;
+    transform: scale(1);
+}

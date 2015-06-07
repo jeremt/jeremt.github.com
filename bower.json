@@ -1,10 +1,22 @@
 {
-  "name": "jeremt.github.io",
-  "version": "0.0.1",
+  "name": "my-website",
+  "version": "0.0.0",
+  "authors": [
+    "Jeremie Taboada <taboada.jeremie@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-    "font-awesome": "~4.2.0",
-    "angular": "~1.2.23",
-    "angular-route": "~1.2.24",
-    "angular-ui-ace": "bower"
+    "polymer": "Polymer/polymer#~1.0",
+    "layout": "Polymer/layout"
+  },
+  "resolutions": {
+    "polymer": "^1.0.0"
   }
 }

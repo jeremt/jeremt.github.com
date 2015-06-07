@@ -1,0 +1,31 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../layout/layout.html">
+<link rel="import" href="../jeremt-style/jeremt-style.html">
+<link rel="import" href="../jeremt-title/jeremt-title.html">
+<link rel="import" href="../jeremt-card/jeremt-card.html">
+<dom-module id="jeremt-app">
+    <template>
+        <link rel="stylesheet" href="jeremt-app.css">
+        <header>
+            <jeremt-title text="JEREMIE TABOADA"></jeremt-title>
+        </header>
+        <section class="layout horizontal wrap">
+            <jeremt-card class="flex small-column"
+                         icon="icon-folder"
+                         description="Articles"
+                         on-click="_articlesClicked">
+            </jeremt-card>
+            <jeremt-card class="flex small-column"
+                         icon="icon-document"
+                         description="Resume"
+                         on-click="_resumeClicked">
+            </jeremt-card>
+            <jeremt-card class="flex small-column"
+                         icon="icon-user"
+                         description="About"
+                         on-click="_aboutClicked">
+            </jeremt-card>
+        </section>
+    </template>
+</dom-module>
+<script type="text/javascript" src="jeremt-app.js"></script>

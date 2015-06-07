@@ -1,0 +1,18 @@
+/**
+ * This stylesheets contains rules to handle spacing and size of elements.
+ */
+html /deep/ .big-column {
+    min-width: 600px;
+}
+html /deep/ .medium-column {
+    min-width: 400px;
+}
+html /deep/ .small-column {
+    min-width: 200px;
+}
+html /deep/ .list-item {
+    padding: 10px;
+}
+html /deep/ .list-item:not(:last-child) {
+    border-bottom: 1px solid #cccccc;
+}
