@@ -22,7 +22,7 @@ html /deep/ h4 {
 html /deep/ h1 {
     font-size: 3em;
     text-align: center;
-    margin: 0;
+    margin: 20px 0;
 }
 html /deep/ h2 {
     font-size: 2.5em;

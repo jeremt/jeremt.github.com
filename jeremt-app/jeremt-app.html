@@ -1,31 +1,58 @@
 <link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../layout/layout.html">
+<link rel="import" href="../../iron-selector/iron-selector.html">
 <link rel="import" href="../jeremt-style/jeremt-style.html">
 <link rel="import" href="../jeremt-title/jeremt-title.html">
 <link rel="import" href="../jeremt-card/jeremt-card.html">
+<link rel="import" href="../jeremt-state/jeremt-state.html">
+<link rel="import" href="../jeremt-icon-button/jeremt-icon-button.html">
 <dom-module id="jeremt-app">
     <template>
         <link rel="stylesheet" href="jeremt-app.css">
-        <header>
-            <jeremt-title text="JEREMIE TABOADA"></jeremt-title>
-        </header>
-        <section class="layout horizontal wrap">
-            <jeremt-card class="flex small-column"
-                         icon="icon-folder"
-                         description="Articles"
-                         on-click="_articlesClicked">
-            </jeremt-card>
-            <jeremt-card class="flex small-column"
-                         icon="icon-document"
-                         description="Resume"
-                         on-click="_resumeClicked">
-            </jeremt-card>
-            <jeremt-card class="flex small-column"
-                         icon="icon-user"
-                         description="About"
-                         on-click="_aboutClicked">
-            </jeremt-card>
-        </section>
+        <jeremt-state attr-for-state="data-page"
+                      root-state="home"
+                      current-state="{{_currentPage}}">
+            <div data-page="home">
+                <header>
+                    <jeremt-title text="JEREMIE TABOADA"></jeremt-title>
+                </header>
+                <section class="layout horizontal wrap">
+                    <jeremt-card class="flex small-column"
+                                 icon="icon-folder"
+                                 description="Articles"
+                                 on-click="_articlesClicked">
+                    </jeremt-card>
+                    <jeremt-card class="flex small-column"
+                                 icon="icon-document"
+                                 description="Resume"
+                                 on-click="_resumeClicked">
+                    </jeremt-card>
+                    <jeremt-card class="flex small-column"
+                                 icon="icon-user"
+                                 description="About"
+                                 on-click="_aboutClicked">
+                    </jeremt-card>
+                </section>
+            </div>
+            <div data-page="articles">
+                <jeremt-icon-button class="close-button"
+                                    icon="icon-cross"
+                                    on-click="_closeClicked">
+                </jeremt-icon-button>
+                <section>
+                    <h1>Articles</h1>
+                </section>
+            </div>
+            <div data-page="about">
+                <jeremt-icon-button class="close-button"
+                                    icon="icon-cross"
+                                    on-click="_closeClicked">
+                </jeremt-icon-button>
+                <section>
+                    <h1>About me</h1>
+                </section>
+            </div>
+        </jeremt-state>
     </template>
 </dom-module>
 <script type="text/javascript" src="jeremt-app.js"></script>

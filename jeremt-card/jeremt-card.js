@@ -5,7 +5,7 @@ Polymer({
         description: String
     },
     ready: function () {
-        this.$.icon.className += " " + this.icon;
+        this.toggleClass(this.icon, true, this.$.icon);
         this.$.icon.addEventListener("click", function () {
             this.fire("click");
         }.bind(this));

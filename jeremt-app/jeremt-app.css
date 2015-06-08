@@ -3,12 +3,16 @@ header {
     margin: 40px auto 0;
     padding: 20px;
 }
-header h1 {
-    font-size: 6em !important;
-    text-shadow: 4px 4px 0 rgba(0, 0, 0, .1);
-}
 section {
     max-width: 800px;
     margin: auto;
     padding: 20px;
+}
+[data-page]:not(.active-state) {
+    display: none;
+}
+.close-button {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

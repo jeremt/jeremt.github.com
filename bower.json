@@ -14,7 +14,8 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#~1.0",
-    "layout": "Polymer/layout"
+    "layout": "Polymer/layout",
+    "iron-selector": "PolymerElements/iron-selector#~1.0.2"
   },
   "resolutions": {
     "polymer": "^1.0.0"

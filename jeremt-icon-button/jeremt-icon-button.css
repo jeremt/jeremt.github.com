@@ -1,0 +1,13 @@
+#icon-button {
+    color: #eeeeee;
+    cursor: pointer;
+    font-size: 2.5em;
+    padding: 20px;
+    transform: scale(0.8);
+    opacity: 0.5;
+    transition: .3s;
+}
+#icon-button:hover {
+    opacity: 1;
+    transform: scale(1);
+}
