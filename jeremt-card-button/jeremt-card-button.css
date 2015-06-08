@@ -13,15 +13,15 @@
     font-family: maxwell_regular, sans-serif;
     text-transform: uppercase;
     font-size: 1.5em;
-    display: inline-block;
-    padding-top: 20px;
 }
 #card > #icon {
     font-size: 3em;
     cursor: pointer;
+    padding-bottom: 20px;
+    display: block;
 }
 #card:hover {
     background: #eeeeee;
-    color: #2A3947;
+    color: #333;
     transform: scale(1);
 }

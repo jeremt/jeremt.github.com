@@ -20,17 +20,17 @@
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-folder-o"
                                         description="Articles"
-                                        on-click="_articlesClicked">
+                                        target="#articles">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-file-text-o"
                                         description="Resume"
-                                        on-click="_resumeClicked">
+                                        target="https://docs.google.com/document/d/1o_tesZvLk8ptZLTAp94PbY6uaRWE1ztGSL3LrxOU468/pub">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-envelope-o"
                                         description="Contact"
-                                        on-click="_contactClicked">
+                                        target="#contact">
                     </jeremt-card-button>
                 </section>
             </div>
@@ -41,15 +41,20 @@
                 </jeremt-icon-button>
                 <section>
                     <h1>Articles</h1>
-                    <div class="article-item">
-                        <span>The property class</span>
-                    </div>
-                    <div class="article-item">
-                        <span>Some c++11 function tricks</span>
-                    </div>
-                    <div class="article-item">
-                        <span>Anti-aliased shapes in GLSL</span>
-                    </div>
+                </section>
+                <section class="layout horizontal wrap">
+                    <jeremt-card-button class="flex small-column"
+                                        description="The property class"
+                                        target="#articles/the_property_class">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        description="Some c++11 function tricks"
+                                        target="#articles/some_c++11_function_tricks">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        description="Anti-aliased shapes in GLSL"
+                                        target="#articles/anti-aliased_shapes_in_glsl">
+                    </jeremt-card-button>
                 </section>
             </div>
             <div data-page="#contact">
@@ -61,43 +66,48 @@
                     <h1>Contact</h1>
                 </section>
                 <section class="layout horizontal wrap">
-                    <template is="dom-repeat" items="{{contacts}}">
-                        <jeremt-card-button class="flex small-column"
-                                            icon="fa-facebook"
-                                            description="Facebook"
-                                            on-click="_linkClicked">
-                        </jeremt-card-button>
-                    </template>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-facebook"
                                         description="Facebook"
-                                        on-click="_linkClicked">
+                                        target="https://www.facebook.com/taboada.jeremie">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-linkedin"
                                         description="LinkedIn"
-                                        on-click="_linkClicked">
+                                        target="https://www.linkedin.com/profile/view?id=208391836&trk=nav_responsive_tab_profile">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-github"
                                         description="Github"
-                                        on-click="_linkClicked">
+                                        target="https://github.com/jeremt">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-twitter"
                                         description="Twitter"
-                                        on-click="_linkClicked">
+                                        target="https://twitter.com/JeremieTaboada">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-google-plus"
                                         description="googleplus"
-                                        on-click="_linkClicked">
+                                        target="https://plus.google.com/106788167698511705100/posts">
                     </jeremt-card-button>
                     <jeremt-card-button class="flex small-column"
                                         icon="fa-envelope"
                                         description="Mail"
-                                        on-click="_linkClicked">
+                                        target="mailto:taboada.jeremie@gmail.com">
                     </jeremt-card-button>
+                </section>
+            </div>
+            <div data-page="*">
+                <jeremt-icon-button class="close-button"
+                                    icon="fa-close"
+                                    on-click="_closeClicked">
+                </jeremt-icon-button>
+                <section>
+                    <h1>Page not found!</h1>
+                    <div class="card">
+                        <p>This page doesn't exists or has been deleted, sorry :/</p>
+                    </div>
                 </section>
             </div>
         </jeremt-state>

@@ -76,9 +76,17 @@ Polymer({
 
     _stateChanged: function () {
         var nodes = Polymer.dom(this).queryDistributedElements("[" + this.attrForState + "]");
+        var hasActive = false;
         for (var i = 0; i < nodes.length; ++i) {
             var isSelected = nodes[i].attributes[this.attrForState].value === this.currentState;
+            if (isSelected) {
+                hasActive = true;
+            }
             this.toggleClass(this.activeClass, isSelected, nodes[i]);
+        }
+        if (!hasActive) {
+            var defaultState = Polymer.dom(this).queryDistributedElements("[" + this.attrForState + "='*']")[0];
+            this.toggleClass(this.activeClass, true, defaultState);
         }
     }
 
