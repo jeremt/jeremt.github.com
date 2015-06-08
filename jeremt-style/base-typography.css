@@ -7,7 +7,6 @@
  */
 body {
     font-size: 1em;
-    color: #eeeeee;
 }
 
 /**
@@ -23,7 +22,6 @@ html /deep/ h1 {
     font-size: 4em;
     text-align: center;
     margin: 20px 0;
-    text-shadow: 5px 5px 0 rgba(0, 0, 0, .1);
 }
 html /deep/ h2 {
     font-size: 3em;

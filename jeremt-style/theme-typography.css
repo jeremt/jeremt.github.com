@@ -13,13 +13,17 @@ html {
 html /deep/ h1,
 html /deep/ h2,
 html /deep/ h3,
-html /deep/ h4 {
+html /deep/ h4,
+html /deep/ h5,
+html /deep/ h6 {
     font-family: maxwell_regular, sans-serif;
     font-weight: normal;
+    text-transform: uppercase;
 }
 
 html /deep/ h1 {
     text-transform: uppercase;
+    text-shadow: 3px 3px 0 #222;
 }
 
 html /deep/ strong {

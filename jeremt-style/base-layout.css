@@ -1,6 +1,11 @@
 /**
  * This stylesheets contains rules to handle spacing and size of elements.
  */
+html /deep/ section {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
 html /deep/ .big-column {
     min-width: 600px;
 }
@@ -15,4 +20,9 @@ html /deep/ .list-item {
 }
 html /deep/ .list-item:not(:last-child) {
     border-bottom: 1px solid #cccccc;
+}
+html /deep/ pre {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
 }

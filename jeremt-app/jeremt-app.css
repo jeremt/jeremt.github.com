@@ -1,29 +1,28 @@
+:host {
+    --jeremt-card-button-color: #eeeeee;
+}
 header {
     max-width: 800px;
     margin: 40px auto 0;
     padding: 20px;
 }
-section {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-}
 [data-page] {
+    padding-top: 40px;
     animation: .3s appear;
 }
 [data-page]:not(.active-state) {
     display: none;
 }
-.close-button {
-    position: absolute;
+nav {
+    z-index: 2;
+    position: fixed;
     top: 0;
     left: 0;
-}
-.card {
-    padding: 20px;
-    border-radius: 5px;
-    background: #eeeeee;
-    box-shadow: 5px 5px 0 rgba(0, 0, 0, .1);
+    right: 0;
+    padding: 10px;
+    background: #333333;
+    max-width: 800px;
+    margin: auto;
 }
 @keyframes appear {
     0% {

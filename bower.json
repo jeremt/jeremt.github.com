@@ -16,7 +16,10 @@
     "polymer": "Polymer/polymer#~1.0",
     "layout": "Polymer/layout",
     "iron-selector": "PolymerElements/iron-selector#~1.0.2",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "marked-element": "PolymerElements/marked-element#~1.0.0",
+    "prism-element": "PolymerElements/prism-element#~1.0.2",
+    "iron-ajax": "PolymerElements/iron-ajax#~1.0.1"
   },
   "resolutions": {
     "polymer": "^1.0.0"

@@ -1,3 +1,8 @@
+:host {
+    --jeremt-card-button-color: #333333;
+    --jeremt-card-button-background: #eeeeee;
+
+}
 #card {
     margin: 10px;
     cursor: pointer;
@@ -21,7 +26,7 @@
     display: block;
 }
 #card:hover {
-    background: #eeeeee;
-    color: #333;
+    background: var(--jeremt-card-button-background);
+    color: var(--jeremt-card-button-color);
     transform: scale(1);
 }
