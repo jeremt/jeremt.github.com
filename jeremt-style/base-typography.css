@@ -7,6 +7,7 @@
  */
 body {
     font-size: 1em;
+    color: #eeeeee;
 }
 
 /**
@@ -17,15 +18,15 @@ html /deep/ h2,
 html /deep/ h3,
 html /deep/ h4 {
     font-family: maxwell_regular, sans-serif;
-    color: #eeeeee;
 }
 html /deep/ h1 {
-    font-size: 3em;
+    font-size: 4em;
     text-align: center;
     margin: 20px 0;
+    text-shadow: 5px 5px 0 rgba(0, 0, 0, .1);
 }
 html /deep/ h2 {
-    font-size: 2.5em;
+    font-size: 3em;
     margin: 10px 0;
 }
 html /deep/ h3 {
@@ -42,4 +43,8 @@ html /deep/ p,
 html /deep/ ul,
 html /deep/ ol {
     color: #666;
+}
+
+html /deep/ p {
+    line-height: 1.5em;
 }

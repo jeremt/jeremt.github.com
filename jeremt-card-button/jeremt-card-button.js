@@ -1,5 +1,5 @@
 Polymer({
-    is: "jeremt-card",
+    is: "jeremt-card-button",
     properties: {
         icon: String,
         description: String

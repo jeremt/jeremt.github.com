@@ -8,6 +8,9 @@ section {
     margin: auto;
     padding: 20px;
 }
+[data-page] {
+    animation: .3s appear;
+}
 [data-page]:not(.active-state) {
     display: none;
 }
@@ -15,4 +18,30 @@ section {
     position: absolute;
     top: 0;
     left: 0;
+}
+.article-item {
+    font-family: maxwell_regular, sans-serif;
+    font-size: 2.5em;
+    padding: 20px;
+}
+.article-item:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.card {
+    background: #eeeeee;
+    color: #2A3947;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, .1);
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

@@ -3,7 +3,7 @@
 <link rel="import" href="../../iron-selector/iron-selector.html">
 <link rel="import" href="../jeremt-style/jeremt-style.html">
 <link rel="import" href="../jeremt-title/jeremt-title.html">
-<link rel="import" href="../jeremt-card/jeremt-card.html">
+<link rel="import" href="../jeremt-card-button/jeremt-card-button.html">
 <link rel="import" href="../jeremt-state/jeremt-state.html">
 <link rel="import" href="../jeremt-icon-button/jeremt-icon-button.html">
 <dom-module id="jeremt-app">
@@ -12,44 +12,92 @@
         <jeremt-state attr-for-state="data-page"
                       root-state="home"
                       current-state="{{_currentPage}}">
-            <div data-page="home">
+            <div data-page="">
                 <header>
                     <jeremt-title text="JEREMIE TABOADA"></jeremt-title>
                 </header>
                 <section class="layout horizontal wrap">
-                    <jeremt-card class="flex small-column"
-                                 icon="icon-folder"
-                                 description="Articles"
-                                 on-click="_articlesClicked">
-                    </jeremt-card>
-                    <jeremt-card class="flex small-column"
-                                 icon="icon-document"
-                                 description="Resume"
-                                 on-click="_resumeClicked">
-                    </jeremt-card>
-                    <jeremt-card class="flex small-column"
-                                 icon="icon-user"
-                                 description="About"
-                                 on-click="_aboutClicked">
-                    </jeremt-card>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-folder-o"
+                                        description="Articles"
+                                        on-click="_articlesClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-file-text-o"
+                                        description="Resume"
+                                        on-click="_resumeClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-envelope-o"
+                                        description="Contact"
+                                        on-click="_contactClicked">
+                    </jeremt-card-button>
                 </section>
             </div>
-            <div data-page="articles">
+            <div data-page="#articles">
                 <jeremt-icon-button class="close-button"
-                                    icon="icon-cross"
+                                    icon="fa-close"
                                     on-click="_closeClicked">
                 </jeremt-icon-button>
                 <section>
                     <h1>Articles</h1>
+                    <div class="article-item">
+                        <span>The property class</span>
+                    </div>
+                    <div class="article-item">
+                        <span>Some c++11 function tricks</span>
+                    </div>
+                    <div class="article-item">
+                        <span>Anti-aliased shapes in GLSL</span>
+                    </div>
                 </section>
             </div>
-            <div data-page="about">
+            <div data-page="#contact">
                 <jeremt-icon-button class="close-button"
-                                    icon="icon-cross"
+                                    icon="fa-close"
                                     on-click="_closeClicked">
                 </jeremt-icon-button>
                 <section>
-                    <h1>About me</h1>
+                    <h1>Contact</h1>
+                </section>
+                <section class="layout horizontal wrap">
+                    <template is="dom-repeat" items="{{contacts}}">
+                        <jeremt-card-button class="flex small-column"
+                                            icon="fa-facebook"
+                                            description="Facebook"
+                                            on-click="_linkClicked">
+                        </jeremt-card-button>
+                    </template>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-facebook"
+                                        description="Facebook"
+                                        on-click="_linkClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-linkedin"
+                                        description="LinkedIn"
+                                        on-click="_linkClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-github"
+                                        description="Github"
+                                        on-click="_linkClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-twitter"
+                                        description="Twitter"
+                                        on-click="_linkClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-google-plus"
+                                        description="googleplus"
+                                        on-click="_linkClicked">
+                    </jeremt-card-button>
+                    <jeremt-card-button class="flex small-column"
+                                        icon="fa-envelope"
+                                        description="Mail"
+                                        on-click="_linkClicked">
+                    </jeremt-card-button>
                 </section>
             </div>
         </jeremt-state>

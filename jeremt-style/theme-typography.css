@@ -2,12 +2,12 @@
  * This stylesheet contains theme-related typography rules for this website.
  */
 @import url(maxwell-font/stylesheet.css);
-@import url(http://fonts.googleapis.com/css?family=Lato:300,300italic);
-@import url(dripicons/webfont.css);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic);
+@import url(../../font-awesome/css/font-awesome.css);
 
 html {
     font-family: "Lato", sans-serif;
-    font-weight: lighter;
+    font-weight: 400;
 }
 
 html /deep/ h1,
@@ -16,6 +16,10 @@ html /deep/ h3,
 html /deep/ h4 {
     font-family: maxwell_regular, sans-serif;
     font-weight: normal;
+}
+
+html /deep/ h1 {
+    text-transform: uppercase;
 }
 
 html /deep/ strong {
