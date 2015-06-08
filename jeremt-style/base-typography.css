@@ -39,7 +39,8 @@ html /deep/ h4 {
  */
 html /deep/ p,
 html /deep/ ul,
-html /deep/ ol {
+html /deep/ ol,
+html /deep/ table {
     color: #666;
 }
 

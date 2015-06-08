@@ -26,3 +26,13 @@ html /deep/ pre {
     padding: 20px;
     border-radius: 5px;
 }
+
+html /deep/ table {
+    border-collapse: collapse;
+}
+
+html /deep/ th,
+html /deep/ td {
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
