@@ -335,6 +335,8 @@ private:
 };
 ```
 
+## Unit tests
+
 Finally, there is some unit tests written using [testy](https://github.com/jeremt/testy) library.
 
 ```

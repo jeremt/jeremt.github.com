@@ -3,6 +3,7 @@
  */
 @import url(maxwell-font/stylesheet.css);
 @import url(http://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
 @import url(../../font-awesome/css/font-awesome.css);
 
 html {
@@ -32,4 +33,9 @@ html /deep/ strong {
 
 a {
     color: #1E88E5;
+}
+
+code {
+    font-family: "Source Code Pro", sans-serif;
+    color: #222222;
 }

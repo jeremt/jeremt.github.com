@@ -25,6 +25,7 @@ html /deep/ pre {
     background: #ffffff;
     padding: 20px;
     border-radius: 5px;
+    overflow: auto;
 }
 
 html /deep/ table {
