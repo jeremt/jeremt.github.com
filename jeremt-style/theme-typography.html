@@ -1,11 +1,4 @@
-/**
- * This stylesheet contains theme-related typography rules for this website.
- */
-@import url(maxwell-font/stylesheet.css);
-@import url(http://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic);
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
-@import url(../bower_components/font-awesome/css/font-awesome.css);
-
+<style is="custom-style">
 html {
     font-family: "Lato", sans-serif;
     font-weight: 400;
@@ -24,18 +17,23 @@ html /deep/ h6 {
 
 html /deep/ h1 {
     text-transform: uppercase;
-    text-shadow: 3px 3px 0 #222;
+    /*text-shadow: 3px 3px 0 #222;*/
 }
 
 html /deep/ strong {
     font-weight: normal;
 }
 
-a {
-    color: #1E88E5;
+html /deep/ a {
+    color: #29B6F6;
+    text-decoration: none;
+}
+html /deep/ a:hover {
+    border-bottom: 1px solid #29B6F6;
 }
 
 code {
     font-family: "Source Code Pro", sans-serif;
-    color: #222222;
+    color: #cccccc;
 }
+</style>

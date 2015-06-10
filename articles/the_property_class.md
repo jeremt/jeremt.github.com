@@ -211,6 +211,12 @@ private:
 
 ## Value of any type
 
+So, it's cool that you can use property with your own class, but what if you need to create property we build-in types
+or classes that already exists?
+
+Instead of creating a new class for each new type, you can easily use the following helper to create properties of
+any type:
+
 ```
 template<typename Type>
 class Value final : public ValueBase {
@@ -258,7 +264,22 @@ typedef Value<float> Number;
 typedef Value<std::string> String;
 ```
 
+### Example
+
+```
+std::unordered_map<std::string, Property> my_properties;
+
+my_properties["boolean_value"] = new Boolean(true);
+my_properties["string_value"] = new String(std::string("Some string value..."));
+my_properties["custom_object"] = new Value<CustomObject>(CustomObject());
+```
+
 ## Value From This
+
+Now, let's say that you create a class that you want to use with `Property`. However, unlike `Choice`, you don't want
+to add specific behavior, you just want to set and get the instance of the class when calling `Property`'s setter and
+getter. Instead of implementing `value()` and `hash_code()` manually, you can directly inherit from the following
+class:
 
 ```
 template<typename Type>
@@ -281,6 +302,27 @@ public:
 };
 ```
 
-## Unit tests
+### Example
 
-TODO
+```
+class Vec2 final : public ValueFromThis<Vec2> {
+public:
+    Vec2(int x, int y)
+            : x(x),
+              y(y) {
+
+    }
+
+public:
+    int x;
+    int y;
+};
+
+
+int main(int, char **) {
+    Property my_point(new Vec2(2, 3));
+
+    std::cout << my_point.value<Vec2>().x << ", " << my_point.value<Vec2>().y << std::endl;
+    return 0;
+}
+```

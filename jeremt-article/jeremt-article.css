@@ -1,7 +1,10 @@
 .card {
     padding: 20px;
     border-radius: 5px;
-    background: #eeeeee;
-    color: #222;
-    box-shadow: 3px 3px 0 #222;
+    background: rgba(0, 0, 0, .1);
+}
+footer.card {
+    margin-top: 10px;
+    color: #888;
+    font-style: italic;
 }
