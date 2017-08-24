@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+    <head>
+        <title>some_cpp11_function_tricks</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../index.css">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,400,700" rel="stylesheet">
+    </head>
+    <body>
+        <div id="page">
+            <header>
+                <div id="icons">
+                    <a class="icon" target="_blank" href="https://docs.google.com/document/d/1o_tesZvLk8ptZLTAp94PbY6uaRWE1ztGSL3LrxOU468/pub"><img src="../images/resume.png"></a>
+                    <a class="icon" target="_blank" href="https://github.com/jeremt"><img src="../images/github.png"></a>
+                    <a class="icon" target="_blank" href="https://www.instagram.com/jeremietaboada/"><img src="../images/instagram.png"></a>
+                    <a class="icon" target="_blank" href="https://www.linkedin.com/profile/view?id=208391836&trk=nav_responsive_tab_profile"><img src="../images/linkedin.png"></a>
+                    <a class="icon" target="_blank" href="mailto:taboada.jeremie@gmail.com"><img src="../images/contact.png"></a>
+                </div>
+                <div id="name"><a href="../index.html">Jeremie Taboada</a></div>
+            </header>
+<h1 id="some-c11-functions-tricks">Some C++11 functions tricks</h1>
+<p>C++11 provides some features for a more &quot;functional&quot; C++. Indeed, there is some features such as <code>std::function</code>, <code>std::bind</code> or lambdas that make functions manipulation much easier. I decided to create 2 useful helpers to manipulate functions.</p>
+<p>The first one stores a lambda and its parameters, then calls it. It is useful when you need to store a function and its parameters and call it later (like does <code>std::thread</code> for instance).</p>
+<pre><code>auto n = 2;
+auto triple = make_callable([] (int &amp;a) {
+    a *= 3;
+}, n);
+
+triple();
+std::cout &lt;&lt; n &lt;&lt; std::endl;</code></pre>
+<p>The second stores a lambda in a generic Function type. Then, you can call it after with its parameters via operator(). It's useful to store generic functions in contains (for JS like events for example).</p>
+<pre><code>Function triple = [] (int &amp;a) {
+    a *= 3;
+};
+
+int n = 2;
+triple(n);
+std::cout &lt;&lt; n &lt;&lt; std::endl;</code></pre>
+<h2 id="callable">Callable</h2>
+<p>The first problem is that the given function can have a variable number of parameters of different type. That's why we will use variadic templates.</p>
+<p>Then, we have to figure out a way to store this parameters within the Callable class. And for this, we have exactly what we need: <code>std::tuple</code>.</p>
+<p>Initially, we will create the Callable class, that will store the lambda and its parameters at creation:</p>
+<pre><code>template&lt;typename TFunction, typename ...TArgs&gt;
+class Callable {
+public:
+    Callable(TFunction &amp;&amp;fn, TArgs &amp;&amp;...args) :
+            _fn(std::forward&lt;TFunction&gt;(fn)),
+            _args(std::forward&lt;TArgs&gt;(args)...) {
+    }
+
+    Callable(Callable const &amp;other) = default;
+    Callable(Callable &amp;&amp;other) = default;
+    ~Callable() = default;
+
+public:
+    auto operator=(Callable const &amp;other) -&gt; Callable &amp; = default;
+    auto operator=(Callable &amp;&amp;other) -&gt; Callable &amp; = default;
+
+private:
+    TFunction _fn;
+    std::tuple&lt;TArgs...&gt; _args;
+};</code></pre>
+<p>Now comes the tricky part: we need to call the function with the arguments stored into the tuple. To do so, there is only one solution: iterate through the template parameters to recreate the arguments variadic list, then call the lambda. That will be done by the following helper:</p>
+<pre><code>namespace detail { // private implementation code
+
+    template&lt;size_t TCount&gt;
+    struct CallerHelper {
+        template&lt;typename TFunction, typename TFirst, typename ...TRest&gt;
+        auto operator()(TFunction &amp;&amp;fn, TFirst &amp;&amp;first, TRest &amp;&amp;...rest) const -&gt; void {
+            CallerHelper&lt;TCount - 1&gt;()(
+                    std::forward&lt;TFunction&gt;(fn),
+                    std::forward&lt;TFirst&gt;(first),
+                    std::get&lt;TCount - 1&gt;(std::forward&lt;TFirst&gt;(first)),
+                    std::forward&lt;TRest&gt;(rest)...);
+        }
+    };
+
+    template&lt;&gt;
+    struct CallerHelper&lt;0&gt; {
+        template&lt;typename TFunction, typename TFirst, typename ...TRest&gt;
+        auto operator()(TFunction &amp;&amp;fn, TFirst &amp;&amp;, TRest &amp;&amp;...rest) const -&gt; void {
+            fn(std::forward&lt;TRest&gt;(rest)...);
+        }
+    };
+
+}</code></pre>
+<p>Now, you can easily use the helper is the call operator of the class:</p>
+<pre><code>#pragma once
+
+#include &lt;tuple&gt;
+#include &lt;cstddef&gt;
+#include &lt;memory&gt;
+
+namespace detail { // private implementation code
+
+    template&lt;size_t TCount&gt;
+    struct CallerHelper {
+        template&lt;typename TFunction, typename TFirst, typename ...TRest&gt;
+        auto operator()(TFunction &amp;&amp;fn, TFirst &amp;&amp;first, TRest &amp;&amp;...rest) const -&gt; void {
+            CallerHelper&lt;TCount - 1&gt;()(
+                    std::forward&lt;TFunction&gt;(fn),
+                    std::forward&lt;TFirst&gt;(first),
+                    std::get&lt;TCount - 1&gt;(std::forward&lt;TFirst&gt;(first)),
+                    std::forward&lt;TRest&gt;(rest)...);
+        }
+    };
+
+    template&lt;&gt;
+    struct CallerHelper&lt;0&gt; {
+        template&lt;typename TFunction, typename TFirst, typename ...TRest&gt;
+        auto operator()(TFunction &amp;&amp;fn, TFirst &amp;&amp;, TRest &amp;&amp;...rest) const -&gt; void {
+            fn(std::forward&lt;TRest&gt;(rest)...);
+        }
+    };
+
+}
+
+/**
+ * This class allows to store a function and its parameters to call it later (like in `std::thread` for instance.
+ */
+template&lt;typename TFunction, typename ...TArgs&gt;
+class Callable {
+public:
+    Callable(TFunction &amp;&amp;fn, TArgs &amp;&amp;...args) :
+            _fn(std::forward&lt;TFunction&gt;(fn)),
+            _args(std::forward&lt;TArgs&gt;(args)...) {
+    }
+
+    Callable(Callable const &amp;other) = default;
+    Callable(Callable &amp;&amp;other) = default;
+    ~Callable() = default;
+
+public:
+    auto operator=(Callable const &amp;other) -&gt; Callable &amp; = default;
+    auto operator=(Callable &amp;&amp;other) -&gt; Callable &amp; = default;
+    auto operator()() -&gt; void {
+        detail::CallerHelper&lt;sizeof...(TArgs)&gt;()(_fn, _args);
+    }
+
+private:
+    TFunction _fn;
+    std::tuple&lt;TArgs...&gt; _args;
+};</code></pre>
+<p>Finally, there is still one problem. You need to specify the template parameters when you create an instance of callback, which can be annoying to do, especially since the first parameter is a lambda function. In order to automatically infer these parameters types, we will use the following function instead of creating a callable directly:</p>
+<pre><code>template&lt;typename TFunction, typename ...TArgs&gt;
+auto make_callable(TFunction &amp;&amp;fn, TArgs &amp;&amp;...args) -&gt; Callable&lt;TFunction, TArgs...&gt; {
+    return Callable&lt;TFunction, TArgs...&gt;(std::forward&lt;TFunction&gt;(fn), std::forward&lt;TArgs&gt;(args)...);
+}</code></pre>
+<h2 id="function">Function</h2>
+<p>For this one, the problem is that we should store the lambda without knowing its number of paramters or their types. So we have to find them from the lambda argument itself.</p>
+<p>Firstly, we need to convert the lambda to an <code>std::function</code>, so we could call it later:</p>
+<pre><code>namespace detail {
+
+    template &lt;typename TFunction&gt;
+    struct FunctionHelper : public FunctionHelper&lt;decltype(&amp;TFunction::operator())&gt; {
+
+    };
+
+    template &lt;typename TClass, typename TReturn, typename ...TArgs&gt;
+    struct FunctionHelper&lt;TReturn(TClass::*)(TArgs...) const&gt; {
+        using Type = std::function&lt;TReturn(TArgs...)&gt;;
+    };
+
+    template &lt;typename TFunction&gt;
+    auto make_function(TFunction &amp;fn) -&gt; typename FunctionHelper&lt;TFunction&gt;::Type {
+        return static_cast&lt;typename FunctionHelper&lt;TFunction&gt;::Type&gt;(fn);
+    }
+
+}</code></pre>
+<p>Now, we need to store the function into the class in a generic way. While our function doesn't inherit from a specific object, the only way to do so is to use a <code>void *</code> pointer. However, since we will loose the type, we also need to define the following functions to interact with our function pointer:</p>
+<ul>
+<li>clone, to allocate a new function pointer with the same signature</li>
+<li>delete, to delete the function pointer</li>
+</ul>
+<pre><code>class Function {
+public:
+
+    // everything is null by default, call the function will throw an exception in that case
+    Function() :
+            _clone([](){ return std::make_pair(nullptr, nullptr); }),
+            _delete([](Function *){}),
+            _function(nullptr),
+            _signature(nullptr) {
+    }
+
+    // Here we define our functions and initialize our `_function` pointer and `_signature` type info
+    template&lt;typename TFunction&gt;
+    Function(TFunction const &amp;fn) {
+        _clone = [&amp;] () {
+            auto function = new decltype(detail::make_function(fn))(detail::make_function(fn));
+            return std::make_pair(static_cast&lt;void *&gt;(function), &amp;typeid(function));
+        };
+        _delete = [&amp;] (Function *self) {
+            if (_function != nullptr) {
+                delete static_cast&lt;decltype(detail::make_function(fn)) *&gt;(self-&gt;_function);
+            }
+        };
+        auto cloned_function = _clone();
+        _function  = cloned_function.first;
+        _signature = cloned_function.second;
+    }
+
+    // In that case, we use the `_clone` function to create a signature
+    Function(Function const &amp;other) :
+            _clone(other._clone),
+            _delete(other._delete) {
+        auto cloned_function = _clone();
+        _function  = cloned_function.first;
+        _signature = cloned_function.second;
+    }
+
+    // Here we call the `_delete` method on the
+    ~Function() {
+        _delete(this);
+    }
+
+public:
+    // Same as copy constructor
+    auto operator=(Function const &amp;other) -&gt; Function &amp; {
+        if (this != &amp;other) {
+            _clone = other._clone;
+            _delete = other._delete;
+            auto cloned_function = _clone();
+            _function  = cloned_function.first;
+            _signature = cloned_function.second;
+        }
+        return *this;
+    }
+
+private:
+
+    std::function&lt;std::pair&lt;void *, std::type_info const *&gt;()&gt; _clone;
+    std::function&lt;void(Function *self)&gt; _delete;
+    void *_function;
+    std::type_info const *_signature;
+
+};
+</code></pre>
+<p>Then, there is the last step: call the function with the given arguments from the <code>void *</code> stored in the class.</p>
+<pre><code>    template&lt;typename TReturn = void, typename ...TArgs&gt;
+    auto call(TArgs &amp;&amp;...args) -&gt; TReturn {
+        if (_function == nullptr || _signature == nullptr)
+            throw std::logic_error(&quot;Call of uninitialized function&quot;);
+        auto function = static_cast&lt;std::function&lt;TReturn(TArgs...)&gt;*&gt;(_function);
+        if (typeid(function) != *(_signature))
+            throw std::logic_error(&quot;Signatures &quot; + std::string(typeid(function).name()) +
+                                           &quot;and&quot; + std::string(_signature-&gt;name()) + &quot; mismatch&quot;);
+        return (*function)(std::forward&lt;TArgs&gt;(args)...);
+    }</code></pre>
+<p>Finally, we put it all together:</p>
+<pre><code>#pragma once
+
+#include &lt;functional&gt;
+#include &lt;stdexcept&gt;
+#include &lt;typeinfo&gt;
+
+namespace detail {
+
+    template &lt;typename TFunction&gt;
+    struct FunctionHelper : public FunctionHelper&lt;decltype(&amp;TFunction::operator())&gt; {
+
+    };
+
+    template &lt;typename TClass, typename TReturn, typename ...TArgs&gt;
+    struct FunctionHelper&lt;TReturn(TClass::*)(TArgs...) const&gt; {
+        using Type = std::function&lt;TReturn(TArgs...)&gt;;
+    };
+
+    template &lt;typename TFunction&gt;
+    auto make_function(TFunction &amp;fn) -&gt; typename FunctionHelper&lt;TFunction&gt;::Type {
+        return static_cast&lt;typename FunctionHelper&lt;TFunction&gt;::Type&gt;(fn);
+    }
+
+}
+
+/**
+ * This class is a generic type to store fns. It&#39;s basically the same principe as boost::any design pattern
+ * applied on fn functions. You can store the fn without specify any type information, and call it later. It
+ * can be useful to store fn functions with different signatures into a map for example.
+ */
+class Function {
+public:
+
+    Function() :
+            _clone([](){ return std::make_pair(nullptr, nullptr); }),
+            _delete([](Function *){}),
+            _function(nullptr),
+            _signature(nullptr) {
+    }
+
+    template&lt;typename TFunction&gt;
+    Function(TFunction const &amp;fn) {
+        _clone = [&amp;] () {
+            auto function = new decltype(detail::make_function(fn))(detail::make_function(fn));
+            return std::make_pair(static_cast&lt;void *&gt;(function), &amp;typeid(function));
+        };
+        _delete = [&amp;] (Function *self) {
+            if (_function != nullptr) {
+                delete static_cast&lt;decltype(detail::make_function(fn)) *&gt;(self-&gt;_function);
+            }
+        };
+        auto cloned_function = _clone();
+        _function  = cloned_function.first;
+        _signature = cloned_function.second;
+    }
+
+    Function(Function const &amp;other) :
+            _clone(other._clone),
+            _delete(other._delete) {
+        auto cloned_function = _clone();
+        _function  = cloned_function.first;
+        _signature = cloned_function.second;
+    }
+
+    ~Function() {
+        _delete(this);
+    }
+
+public:
+    auto operator=(Function const &amp;other) -&gt; Function &amp; {
+        if (this != &amp;other) {
+            _clone = other._clone;
+            _delete = other._delete;
+            auto cloned_function = _clone();
+            _function  = cloned_function.first;
+            _signature = cloned_function.second;
+        }
+        return *this;
+    }
+
+    // We have to provide a call method, because the return type cannot be found. This operator only works with
+    // functions which return void.
+    template&lt;typename ...TArgs&gt;
+    auto operator()(TArgs &amp;&amp;...args) -&gt; void {
+        call(std::forward&lt;TArgs&gt;(args)...);
+    }
+
+public:
+    template&lt;typename TReturn = void, typename ...TArgs&gt;
+    auto call(TArgs &amp;&amp;...args) -&gt; TReturn {
+        if (_function == nullptr || _signature == nullptr)
+            throw std::logic_error(&quot;Call of uninitialized function&quot;);
+        auto function = static_cast&lt;std::function&lt;TReturn(TArgs...)&gt;*&gt;(_function);
+        if (typeid(function) != *(_signature))
+            throw std::logic_error(&quot;Signatures &quot; + std::string(typeid(function).name()) +
+                                           &quot;and&quot; + std::string(_signature-&gt;name()) + &quot; mismatch&quot;);
+        return (*function)(std::forward&lt;TArgs&gt;(args)...);
+    }
+
+private:
+    std::function&lt;std::pair&lt;void *, std::type_info const *&gt;()&gt; _clone;
+    std::function&lt;void(Function *self)&gt; _delete;
+    void *_function;
+    std::type_info const *_signature;
+
+};</code></pre>
+
+        </div> <!-- #page -->
+    </body>
+</html>
