@@ -1,102 +1,38 @@
-body {
-    margin: 0;
-    font-size: 1em;
-}
-#page {
-    box-sizing: border-box;
-    max-width: 800px;
-    margin: auto;
+html, body, #root {
     width: 100%;
-    font-family: "Josefin Sans", sans-serif;
-    /*background: yellow;*/
-}
-
-#icons {
-    float: right;
-}
-
-#name {
-    font-size: 2em;
-    font-weight: normal;
-    padding: 20px;
+    height: 100%;
     margin: 0;
-    /*background: yellow;*/
 }
 
-#name a {
-    color: #222222;
-    text-decoration: none;
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    font-family: Oswald, sans-serif;
+}
+
+h1, h2 {
+    margin: 0;
 }
 
 h1 {
-    margin: 20px;
-    font-size: 3em;
-    color: #222222;
-    font-weight: 700;
+    font-size: 2.5em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #333333;
 }
 
 h2 {
-    padding: 0 20px;
+    font-weight: 400;
+    color: #aaaaaa;
 }
 
-p {
-    padding: 10px 20px;
-    margin: 0;
+a {
+    color: #299ee1;
 }
 
-pre {
-    margin: 10px 20px;
-    padding: 20px;
-    background: #dddddd;
-    overflow: auto;
-    max-height: 500px;
-}
-
-code {
-    font-family: Monaco, monospace;
-    font-size: .7em;
-}
-
-header {
-    border-bottom: 5px solid #dddddd;
-    margin-bottom: 40px;
-}
-
-a.icon {
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 23px 20px 20px 20px;
-    /*background: yellow;*/
-    margin: 0;
-}
-
-a.icon:hover {
-    /*transform: scale(1.2);*/
-    border-bottom: 5px solid #222222;
-}
-
-a.icon img {
-    width: 25px;
-    display: inline-block;
-}
-
-article {
-    padding: 0 20px;
-    box-sizing: border-box;
-    /*text-transform: uppercase;*/
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-article a {
-    padding: 20px;
-    background: #222222;
-    color: #ffffff;
-    text-decoration: none;
-    display: block;
-}
-
-article a:hover {
-    background: #ddd;
-    color: #222222;
-}
