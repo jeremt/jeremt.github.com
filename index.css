@@ -27,21 +27,21 @@ html, body {
 }
 
 #presentation > img {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
 }
 
 #presentation > h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.8rem;
     margin-top: 15px;
     font-weight: 800;
 }
 
 #presentation > p {
     color: #888888;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     text-align: center;
     margin-top: 5px;
     margin-bottom: 15px;
@@ -81,8 +81,9 @@ html, body {
 .btn {
     color: #222222;
     border: 3px solid #222222;
-    padding: 10px 15px;
+    padding: 8px 15px;
     margin-top: 20px;
+    font-size: 1.2rem;
     transition: .3s all;
     font-weight: 700;
     border-radius: 25px;
@@ -113,17 +114,13 @@ html, body {
 
 h2 {
     text-align: center;
+    margin-bottom: 0;
+    font-size: 1.8rem;
 }
 
 #grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-}
-
-@media (max-width: 500px) {
-    #grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
 }
 
 .project {
@@ -144,13 +141,13 @@ h2 {
 .project > h4 {
     padding: 0 10px;
     margin: 0;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .project > p {
     padding: 0 10px;
     color: #888888;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     margin-top: 0;
     margin-bottom: 15px;
 }
@@ -158,9 +155,9 @@ h2 {
 .project > a {
     color: #222222;
     border: 3px solid #222222;
-    margin: 0 20px;
+    margin: 0 10px;
     padding: 5px 10px;
-    font-size: .75rem;
+    font-size: .9rem;
     transition: .3s all;
     font-weight: 700;
     border-radius: 25px;
@@ -172,6 +169,20 @@ h2 {
 }
 
 #projects > .btn {
-    width: 130px;
+    width: 150px;
     margin: auto;
+}
+
+/* Small screens adjustements */
+
+@media (max-width: 600px) {
+    #presentation > h1 {
+        font-size: 2.2rem;
+    }
+    #presentation > p {
+        font-size: 1em;
+    }
+    #grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
