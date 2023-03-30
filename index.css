@@ -1,38 +1,177 @@
-html, body, #root {
-    width: 100%;
-    height: 100%;
-    margin: 0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
 }
 
-#root {
+html, body {
+    color: #222222;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Presentation */
+
+#presentation {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    max-width: 400px;
-    margin: auto;
-    text-align: center;
-    font-family: Oswald, sans-serif;
+    height: 100%;
+    padding: 20px;
 }
 
-h1, h2 {
+#presentation > img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+#presentation > h1 {
     margin: 0;
+    font-size: 2rem;
+    margin-top: 15px;
+    font-weight: 800;
 }
 
-h1 {
-    font-size: 2.5em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: #333333;
+#presentation > p {
+    color: #888888;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+#contact {
+    display: flex;
+}
+
+#contact a {
+    display: flex;
+    width: 50px;
+    border: 3px solid #222222;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: .3s all;
+    border-radius: 50%;
+}
+
+#contact > a:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 #222222;
+    background-color: #c6fd20;
+}
+
+#contact > a:active {
+    transform: none;
+    box-shadow: none;
+}
+
+#contact a:not(:last-child) {
+    margin-right: 20px;
+}
+
+
+.btn {
+    color: #222222;
+    border: 3px solid #222222;
+    padding: 10px 15px;
+    margin-top: 20px;
+    transition: .3s all;
+    font-weight: 700;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0 #222222;
+    background-color: #c6fd20;
+}
+
+.btn:active {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Projects */
+
+#projects {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    padding: 20px;
+    max-width: 800px;
+    flex-direction: column;
 }
 
 h2 {
-    font-weight: 400;
-    color: #aaaaaa;
+    text-align: center;
 }
 
-a {
-    color: #299ee1;
+#grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
+@media (max-width: 500px) {
+    #grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.project {
+    padding: 20px;
+}
+
+.project > img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.project > h3 {
+    padding: 0 10px;
+    margin: 0;
+}
+
+.project > h4 {
+    padding: 0 10px;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.project > p {
+    padding: 0 10px;
+    color: #888888;
+    font-size: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.project > a {
+    color: #222222;
+    border: 3px solid #222222;
+    margin: 0 20px;
+    padding: 5px 10px;
+    font-size: .75rem;
+    transition: .3s all;
+    font-weight: 700;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.project > a:hover {
+    background-color: #c6fd20;
+}
+
+#projects > .btn {
+    width: 130px;
+    margin: auto;
+}
