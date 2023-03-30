@@ -234,3 +234,29 @@ h2 {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 1s;
 }
+
+@keyframes coucou {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(15deg);
+    }
+    10% {
+        transform: rotate(-15deg);
+    }
+    15% {
+        transform: rotate(15deg);
+    }
+    20% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#presentation > h1 > span {
+    display: inline-block;
+    animation: coucou 10s ease-in-out infinite 1.5s;
+}
