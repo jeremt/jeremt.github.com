@@ -62,7 +62,7 @@ html, body {
 }
 
 .btn:hover {
-    box-shadow: 0px 4px 20px rgba(101, 139, 221, 0.7);
+    box-shadow: 0px 4px 20px rgba(101, 139, 221, 1);
 }
 
 .btn:active {
@@ -84,12 +84,12 @@ html, body {
 
     box-sizing: border-box;
     border-radius: 50%;
-    transition: 0.3s background-color;
+    transition: 0.5s background-color;
 }
 
 #contact > a:hover {
     opacity: 1;
-    background-color: #e9e8fb;
+    background-color: hsla(243, 66%, 62%, 0.2);
 }
 
 #contact > a:active {
@@ -153,7 +153,7 @@ h2 {
 }
 
 .project > a {
-    color: #635CDD;
+    color: hsl(243, 66%, 62%);
     margin: 0 10px;
     font-size: .9rem;
     font-weight: 700;
@@ -161,7 +161,7 @@ h2 {
 }
 
 .project > a:hover {
-    border-bottom: 2px solid #DCDBF1;
+    border-bottom: 2px solid hsla(243, 66%, 62%, 0.4);
 }
 
 #projects > .btn {
