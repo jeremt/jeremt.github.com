@@ -269,13 +269,7 @@ body {
     -webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
-	/*min-height: calc(100vh - 2rem);*/
-	/* display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: space-evenly;
-	overflow: hidden;
-	position: relative;  */
+	overflow-x: hidden;
 }
 
 body::before, 
