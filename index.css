@@ -47,25 +47,49 @@ html, body {
     margin-bottom: 15px;
 }
 
+.btn {
+    color: #ffffff;
+    background-color: #635CDD;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: .3s all;
+}
+
+.btn:hover {
+    background-color: #7873cf;
+    border-radius: 15px;
+}
+
+.btn:active {
+    transform: none;
+    box-shadow: none;
+}
+
+
 #contact {
     display: flex;
 }
 
 #contact > a {
     display: flex;
-    width: 50px;
-    border: 3px solid #222222;
-    height: 50px;
-    padding: 10px;
-    transform: none;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+
     box-sizing: border-box;
     border-radius: 50%;
+    transition: 0.3s background-color;
 }
 
 #contact > a:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 4px 4px 0 #222222;
-    background-color: #c6fd20;
+    opacity: 1;
+    background-color: #e9e8fb;
 }
 
 #contact > a:active {
@@ -75,29 +99,6 @@ html, body {
 
 #contact a:not(:last-child) {
     margin-right: 20px;
-}
-
-
-.btn {
-    color: #222222;
-    border: 3px solid #222222;
-    padding: 8px 15px;
-    margin-top: 20px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 25px;
-    text-decoration: none;
-}
-
-.btn:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 4px 4px 0 #222222;
-    background-color: #c6fd20;
-}
-
-.btn:active {
-    transform: none;
-    box-shadow: none;
 }
 
 /* Projects */
@@ -152,22 +153,19 @@ h2 {
 }
 
 .project > a {
-    color: #222222;
-    border: 3px solid #222222;
+    color: #635CDD;
     margin: 0 10px;
-    padding: 5px 10px;
     font-size: .9rem;
     font-weight: 700;
-    border-radius: 25px;
     text-decoration: none;
 }
 
 .project > a:hover {
-    background-color: #c6fd20;
+    border-bottom: 2px solid #DCDBF1;
 }
 
 #projects > .btn {
-    width: 150px;
+    width: 155px;
     margin: auto;
 }
 
@@ -212,25 +210,25 @@ h2 {
     animation: 0.5s appear ease-in-out forwards 0.4s;
 }
 
-#contact > a[title="Github"] {
+#presentation > .btn {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.6s;
 }
 
-#contact > a[title="LinkedIn"] {
+#contact > a[title="Github"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.7s;
 }
-#contact > a[title="Instagram"] {
+
+#contact > a[title="LinkedIn"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.8s;
 }
-#contact > a[title="Resume"] {
+#contact > a[title="Instagram"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.9s;
 }
-
-#presentation > .btn {
+#contact > a[title="Resume"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 1s;
 }
