@@ -36,7 +36,7 @@ main {
 
 main > img {
     width: clamp(120px, 30%, 220px);
-    filter: saturate(20%);
+    filter: saturate(10%) hue-rotate(-30deg);
     transition: 1.5s all;
     border-radius: 40%;
     margin-top: -2.5rem;
