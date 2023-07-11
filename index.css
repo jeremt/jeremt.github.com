@@ -1,187 +1,114 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Source+Serif+4:ital@0;1&display=swap');
+
+:root {
+    --title-font: 'Outfit', sans-serif;
+    --subtitle-font: 'Source Serif 4', sans-serif;
+
+    --bg-color: #ccd3df;
+    --title-color: #404459;
+    --sub-bg-color: #ececfa;
+    --content-color: #6b7a9a;
+}
 
 * {
     box-sizing: border-box;
 }
 
 html, body {
-    color: #222222;
-    margin: 0;
-    padding: 0;
+    color: var(--title-color);
     width: 100%;
     height: 100%;
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
 }
 
-/* Presentation */
-
-#presentation {
+main {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    height: 100svh;
+    padding: 1rem;
 }
 
-#presentation > img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
+main > img {
+    width: clamp(120px, 30%, 220px);
+    filter: saturate(20%);
+    transition: 1.5s all;
+    border-radius: 40%;
+    margin-top: -2.5rem;
 }
 
-#presentation > h1 {
+main > img:hover {
+    filter: none;
+    box-shadow: 10px 10px 50px 0px rgba(255, 103, 21, 0.3), -5px 10px 50px 0px rgba(17, 55, 243, 0.3), -5px -10px 50px 0px rgba(130, 233, 110, 0.3);
+}
+
+main > h1 {
     margin: 0;
-    font-size: 2.8rem;
-    margin-top: 15px;
-    font-weight: 800;
-}
-
-#presentation > p {
-    color: #888888;
-    font-size: 1.2rem;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    margin-top: 0.5em;
+    font-family: var(--title-font);
+    letter-spacing: -1px;
 }
 
-.btn {
-    color: #ffffff;
-    background-image: linear-gradient(93.93deg, rgba(217, 94, 146, 0.2) 5.62%, rgba(217, 94, 146, 0) 80.06%), linear-gradient(180deg, #648BDC 0%, #756EED 100%);
-    box-shadow: 0px 4px 10px rgba(101, 139, 221, 0.5);
-    padding: 10px 20px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: 0.5s box-shadow;
+main > h2 {
+    color: var(--content-color);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    text-align: center;
+    font-style: italic;
+    margin-top: 0.5em;
+    font-weight: normal;
+    font-family: var(--subtitle-font);
 }
 
-.btn:hover {
-    box-shadow: 0px 4px 20px rgba(101, 139, 221, 1);
-}
-
-.btn:active {
-    transform: none;
-    box-shadow: none;
-}
-
-
-#contact {
+footer {
     display: flex;
+    position: fixed;
+    bottom: 2.5rem;
 }
 
-#contact > a {
+footer > a {
+    width: 4rem;
+    height: 4rem;
+    padding: 1em;
     display: flex;
-    width: 60px;
-    height: 60px;
     align-items: center;
     justify-content: center;
 
     box-sizing: border-box;
-    border-radius: 50%;
-    transition: 0.5s background-color;
+    transition: 0.5s all;
+    border-radius: 40%;
 }
 
-#contact > a:hover {
-    opacity: 1;
-    background-color: hsla(243, 66%, 62%, 0.2);
-}
-
-#contact > a:active {
-    transform: none;
-    box-shadow: none;
-}
-
-#contact a:not(:last-child) {
-    margin-right: 20px;
-}
-
-/* Projects */
-
-#projects {
+footer > a img {
     width: 100%;
-    margin: auto;
-    display: flex;
-    padding: 20px;
-    max-width: 800px;
-    flex-direction: column;
 }
-
-h2 {
-    text-align: center;
-    margin-bottom: 0;
-    font-size: 1.8rem;
-}
-
-#grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.project {
-    padding: 20px;
-}
-
-.project > img {
-    width: 100%;
-    border-radius: 20px;
-    margin-bottom: 10px;
-}
-
-.project > h3 {
-    padding: 0 10px;
-    margin: 0;
-}
-
-.project > h4 {
-    padding: 0 10px;
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-.project > p {
-    padding: 0 10px;
-    color: #888888;
-    font-size: 0.9rem;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.project > a {
-    color: hsl(243, 66%, 62%);
-    margin: 0 10px;
-    font-size: .9rem;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.project > a:hover {
-    border-bottom: 2px solid hsla(243, 66%, 62%, 0.4);
-}
-
-#projects > .btn {
-    width: 155px;
-    margin: auto;
-}
-
-/* Small screens adjustements */
 
 @media (max-width: 600px) {
-    #presentation > h1 {
-        font-size: 2.2rem;
+    footer {
+        grid-template-columns: repeat(2, 1fr);
     }
-    #presentation > p {
-        font-size: 1em;
-    }
-    #grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
+}
+
+footer > a:hover {
+    opacity: 1;
+    margin-top: -0.5rem;
+    background-color: var(--sub-bg-color);
+}
+
+footer > a:active {
+    transform: none;
+    box-shadow: none;
+    margin-top: 0;
+}
+
+footer > a:not(:last-child) {
+    margin-right: 0.8rem;
 }
 
 /* Animations */
@@ -196,40 +123,35 @@ h2 {
     }
 }
 
-#presentation > img {
+main > img {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards;
 }
 
-#presentation > h1 {
+main > h1 {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.2s;
 }
 
-#presentation > p {
+main > h2 {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.4s;
 }
 
-#presentation > .btn {
-    opacity: 0;
-    animation: 0.5s appear ease-in-out forwards 0.6s;
-}
-
-#contact > a[title="Github"] {
+footer > a[title="Github"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.7s;
 }
 
-#contact > a[title="LinkedIn"] {
+footer > a[title="LinkedIn"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.8s;
 }
-#contact > a[title="Instagram"] {
+footer > a[title="Instagram"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.9s;
 }
-#contact > a[title="Resume"] {
+footer > a[title="Resume"] {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 1s;
 }
@@ -255,39 +177,7 @@ h2 {
     }
 }
 
-#presentation > h1 > span {
+#👋 {
     display: inline-block;
     animation: coucou 10s ease-in-out infinite 1.5s;
-}
-
-/* Css background inspired by https://codepen.io/chris22smith/pen/RZogMa */
-
-@keyframes slide {
-    0% {
-        transform:translateX(-25%);
-    }
-    100% {
-        transform:translateX(25%);
-    }
-}
-
-.bg {
-    animation: slide 6s ease-in-out infinite alternate;
-    background-image: linear-gradient(-60deg, rgb(191, 196, 227) 50%, rgb(199, 222, 244) 50%);
-    bottom:0;
-    left:-50%;
-    opacity:.5;
-    position:fixed;
-    right:-50%;
-    top:0;
-    z-index:-1;
-}
-  
-.bg2 {
-    animation-direction:alternate-reverse;
-    animation-duration: 8s;
-}
-  
-.bg3 {
-    animation-duration: 10s;
 }
