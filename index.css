@@ -64,7 +64,7 @@ main > h1 {
     letter-spacing: -1px;
 }
 
-main > h2 {
+main > p {
     color: var(--content-color);
     font-size: clamp(1.3rem, 3vw, 1.8rem);
     text-align: center;
@@ -101,7 +101,7 @@ section > h2 {
     letter-spacing: -1px;
 }
 
-section > h3 {
+section > p {
     color: var(--content-color);
     font-size: clamp(1rem, 2vw, 1.6rem);
     text-align: center;
@@ -203,7 +203,7 @@ main > h1 {
     animation: 0.5s appear ease-in-out forwards 0.2s;
 }
 
-main > h2 {
+main > p {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.4s;
 }
