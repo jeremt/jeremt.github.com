@@ -5,6 +5,7 @@
     --subtitle-font: 'Source Serif 4', sans-serif;
 
     --bg-color: #ccd3df;
+    --accent-color: #5267b4;
     --title-color: #404459;
     --sub-bg-color: #ececfa;
     --content-color: #6b7a9a;
@@ -12,6 +13,10 @@
 
 * {
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 html, body {
@@ -26,7 +31,6 @@ html, body {
 main {
     width: 100%;
     height: 100%;
-    height: 100svh;
     display: flex;
     padding: 1rem;
     align-items: center;
@@ -66,9 +70,74 @@ main > h2 {
     font-family: var(--subtitle-font);
 }
 
+main > a {
+    color: var(--accent-color);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-family: var(--subtitle-font);
+    text-decoration: none;
+}
+
+section {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+section > h2 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    text-align: center;
+    margin-top: 0.5em;
+    font-family: var(--title-font);
+    letter-spacing: -1px;
+}
+
+section > h3 {
+    color: var(--content-color);
+    font-size: clamp(1rem, 2vw, 1.6rem);
+    text-align: center;
+    font-style: italic;
+    margin-top: 0.5em;
+    font-weight: normal;
+    font-family: var(--subtitle-font);
+}
+
+section > a {
+    display: inline-block;
+    color: var(--accent-color);
+    padding: .5rem .8rem;
+    font-size: 1.2rem;
+    font-family: var(--subtitle-font);
+    text-decoration: none;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid img {
+    width: 100%;
+    filter: saturate(10%) hue-rotate(-30deg);
+    transition: 0.8s all;
+    border-radius: 1rem;
+}
+
+.grid img:hover {
+    filter: none;
+    transform: scale(0.97);
+}
+
+#slides {
+    padding-bottom: 7rem;
+}
+
 footer {
     width: 100%;
-    bottom: 2.5rem;
+    bottom: 0;
+    background-color: var(--bg-color);
+    padding: 1rem 1rem 2rem 1rem;
     display: flex;
     position: fixed;
     justify-content: center;
@@ -131,6 +200,11 @@ main > h1 {
 main > h2 {
     opacity: 0;
     animation: 0.5s appear ease-in-out forwards 0.4s;
+}
+
+main > a {
+    opacity: 0;
+    animation: 0.5s appear ease-in-out forwards 0.5s;
 }
 
 footer > a[title="Github"] {
