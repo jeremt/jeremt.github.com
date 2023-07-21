@@ -81,6 +81,12 @@ main > a, section > a {
     text-decoration: none;
 }
 
+@media (min-width: 650px) {
+    main > a, section > a {
+        font-size: 1.4rem;
+    }
+}
+
 main > a:hover, section > a:hover {
     filter: saturate(150%);
 }
@@ -213,22 +219,9 @@ main > a {
     animation: 0.5s appear ease-in-out forwards 0.5s;
 }
 
-footer > a[title="Github"] {
+footer > * {
     opacity: 0;
-    animation: 0.5s appear ease-in-out forwards 0.7s;
-}
-
-footer > a[title="LinkedIn"] {
-    opacity: 0;
-    animation: 0.5s appear ease-in-out forwards 0.8s;
-}
-footer > a[title="Instagram"] {
-    opacity: 0;
-    animation: 0.5s appear ease-in-out forwards 0.9s;
-}
-footer > a[title="Resume"] {
-    opacity: 0;
-    animation: 0.5s appear ease-in-out forwards 1s;
+    animation: 0.5s appear ease-in-out forwards calc(var(--footer-index, 0) * 0.1s + 0.7s);
 }
 
 @keyframes coucou {
@@ -254,7 +247,7 @@ footer > a[title="Resume"] {
 
 #👋 {
     display: inline-block;
-    animation: coucou 10s ease-in-out infinite 1.5s;
+    animation: coucou 8s ease-in-out infinite 1.5s;
 }
 
 @media (prefers-reduced-motion) {
