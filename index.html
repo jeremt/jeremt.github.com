@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <button title="Color scheme" id="colorScheme" onclick="toggleTheme()">💩</button>
     <main id="intro">
         <img src="assets/avatar.jpg" alt="me" />
         <h1>Salut! I'm Jérémie <span id="👋">👋</span></h1>
@@ -51,5 +52,22 @@
         <a target="_blank" style="--footer-index: 2" title="Instagram" href="https://www.instagram.com/jeremtab"><img src="assets/instagram.svg" /></a>
         <a target="_blank" style="--footer-index: 3" title="Resume" href="/assets/resume.pdf"><img src="assets/resume.svg" /></a>
     </footer>
+    <script>
+        const media = matchMedia('(prefers-color-scheme: dark)');
+        media.addEventListener('change', applyTheme);
+        
+        const colorSchemeBtn = document.querySelector('#colorScheme');
+
+        applyTheme(media);
+
+        function applyTheme({matches}) {
+            colorSchemeBtn.innerText = matches ? '🌞' : '🌛';
+            document.documentElement.setAttribute('color-scheme', colorSchemeBtn.innerText === '🌛' ? 'light' : 'dark');
+        }
+
+        function toggleTheme() {
+            applyTheme({matches: colorSchemeBtn.innerText !== '🌞'});
+        }
+    </script>
 </body>
 </html>
