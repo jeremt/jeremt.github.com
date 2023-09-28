@@ -1,18 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Source+Serif+4:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400;1,8..60,700&display=swap');
 
 :root {
-    --title-font: 'Outfit', sans-serif;
+    --title-font: 'Playfair Display', sans-serif;
     --subtitle-font: 'Source Serif 4', sans-serif;
-
     --bg-color: #dfe3f1;
-    --accent-color: #5267b4;
+    --accent-color: #435fc2;
     --title-color: #404459;
     --sub-bg-color: #ffffff;
     --content-color: #6b7a9a;
+    --shadow-color: hsl(227, 40%, 51%, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #2a2d38;
+        --accent-color: #d3d686;
+        --title-color: #e2e4f3;
+        --sub-bg-color: #ffffff;
+        --content-color: #818ca1;
+        --shadow-color: hsla(226, 20%, 63%, 0.3);
+    }
 }
 
 ::selection {
-    background: hsl(227, 40%, 51%, 0.3);
+    background: var(--shadow-color);
 }
 
 * {
@@ -62,6 +73,11 @@ main > h1 {
     margin-top: 0.5em;
     font-family: var(--title-font);
     letter-spacing: -1px;
+    transition: text-shadow 0.3s;
+}
+
+main > h1:hover {
+    text-shadow: 0.06em 0.06em 0 var(--shadow-color);
 }
 
 main > p {
