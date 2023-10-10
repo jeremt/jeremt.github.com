@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400;1,8..60,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400;1,8..60,700&display=swap");
 
 /* Theme */
 
 :root {
-    --title-font: 'Playfair Display', sans-serif;
-    --subtitle-font: 'Source Serif 4', sans-serif;
+    --title-font: "Playfair Display", sans-serif;
+    --subtitle-font: "Source Serif 4", sans-serif;
 }
 
 :root[color-scheme="light"] {
@@ -17,7 +17,7 @@
 }
 
 :root[color-scheme="dark"] {
-    --bg-color: #20232d;
+    --bg-color: #212230;
     --accent-color: #f173bf;
     --title-color: #e2e4f3;
     --sub-bg-color: #ffffff;
@@ -39,7 +39,8 @@ html {
     scroll-behavior: smooth;
 }
 
-html, body {
+html,
+body {
     color: var(--title-color);
     width: 100%;
     height: 100%;
@@ -62,6 +63,10 @@ main {
 
 #colorScheme {
     position: fixed;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
     top: 1em;
     right: 1em;
     background-color: var(--shadow-color);
@@ -71,7 +76,7 @@ main {
     border: none;
     cursor: pointer;
     border-radius: 50%;
-    transition: scale .3s;
+    transition: scale 0.3s;
 }
 
 #colorScheme:hover {
@@ -91,7 +96,8 @@ main > img {
 
 main > img:hover {
     filter: none;
-    box-shadow: 10px 10px 50px 0px rgba(255, 103, 21, 0.3), -5px 10px 50px 0px rgba(17, 55, 243, 0.3), -5px -10px 50px 0px rgba(130, 233, 110, 0.3);
+    box-shadow: 10px 10px 50px 0px rgba(255, 103, 21, 0.3), -5px 10px 50px 0px rgba(17, 55, 243, 0.3),
+        -5px -10px 50px 0px rgba(130, 233, 110, 0.3);
 }
 
 main > h1 {
@@ -118,7 +124,8 @@ main > p {
     font-family: var(--subtitle-font);
 }
 
-main > a, section > a {
+main > a,
+section > a {
     color: var(--accent-color);
     font-size: 1.2rem;
     font-family: var(--subtitle-font);
@@ -126,12 +133,14 @@ main > a, section > a {
 }
 
 @media (min-width: 650px) {
-    main > a, section > a {
+    main > a,
+    section > a {
         font-size: 1.4rem;
     }
 }
 
-main > a:hover, section > a:hover {
+main > a:hover,
+section > a:hover {
     filter: saturate(150%);
 }
 
@@ -163,7 +172,7 @@ section > p {
 
 section > a {
     display: inline-block;
-    padding: .5rem .8rem;
+    padding: 0.5rem 0.8rem;
 }
 
 .grid {
