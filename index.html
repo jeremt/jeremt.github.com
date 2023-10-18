@@ -1,73 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jeremtab</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <button title="Color scheme" id="colorScheme" onclick="toggleTheme()">💩</button>
-    <main id="intro">
-        <img src="assets/avatar.jpg" alt="me" />
-        <h1>Salut! I'm Jérémie <span id="👋">👋</span></h1>
-        <p>
-            Just a random guy in Paris who writes code sometimes<br>
-            and start new side projects every now and then.
-        </p>
-        <a href="#slides">More stuff 👇</a>
-    </main>
-    <section id="slides">
-        <h2>Slides for workshops</h2>
-        <p>Theses slides are not meant to be used on their own but more as a support for teaching the associated concepts, also they are only in french, sorry...</p>
-        <div class="grid">
-            <a title="Intro to VSCode" href="https://jeremt.github.io/intro-to-vscode" target="_blank">
-                <img src="assets/slides-vscode.png" alt="Intro to VSCode">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>jeremtab</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <button title="Color scheme" id="colorScheme" onclick="toggleTheme()"></button>
+        <main id="intro">
+            <img src="assets/avatar.jpg" alt="me" />
+            <h1>Salut! I'm Jérémie <span id="👋">👋</span></h1>
+            <p>
+                Just a random guy in Paris who writes code sometimes<br />
+                and start new side projects every now and then.
+            </p>
+            <a href="#slides" class="linkBtn">More stuff 👇</a>
+        </main>
+        <section id="slides">
+            <h2>Slides for workshops</h2>
+            <p>
+                Theses slides are not meant to be used on their own but more as a support for teaching the associated
+                concepts, also they are only in french, sorry...
+            </p>
+            <div class="grid">
+                <a title="Intro to VSCode" href="https://jeremt.github.io/intro-to-vscode" target="_blank">
+                    <img src="assets/slides-vscode.png" alt="Intro to VSCode" />
+                </a>
+                <a title="Intro to GIT" href="https://jeremt.github.io/intro-to-git" target="_blank">
+                    <img src="assets/slides-git.png" alt="Intro to GIT" />
+                </a>
+                <a title="Intro to async" href="https://jeremt.github.io/intro-to-async" target="_blank">
+                    <img src="assets/slides-async.png" alt="Intro to async" />
+                </a>
+                <a title="Intro to React" href="https://jeremt.github.io/intro-to-react" target="_blank">
+                    <img src="assets/slides-react.png" alt="Intro to React" />
+                </a>
+                <a title="Intro to Debug" href="https://jeremt.github.io/intro-to-debug" target="_blank">
+                    <img src="assets/slides-debugger.png" alt="Intro to Debug" />
+                </a>
+                <a title="Intro to TypeScript" href="https://jeremt.github.io/intro-to-ts" target="_blank">
+                    <img src="assets/slides-ts.png" alt="Intro to TypeScript" />
+                </a>
+                <a title="Intro to POO" href="https://jeremt.github.io/intro-to-poo" target="_blank">
+                    <img src="assets/slides-poo.png" alt="Intro to POO" />
+                </a>
+            </div>
+            <a href="#intro" class="linkBtn">Back to top 👆</a>
+        </section>
+        <footer>
+            <a target="_blank" style="--footer-index: 0" title="Github" href="https://github.com/jeremt">
+                <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22.5 0C10.0763 0 0 10.3291 0 23.0688C0 33.2614 6.44625 41.9083 15.3881 44.9592C16.5112 45.1726 16.875 44.4574 16.875 43.85V39.5553C10.6162 40.951 9.31313 36.8332 9.31313 36.8332C8.28938 34.1668 6.81375 33.4575 6.81375 33.4575C4.77188 32.0253 6.96938 32.056 6.96938 32.056C9.22875 32.2175 10.4175 34.434 10.4175 34.434C12.4238 37.9597 15.6806 36.9409 16.965 36.3507C17.1656 34.8608 17.7488 33.8419 18.3938 33.2671C13.3969 32.6808 8.14312 30.7027 8.14312 21.8654C8.14312 19.3451 9.0225 17.2881 10.4606 15.6733C10.2281 15.0908 9.4575 12.7436 10.68 9.56779C10.68 9.56779 12.57 8.94877 16.8694 11.9323C18.6637 11.421 20.5875 11.1653 22.5 11.1557C24.4125 11.1653 26.3381 11.421 28.1362 11.9323C32.4319 8.94877 34.3181 9.56779 34.3181 9.56779C35.5425 12.7455 34.7719 15.0928 34.5394 15.6733C35.9831 17.2881 36.855 19.347 36.855 21.8654C36.855 30.7257 31.5919 32.677 26.5819 33.2479C27.3881 33.9631 28.125 35.3664 28.125 37.5195V43.85C28.125 44.4632 28.485 45.1841 29.6269 44.9573C38.5612 41.9026 45 33.2575 45 23.0688C45 10.3291 34.9256 0 22.5 0Z"
+                        fill="var(--content-color)"
+                    />
+                </svg>
             </a>
-            <a title="Intro to GIT" href="https://jeremt.github.io/intro-to-git" target="_blank">
-                <img src="assets/slides-git.png" alt="Intro to GIT">
+            <a
+                target="_blank"
+                style="--footer-index: 1"
+                title="LinkedIn"
+                href="https://www.linkedin.com/in/jeremie-taboada-16495959/"
+            >
+                <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M0 3.48485C0 2.47473 0.360371 1.64139 1.08108 0.984849C1.80179 0.328273 2.73875 0 3.89189 0C5.02446 0 5.94079 0.323212 6.64093 0.969697C7.36164 1.63636 7.72201 2.50503 7.72201 3.57576C7.72201 4.54545 7.37195 5.35352 6.67181 6C5.9511 6.66667 5.00386 7 3.83012 7H3.79923C2.66666 7 1.75033 6.66667 1.05019 6C0.350054 5.33333 0 4.49494 0 3.48485ZM0.401544 30V9.75758H7.25869V30H0.401544ZM11.0579 30H17.9151V18.697C17.9151 17.9899 17.9974 17.4444 18.1622 17.0606C18.4504 16.3737 18.888 15.7929 19.4749 15.3182C20.0618 14.8434 20.7979 14.6061 21.6834 14.6061C23.9897 14.6061 25.1429 16.1313 25.1429 19.1818V30H32V18.3939C32 15.404 31.2793 13.1364 29.8378 11.5909C28.3964 10.0455 26.4916 9.27273 24.1236 9.27273C21.4672 9.27273 19.3977 10.3939 17.9151 12.6364V12.697H17.8842L17.9151 12.6364V9.75758H11.0579C11.0991 10.404 11.1197 12.4141 11.1197 15.7879C11.1197 19.1616 11.0991 23.899 11.0579 30Z"
+                        fill="var(--content-color)"
+                    />
+                </svg>
             </a>
-            <a title="Intro to async" href="https://jeremt.github.io/intro-to-async" target="_blank">
-                <img src="assets/slides-async.png" alt="Intro to async">
+            <a target="_blank" style="--footer-index: 2" title="Instagram" href="https://www.instagram.com/jeremtab">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M16.9924 3.06257C21.5333 3.06257 22.066 3.08335 23.8604 3.16459C25.5208 3.24016 26.418 3.516 27.0187 3.75028C27.8139 4.06201 28.3806 4.42665 28.9737 5.01989C29.5687 5.61314 29.9389 6.17993 30.243 6.97722C30.4716 7.57802 30.7549 8.47544 30.8286 10.1343C30.9098 11.9291 30.9306 12.4619 30.9306 17.0038C30.9306 21.5457 30.9117 22.0785 30.8286 23.8733C30.7549 25.5321 30.4791 26.4295 30.243 27.0303C29.9712 27.7694 29.5375 28.4382 28.9737 28.9877C28.4264 29.5529 27.7579 29.9863 27.0187 30.2554C26.418 30.4859 25.5208 30.7693 23.8604 30.843C22.066 30.9242 21.5333 30.945 16.9924 30.945C12.4534 30.945 11.9208 30.9242 10.1263 30.843C8.466 30.7674 7.56878 30.4916 6.96811 30.2573C6.22996 29.9852 5.56199 29.5514 5.01311 28.9877C4.44707 28.4399 4.01301 27.7706 3.74378 27.0303C3.51522 26.4295 3.23189 25.5321 3.15822 23.8733C3.077 22.0785 3.05622 21.5457 3.05622 17.0038C3.05622 12.4619 3.07511 11.9291 3.15633 10.1343C3.23189 8.47544 3.50767 7.57802 3.74378 6.97722C4.05356 6.17993 4.41811 5.61314 5.01311 5.01989C5.60622 4.42665 6.17289 4.05635 6.96811 3.75217C7.56878 3.52167 8.466 3.23828 10.1263 3.16459C11.9208 3.07768 12.4534 3.06257 16.9924 3.06257V3.06257ZM16.9924 0C12.3798 0 11.798 0.0188929 9.98467 0.102022C8.177 0.181373 6.94167 0.472327 5.86311 0.889864C4.72844 1.31669 3.70127 1.98743 2.85411 2.85475C1.90967 3.7994 1.32978 4.74972 0.889667 5.86441C0.472222 6.94321 0.181333 8.17882 0.102 9.99255C0.0188887 11.8006 0 12.3825 0 16.9962C0 21.6118 0.0188887 22.1918 0.102 24.0074C0.181333 25.8155 0.472222 27.0492 0.889667 28.1375C1.32222 29.2578 1.90967 30.2025 2.85411 31.1471C3.79856 32.0918 4.74867 32.6718 5.86311 33.1101C6.94167 33.5277 8.177 33.8186 9.99033 33.8999C11.8056 33.9811 12.3798 34 17 34C21.6202 34 22.1944 33.9811 24.0078 33.8999C25.8173 33.8186 27.0508 33.5277 28.1369 33.1101C29.2716 32.6833 30.2987 32.0126 31.1459 31.1453C32.0903 30.2006 32.6702 29.2503 33.1103 28.1375C33.5278 27.0568 33.8187 25.8231 33.898 24.0074C33.9792 22.1937 34 21.6194 34 16.9981C34 12.375 33.9811 11.8025 33.898 9.98689C33.8187 8.17882 33.5278 6.94321 33.1103 5.85686C32.6835 4.72196 32.013 3.69457 31.1459 2.84719C30.2014 1.90253 29.2513 1.32252 28.1369 0.882307C27.0583 0.466659 25.823 0.175706 24.0097 0.0944653C22.1869 0.018893 21.607 0 16.9924 0V0ZM16.9924 8.26573C14.6995 8.29946 12.5118 9.23422 10.9023 10.868C9.29269 12.5018 8.39041 14.7034 8.39041 16.9972C8.39041 19.2909 9.29269 21.4925 10.9023 23.1263C12.5118 24.7601 14.6995 25.6949 16.9924 25.7286C19.3074 25.7271 21.5272 24.8066 23.1641 23.1693C24.8011 21.532 25.7214 19.3117 25.7229 16.9962C25.7214 14.6809 24.801 12.4608 23.164 10.8238C21.527 9.1868 19.3073 8.26673 16.9924 8.26573V8.26573ZM16.9924 22.6641C16.2397 22.6779 15.4918 22.5415 14.7923 22.2629C14.0929 21.9842 13.456 21.569 12.9188 21.0414C12.3816 20.5138 11.9549 19.8845 11.6636 19.1901C11.3723 18.4957 11.2223 17.7502 11.2223 16.9972C11.2223 16.2441 11.3723 15.4987 11.6636 14.8043C11.9549 14.1099 12.3816 13.4805 12.9188 12.9529C13.456 12.4253 14.0929 12.0101 14.7923 11.7315C15.4918 11.4529 16.2397 11.3164 16.9924 11.3302C18.4953 11.3302 19.9367 11.9273 20.9994 12.9903C22.0621 14.0532 22.6591 15.4949 22.6591 16.9981C22.6591 18.5013 22.0621 19.943 20.9994 21.0059C19.9367 22.0689 18.4953 22.666 16.9924 22.666V22.6641ZM28.1048 7.92187C28.1048 8.18958 28.0521 8.45467 27.9496 8.702C27.8472 8.94933 27.6971 9.17406 27.5078 9.36335C27.3186 9.55265 27.0939 9.70281 26.8466 9.80526C26.5993 9.90771 26.3343 9.96044 26.0667 9.96044C25.799 9.96044 25.534 9.90771 25.2867 9.80526C25.0394 9.70281 24.8148 9.55265 24.6255 9.36335C24.4362 9.17406 24.2861 8.94933 24.1837 8.702C24.0813 8.45467 24.0286 8.18958 24.0286 7.92187C24.0286 7.38121 24.2433 6.86269 24.6255 6.48039C25.0077 6.09808 25.5261 5.88331 26.0667 5.88331C26.6072 5.88331 27.1256 6.09808 27.5078 6.48039C27.89 6.86269 28.1048 7.38121 28.1048 7.92187Z"
+                        fill="var(--content-color)"
+                    />
+                </svg>
             </a>
-            <a title="Intro to React" href="https://jeremt.github.io/intro-to-react" target="_blank">
-                <img src="assets/slides-react.png" alt="Intro to React">
+            <a target="_blank" style="--footer-index: 3" title="Resume" href="/assets/resume.pdf">
+                <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M27.3595 25.3441C27.4976 23.8201 27.5 21.8499 27.5 19V15C27.5 12.1501 27.4976 10.1799 27.3595 8.65594C27.2245 7.16636 26.9758 6.35031 26.6292 5.75C26.0587 4.76188 25.2381 3.94133 24.25 3.37083C23.6497 3.02424 22.8336 2.77552 21.3441 2.64052C19.8201 2.5024 17.8499 2.5 15 2.5C12.1501 2.5 10.1799 2.5024 8.65594 2.64052C7.16636 2.77552 6.35031 3.02424 5.75 3.37083C4.76188 3.94133 3.94133 4.76188 3.37083 5.75C3.02424 6.35031 2.77552 7.16636 2.64052 8.65594C2.5024 10.1799 2.5 12.1501 2.5 15V19C2.5 21.8499 2.5024 23.8201 2.64052 25.3441C2.77552 26.8336 3.02424 27.6497 3.37083 28.25C3.94133 29.2381 4.76188 30.0587 5.75 30.6292C6.35031 30.9758 7.16636 31.2245 8.65594 31.3595C10.1799 31.4976 12.1501 31.5 15 31.5C17.8499 31.5 19.8201 31.4976 21.3441 31.3595C22.8336 31.2245 23.6497 30.9758 24.25 30.6292C25.2381 30.0587 26.0587 29.2381 26.6292 28.25C26.9758 27.6497 27.2245 26.8336 27.3595 25.3441ZM1.20577 4.5C0 6.58846 0 9.39231 0 15V19C0 24.6077 0 27.4115 1.20577 29.5C1.99569 30.8682 3.13183 32.0043 4.5 32.7942C6.58846 34 9.39231 34 15 34C20.6077 34 23.4115 34 25.5 32.7942C26.8682 32.0043 28.0043 30.8682 28.7942 29.5C30 27.4115 30 24.6077 30 19V15C30 9.39231 30 6.58846 28.7942 4.5C28.0043 3.13183 26.8682 1.99569 25.5 1.20577C23.4115 0 20.6077 0 15 0C9.39231 0 6.58846 0 4.5 1.20577C3.13183 1.99569 1.99569 3.13183 1.20577 4.5ZM6 7C6 6.44772 6.44772 6 7 6H11C11.5523 6 12 6.44772 12 7V11C12 11.5523 11.5523 12 11 12H7C6.44772 12 6 11.5523 6 11V7ZM7.5 14C6.67157 14 6 14.6716 6 15.5C6 16.3284 6.67157 17 7.5 17H22.5C23.3284 17 24 16.3284 24 15.5C24 14.6716 23.3284 14 22.5 14H7.5ZM6 20.5C6 19.6716 6.67157 19 7.5 19H22.5C23.3284 19 24 19.6716 24 20.5C24 21.3284 23.3284 22 22.5 22H7.5C6.67157 22 6 21.3284 6 20.5ZM7.5 24C6.67157 24 6 24.6716 6 25.5C6 26.3284 6.67157 27 7.5 27H19.5C20.3284 27 21 26.3284 21 25.5C21 24.6716 20.3284 24 19.5 24H7.5Z"
+                        fill="var(--content-color)"
+                    />
+                </svg>
             </a>
-            <a title="Intro to Debug" href="https://jeremt.github.io/intro-to-debug" target="_blank">
-                <img src="assets/slides-debugger.png" alt="Intro to Debug">
-            </a>
-            <a title="Intro to TypeScript" href="https://jeremt.github.io/intro-to-ts" target="_blank">
-                <img src="assets/slides-ts.png" alt="Intro to TypeScript">
-            </a>
-            <a title="Intro to POO" href="https://jeremt.github.io/intro-to-poo" target="_blank">
-                <img src="assets/slides-poo.png" alt="Intro to POO">
-            </a>
-        </div>
-        <a href="#intro">Back to top 👆</a>
-    </section>
-    <footer>
-        <a target="_blank" style="--footer-index: 0" title="Github" href="https://github.com/jeremt"><img src="assets/github.svg" /></a>
-        <a target="_blank" style="--footer-index: 1" title="LinkedIn" href="https://www.linkedin.com/in/jeremie-taboada-16495959/"><img src="assets/linkedin.svg" /></a>
-        <a target="_blank" style="--footer-index: 2" title="Instagram" href="https://www.instagram.com/jeremtab"><img src="assets/instagram.svg" /></a>
-        <a target="_blank" style="--footer-index: 3" title="Resume" href="/assets/resume.pdf"><img src="assets/resume.svg" /></a>
-    </footer>
-    <script>
-        const media = matchMedia('(prefers-color-scheme: dark)');
-        media.addEventListener('change', applyTheme);
-        
-        const colorSchemeBtn = document.querySelector('#colorScheme');
+        </footer>
+        <script>
+            const media = matchMedia("(prefers-color-scheme: dark)");
+            media.addEventListener("change", applyTheme);
 
-        applyTheme(media);
+            const colorSchemeBtn = document.querySelector("#colorScheme");
 
-        function applyTheme({matches}) {
-            colorSchemeBtn.innerText = matches ? '🌞' : '🌛';
-            document.documentElement.setAttribute('color-scheme', colorSchemeBtn.innerText === '🌛' ? 'light' : 'dark');
-        }
+            applyTheme(media);
 
-        function toggleTheme() {
-            applyTheme({matches: colorSchemeBtn.innerText !== '🌞'});
-        }
-    </script>
-</body>
+            function applyTheme({matches}) {
+                colorSchemeBtn.className = matches ? "dark" : "light";
+                document.documentElement.setAttribute("color-scheme", !matches ? "light" : "dark");
+            }
+
+            function toggleTheme() {
+                applyTheme({matches: colorSchemeBtn.className === "light"});
+            }
+        </script>
+    </body>
 </html>
