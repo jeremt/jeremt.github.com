@@ -63,16 +63,19 @@ main {
     position: fixed;
     top: 1em;
     right: 1em;
-    font-size: 1.2rem;
-    width: 2rem;
-    height: 2rem;
+    width: 2.8rem;
+    height: 2.8rem;
     border: none;
     cursor: pointer;
+    z-index: 2;
+    font-size: 1.2rem;
     border-radius: 50%;
     transition: scale 0.3s;
-    background-color: transparent;
+    background-color: var(--bg-color);
     background-image: url(./assets/sun.svg);
-    background-size: 100% 100%;
+    background-size: 70% 70%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #colorScheme.dark {
