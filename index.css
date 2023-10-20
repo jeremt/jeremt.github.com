@@ -103,7 +103,7 @@ main > img:hover {
 
 main > h1 {
     margin: 0;
-    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
     text-align: center;
     margin-top: 0.5em;
     font-family: var(--title-font);
@@ -115,7 +115,7 @@ main > h1 {
 
 main > p {
     color: var(--content-color);
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     text-align: center;
     margin-top: 0.5em;
     font-weight: normal;
@@ -150,7 +150,7 @@ section {
 
 section > h2 {
     margin: 0;
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
     text-align: center;
     margin-top: 0.5em;
     font-family: var(--title-font);
@@ -160,7 +160,7 @@ section > h2 {
 
 section > p {
     color: var(--content-color);
-    font-size: clamp(1rem, 2vw, 1.6rem);
+    font-size: clamp(1.3rem, 2vw, 2rem);
     text-align: center;
     margin-top: 0.5em;
     font-weight: normal;
@@ -192,6 +192,16 @@ section > a {
 
 .grid img:active {
     translate: 0 0;
+}
+
+.project > p {
+    font-family: var(--subtitle-font);
+    color: var(--content-color);
+    padding: 0 1.5rem;
+}
+
+.project > p a {
+    color: var(--accent-color);
 }
 
 #slides {
