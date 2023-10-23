@@ -9,6 +9,7 @@
 
 :root[color-scheme="light"] {
     --bg-color: #f3ecdc;
+    --sub-bg-color: #dcd2bb;
     --accent-color: #f9bb29;
     --title-color: #474747;
     --content-color: #8e8572;
@@ -17,6 +18,7 @@
 
 :root[color-scheme="dark"] {
     --bg-color: #262523;
+    --sub-bg-color: #36342e;
     --accent-color: #f9d277;
     --title-color: #eeeeee;
     --content-color: #8b8579;
@@ -44,6 +46,9 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-image: radial-gradient(var(--sub-bg-color) 8%, transparent 8%);
+    background-position: 0% 0%;
+    background-size: 5vmin 5vmin;
     background-color: var(--bg-color);
 }
 
@@ -63,17 +68,17 @@ main {
     position: fixed;
     top: 1em;
     right: 1em;
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 3.2rem;
+    height: 3.2rem;
     border: none;
     cursor: pointer;
     z-index: 2;
     font-size: 1.2rem;
     border-radius: 50%;
     transition: scale 0.3s;
-    background-color: var(--bg-color);
+    background-color: var(--sub-bg-color);
     background-image: url(./assets/sun.svg);
-    background-size: 70% 70%;
+    background-size: 60% 60%;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -211,7 +216,6 @@ section > a {
 footer {
     width: 100%;
     bottom: 0;
-    background-color: var(--bg-color);
     padding: 1rem 1rem 2rem 1rem;
     display: flex;
     position: fixed;
@@ -226,8 +230,9 @@ footer > a {
     box-sizing: border-box;
     transition: 0.5s all;
     align-items: center;
-    border-radius: 40%;
+    border-radius: 50%;
     justify-content: center;
+    background-color: var(--sub-bg-color);
 }
 
 footer > a > img {
