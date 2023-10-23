@@ -9,15 +9,15 @@
 
 :root[color-scheme="light"] {
     --bg-color: #f3ecdc;
-    --sub-bg-color: #dcd2bb;
-    --accent-color: #f9bb29;
-    --title-color: #474747;
-    --content-color: #8e8572;
+    --sub-bg-color: #e0d4b9;
+    --accent-color: #f3af11;
+    --title-color: #3f3f3f;
+    --content-color: #746c5a;
     --shadow-color: hsl(227, 40%, 51%, 0.3);
 }
 
 :root[color-scheme="dark"] {
-    --bg-color: #262523;
+    --bg-color: #21201e;
     --sub-bg-color: #36342e;
     --accent-color: #f9d277;
     --title-color: #eeeeee;
