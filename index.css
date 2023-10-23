@@ -235,8 +235,12 @@ footer > a {
     background-color: var(--sub-bg-color);
 }
 
-footer > a > img {
-    width: 100%;
+@media (max-width: 600px) {
+    footer > a {
+        width: 3.4rem;
+        height: 3.4rem;
+        padding: 0.8em;
+    }
 }
 
 footer > a:hover {
