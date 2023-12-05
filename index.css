@@ -1,27 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Gaegu&family=Solway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;700&display=swap");
 
 /* Theme */
 
 :root {
-    --title-font: "Solway", sans-serif;
-    --subtitle-font: "Gaegu", sans-serif;
+    --title-font: "Bebas Neue", sans-serif;
+    --subtitle-font: "Open Sans", sans-serif;
 }
 
 :root[color-scheme="light"] {
     --bg-color: #f3ecdc;
     --sub-bg-color: #e0d4b9;
-    --accent-color: #f3af11;
+    --accent-color: #625dc4;
     --title-color: #3f3f3f;
     --content-color: #746c5a;
     --shadow-color: hsl(227, 40%, 51%, 0.3);
 }
 
 :root[color-scheme="dark"] {
-    --bg-color: #21201e;
-    --sub-bg-color: #36342e;
-    --accent-color: #f9d277;
+    --bg-color: #1e1e21;
+    --sub-bg-color: #2e3036;
+    --accent-color: #f977ba;
     --title-color: #eeeeee;
-    --content-color: #8b8579;
+    --content-color: #8e8fa9;
     --shadow-color: hsla(226, 20%, 63%, 0.3);
 }
 
@@ -108,19 +108,19 @@ main > img:hover {
 
 main > h1 {
     margin: 0;
-    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-size: clamp(3rem, 10vw, 6rem);
     text-align: center;
     margin-top: 0.5em;
-    font-family: var(--title-font);
     font-weight: normal;
+    font-family: var(--title-font);
     text-wrap: balance;
     letter-spacing: -1px;
     transition: text-shadow 0.3s;
 }
 
-main > p {
+main > .subtitle {
     color: var(--content-color);
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
     text-align: center;
     margin-top: 0.5em;
     font-weight: normal;
@@ -130,7 +130,8 @@ main > p {
 .linkBtn {
     color: var(--accent-color);
     font-size: 1.2rem;
-    font-family: var(--title-font);
+    font-weight: bold;
+    font-family: var(--subtitle-font);
     text-decoration: none;
 }
 
@@ -155,21 +156,13 @@ section {
 
 section > h2 {
     margin: 0;
+    margin-bottom: 2rem;
     font-size: clamp(2.4rem, 6vw, 3.8rem);
     text-align: center;
     margin-top: 0.5em;
     font-family: var(--title-font);
     font-weight: normal;
     letter-spacing: -1px;
-}
-
-section > p {
-    color: var(--content-color);
-    font-size: clamp(1.3rem, 2vw, 2rem);
-    text-align: center;
-    margin-top: 0.5em;
-    font-weight: normal;
-    font-family: var(--subtitle-font);
 }
 
 section > a {
@@ -193,6 +186,7 @@ section > a {
 .grid img:hover {
     filter: none;
     translate: 0 -0.5rem;
+    rotate: 1deg;
 }
 
 .grid img:active {
@@ -203,6 +197,8 @@ section > a {
     font-family: var(--subtitle-font);
     color: var(--content-color);
     padding: 0 1.5rem;
+    line-height: 1.6;
+    font-size: 0.9rem;
 }
 
 .project > p a {
@@ -323,6 +319,23 @@ footer > * {
 #👋 {
     display: inline-block;
     animation: coucou 8s ease-in-out infinite 1.5s;
+}
+
+@keyframes upAndDown {
+    0% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 0.5rem;
+    }
+    100% {
+        translate: 0 0;
+    }
+}
+
+.linkBtn > span {
+    display: inline-block;
+    animation: upAndDown 2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion) {
