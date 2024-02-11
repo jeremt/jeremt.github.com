@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;700&display=swap');
 
 /* Theme */
 
 :root {
-    --title-font: "Bebas Neue", sans-serif;
-    --subtitle-font: "Open Sans", sans-serif;
+    --title-font: 'Bebas Neue', sans-serif;
+    --subtitle-font: 'Open Sans', sans-serif;
 }
 
-:root[color-scheme="light"] {
+:root[color-scheme='light'] {
     --bg-color: #f3ecdc;
     --sub-bg-color: #e0d4b9;
     --accent-color: #625dc4;
@@ -16,7 +16,7 @@
     --shadow-color: hsl(227, 40%, 51%, 0.3);
 }
 
-:root[color-scheme="dark"] {
+:root[color-scheme='dark'] {
     --bg-color: #1e1e21;
     --sub-bg-color: #2e3036;
     --accent-color: #f977ba;
@@ -94,7 +94,7 @@ main {
     scale: 1;
 }
 
-main > img {
+/* main > img {
     width: clamp(120px, 30%, 180px);
     filter: saturate(10%) hue-rotate(-30deg);
     transition: 0.8s all;
@@ -104,13 +104,17 @@ main > img {
 
 main > img:hover {
     filter: none;
+} */
+
+#thinkingHead {
+    width: 280px;
+    height: 280px;
 }
 
 main > h1 {
     margin: 0;
     font-size: clamp(3rem, 10vw, 6rem);
     text-align: center;
-    margin-top: 0.5em;
     font-weight: normal;
     font-family: var(--title-font);
     text-wrap: balance;
