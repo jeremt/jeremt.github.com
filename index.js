@@ -50,7 +50,7 @@ loader.load(
 
 addEventListener('mousemove', (event) => {
     if (model) {
-        model.rotation.x = event.clientY / innerHeight - 0.3;
+        model.rotation.x = event.clientY / innerHeight - 0.1; // easier to look down than up 😅
         model.rotation.y = event.clientX / innerWidth - 0.5;
     }
     renderer.render(scene, camera);
