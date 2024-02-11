@@ -58,10 +58,10 @@ main {
     width: 100%;
     height: 100%;
     display: flex;
-    padding: 1rem;
+    padding-bottom: 8rem;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
 }
 
 #colorScheme {
@@ -94,21 +94,16 @@ main {
     scale: 1;
 }
 
-/* main > img {
-    width: clamp(120px, 30%, 180px);
-    filter: saturate(10%) hue-rotate(-30deg);
-    transition: 0.8s all;
-    margin-top: -2.5rem;
-    border-radius: 50%;
+#thinkingHead {
+    width: 500px;
+    height: 500px;
 }
 
-main > img:hover {
-    filter: none;
-} */
-
-#thinkingHead {
-    width: 280px;
-    height: 280px;
+@media (max-width: 800px) {
+    #thinkingHead {
+        width: 320px;
+        height: 320px;
+    }
 }
 
 main > h1 {
@@ -122,10 +117,11 @@ main > h1 {
     transition: text-shadow 0.3s;
 }
 
-main > .subtitle {
+main > p {
     color: var(--content-color);
     font-size: clamp(1.3rem, 2vw, 1.8rem);
     text-align: center;
+    text-wrap: balance;
     margin-top: 0.5em;
     font-weight: normal;
     font-family: var(--subtitle-font);
@@ -156,6 +152,27 @@ section {
     margin: 2rem auto;
     padding: 2rem;
     text-align: center;
+}
+
+section > p {
+    color: var(--content-color);
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    text-align: center;
+    text-wrap: balance;
+    margin-top: 0.5em;
+    font-weight: normal;
+    font-family: var(--subtitle-font);
+}
+
+section > p > a {
+    color: var(--accent-color);
+}
+
+section > img {
+    display: flex;
+    margin: 1.2rem auto;
+    border-radius: 1rem;
+    max-width: 100%;
 }
 
 section > h2 {
@@ -209,7 +226,7 @@ section > a {
     color: var(--accent-color);
 }
 
-#slides {
+#btw {
     padding-bottom: 7rem;
 }
 

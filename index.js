@@ -17,7 +17,7 @@ container.appendChild(renderer.domElement);
 
 const dirLight = new THREE.DirectionalLight(0xffffff);
 dirLight.position.x = 0.5;
-dirLight.position.z = 0.5;
+dirLight.position.z = 1;
 scene.add(dirLight);
 
 const frontDirLight = new THREE.DirectionalLight(0xffffff);
@@ -28,6 +28,7 @@ scene.add(frontDirLight);
 const light = new THREE.AmbientLight(0xffffff, 2);
 scene.add(light);
 
+camera.position.y = -0.05;
 camera.position.z = 0.75;
 
 const loader = new GLTFLoader();
@@ -53,6 +54,13 @@ addEventListener('mousemove', (event) => {
         model.rotation.y = event.clientX / innerWidth - 0.5;
     }
     renderer.render(scene, camera);
+});
+
+addEventListener('resize', () => {
+    const {width, height} = container.getBoundingClientRect();
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
 });
 
 // Dark mode
