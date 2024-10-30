@@ -73,21 +73,23 @@ addEventListener('mousemove', (event) => {
 
 // Handle switch between light and dark mode
 
-const media = matchMedia('(prefers-color-scheme: dark)');
-media.addEventListener('change', applyTheme);
-
 const colorSchemeBtn = document.querySelector('#colorScheme');
 
-applyTheme(media);
-colorSchemeBtn.addEventListener('click', () => {
-    applyTheme({matches: colorSchemeBtn.className === 'light'});
-});
+const colorScheme = document.documentElement.getAttribute('color-scheme');
+colorSchemeBtn.className = colorScheme;
 
-function applyTheme({matches}) {
-    colorSchemeBtn.className = matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('color-scheme', !matches ? 'light' : 'dark');
+// fix lighting for mode
+light.intensity = colorScheme === 'dark' ? 1 : 2;
+renderer.render(scene, camera);
+
+colorSchemeBtn.addEventListener('click', () => {
+    const colorScheme = document.documentElement.getAttribute('color-scheme');
+    document.documentElement.setAttribute('color-scheme', colorScheme === 'dark' ? 'light' : 'dark');
+    localStorage.setItem('colorScheme', colorScheme === 'dark' ? 'light' : 'dark');
+
+    colorSchemeBtn.className = colorScheme === 'dark' ? 'light' : 'dark';
 
     // fix lighting for mode
-    light.intensity = matches ? 1 : 2;
+    light.intensity = colorScheme === 'dark' ? 1 : 2;
     renderer.render(scene, camera);
-}
+});

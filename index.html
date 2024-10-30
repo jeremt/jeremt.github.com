@@ -11,6 +11,25 @@
             href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤔</text></svg>"
         />
         <link rel="stylesheet" href="index.css" />
+        <!-- Handle dark mode -->
+        <script>
+            const defaultColorScheme = 'dark';
+            const localColorScheme = localStorage.getItem('colorScheme');
+            const matchLightScheme = matchMedia('(prefers-color-scheme: light)');
+            if (localColorScheme !== null) {
+                if (localColorScheme !== 'dark' && localColorScheme !== 'light') {
+                    console.warn('localStorage.colorScheme must be either light or dark');
+                }
+                document.documentElement.setAttribute('color-scheme', localColorScheme);
+            } else if (matchLightScheme.matches) {
+                document.documentElement.setAttribute('color-scheme', 'light');
+            } else {
+                document.documentElement.setAttribute('color-scheme', 'dark');
+            }
+            matchLightScheme.addEventListener('change', ({matches}) => {
+                document.documentElement.setAttribute('color-scheme', matches ? 'light' : 'dark');
+            });
+        </script>
         <!-- Load ThreeJS library (see https://threejs.org/docs/index.html#manual/en/introduction/Installation) -->
         <script type="importmap">
             {
@@ -56,6 +75,18 @@
                         repurposed to learn dev/tech concepts. Add your own cards
                         <a href="https://github.com/jeremt/ttmc-for-dev" target="_blank">here</a>.
                     </p>
+                </div>
+                <div class="project">
+                    <a href="https://simple-sqlite-editor.vercel.app/" target="_blank" aria-label="Sqlite Editor"
+                        ><img src="./assets/sqlite-editor.png" alt=""
+                    /></a>
+                    <p>Open-source sqlite editor inspired by Code Passport UI. You can execute and visualise queries without creating an account.</p>
+                </div>
+                <div class="project">
+                    <a href="https://apps.apple.com/fr/app/crafter-ar-build-battle/id1389840361" target="_blank" aria-label="Crafter AR"
+                        ><img src="./assets/crafter.png" alt=""
+                    /></a>
+                    <p>Create 3d stuff and make it guess to your friends. I made this with a friend using Unity and Firebase.</p>
                 </div>
             </div>
         </section>
